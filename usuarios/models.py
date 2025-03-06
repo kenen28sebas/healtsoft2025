@@ -37,4 +37,24 @@ class Usuario (AbstractUser):
     is_superuser = models.BooleanField(default=True)
 
 
-    
+class Medico(models.Model):
+    especialidad=models.CharField(max_length=100, null=False, verbose_name='Especialidad')
+    contrato=models.CharField(max_length=100,null=False, verbose_name='Contrato')
+    sueldo=models.DecimalField(max_digits=6,decimal_places=3, verbose_name='Sueldo')
+    usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
+
+class Gestor_TH(models.Model):
+    cargo=models.CharField(max_length=100,null=False,blank=False,verbose_name="Cargo")
+    # T_CONTRATO_CHOICES=[
+    #     ("Contrato a término indefinido"),
+    #     ("Contrato a término fijo"),
+    #     ("Contrato por obra o labor"),
+    #     ("Contrato ocasional, accidental o transitorio"),
+    #     ("Contrato de aprendizaje"),
+    #     ("Contrato de prestación de servicios"),
+    #     ("Contrato sindical ")
+    # ]
+    # tipo_contrato=models.CharField(max_length=100, choices=T_CONTRATO_CHOICES,null=False,verbose_name="Tipo de contrato")
+    usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    area_responsable =models.CharField(max_length=100,null=False,blank=False , verbose_name="Área responsable")
+    fecha_ingreso=models.DateField(auto_created=False,auto_now=False,auto_now_add=False, verbose_name="Fecha de ingreso")
