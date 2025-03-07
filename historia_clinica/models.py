@@ -64,9 +64,9 @@ class Anamnesis(models.Model):
     alergias = models.CharField(max_length=50, null=False, blank=False, verbose_name='Alergias')
     enfermedades_base = models.CharField(max_length=100, null=False, blank=False, verbose_name='Enfermedades de Base')
     SUSTANCIAS = [
-        'Tabaco', 'Tabaco',
-        'Alcohol', 'Alcohol',
-        'Drogas', 'Drogas',
+        ('Tabaco', 'Tabaco'),
+        ('Alcohol', 'Alcohol'),
+        ('Drogas', 'Drogas'),
     ]
     habitos = models.CharField(max_length=10, null=False, blank=False, verbose_name='Consumo de sustancias', choices=SUSTANCIAS)
 
@@ -81,16 +81,16 @@ class AntecedentesMedicos(models.Model):
     # diagnostico = models.CharField()
     descripcion = models.TextField(null=False, blank=False, verbose_name='Descripcion del Diagnostico')
     TIPO_DIA = [
-        'Principal', 'Diagnóstico Principal',
-        'Secundarios', 'Diagnósticos Secundarios',
-        'Diferencial', 'Diagnóstico Diferencial',
-        'Confirmado', 'Diagnóstico Confirmado',
-        'Enfermedad Aguda', 'Diagnóstico de Enfermedad Aguda',
-        'Rehabilitacion', 'Diagnóstico de Rehabilitación',
-        'Salud Mental', 'Diagnóstico de Salud Mental',
-        'Preventivo', 'Diagnóstico Preventivo',
-        'Riesgo', 'Diagnóstico de Riesgo',
-        'Sindrome', 'Diagnóstico de Síndrome',
+        ('Principal', 'Diagnóstico Principal'),
+        ('Secundarios', 'Diagnósticos Secundarios'),
+        ('Diferencial', 'Diagnóstico Diferencial'),
+        ('Confirmado', 'Diagnóstico Confirmado'),
+        ('Enfermedad Aguda', 'Diagnóstico de Enfermedad Aguda'),
+        ('Rehabilitacion', 'Diagnóstico de Rehabilitación'),
+        ('Salud Mental', 'Diagnóstico de Salud Mental'),
+        ('Preventivo', 'Diagnóstico Preventivo'),
+        ('Riesgo', 'Diagnóstico de Riesgo'),
+        ('Sindrome', 'Diagnóstico de Síndrome'),
         
     ]
 
@@ -103,6 +103,18 @@ class OrdenDeProcedimientos(models.Model):
     cantidad = models.CharField(max_length=10, null=False, blank=False, verbose_name='Cantidad')
     estado = models.CharField(max_length=20, null=False, blank=False, verbose_name='Estado')
     observacion = models.CharField(max_length=100, null=False, blank=False, verbose_name='Observación')
+    anamnesis = models.ForeignKey(Anamnesis, on_delete=models.CASCADE)
+
+
+class SignosVitales(models.Model):
+    frecuencia_cardiaca = models.FloatField(null=False, blank=false, verbose_name='Frecuencia Cardiaca')
+    prsion_arterial = models.FloatField(null=false, blank=False, verbose_name='Presion Arterial')
+    frecuencia_respiratoria = models.FloatField(null=False, blank=False, verbose_name='Frecuencia Respiratoria')
+    temperatura_corporal = models.FloatField(null=False, blank=False, verbose_name='Temperatura Corporal')
+    sauracion = models.CharField(max_length=10, null=False, blank=False, verbose_name='Saturación')
+    peso = models.FloatField(null=False, blank=False, verbose_name='Peso')
+    talla = models.FloatField(null=False, blank=False, verbose_name='Talla')
+    imc = models.FloatField(null=True, blank=True, verbose_name='Indice de masa Corporal')
     anamnesis = models.ForeignKey(Anamnesis, on_delete=models.CASCADE)
 
 
