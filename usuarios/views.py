@@ -11,18 +11,29 @@ from rest_framework.authtoken.models import Token
 def registrar (request):
 
     tipo_ususrio = request.data["tipo_usuario"]
+    print(tipo_ususrio)
     match tipo_ususrio:
         case "medico":
             serializer=MedicoSerializador(data= request.data)
-            if serializer.is_valid():
+            print(serializer.is_valid())
+            if serializer.is_valid(): 
                 serializer.save()
+                
                 return Response({"user":serializer.data})
         case "gestor_th":
-            serializerTH=gestor_thSerializador(data=request.data)
+            serializerTH=Gestor_thSerializador(data=request.data)
             print(serializerTH.is_valid())
             if serializerTH.is_valid():
+                token = Token.objects.create(user = serializerTH)
                 serializerTH.save()
                 return Response({"user":serializerTH.data})
+        case "paciente":
+            serializer= PacienteSerializador(data = request.data)
+            print(serializer.is_valid())
+            if serializer.is_valid():
+                token = Token.objects.create(user = serializer)
+                serializer.save()
+                return Response({"user":serializer.data})
     
 
 
@@ -32,19 +43,35 @@ def registrar (request):
 @api_view(["POST"])
 def login (request):
     
-    
+    tipo_ususrio = request.data["tipo_usuario"]
     usuario = get_object_or_404(Usuario , nro_doc = request.data["nro_doc"])
     
     if not usuario.check_password(request.data["password"]):
         return Response({"error" : "clave incorrecta"})
     
-    try:
-        medico = get_object_or_404(Medico , usuario_id = request.data["nro_doc"])
-        datos_medico = MedicoSerializador(instance = medico)
-        print(datos_medico.data)
-    except:
-        print("medico sexual no encotrado")        
+    match tipo_ususrio:
+        case "medico":
+            try:
+                medico = get_object_or_404(Medico , usuario_id = request.data["nro_doc"])
+                datos_medico = MedicoSerializador(instance = medico)
+                return Response ({"user" : datos_paciente.data})
+            except:
+                print("medico sexual no encotrado")        
     
-    serializer = UsuarioSerializer(instance = usuario)
-    
-    return Response ( {"user" : datos_medico.data } )    
+        case "gestor_th":
+            try:
+                gestor_th = get_object_or_404(Gestor_TH , usuario_id = request.data["nro_doc"])
+                datos_gestor_th = Gestor_thSerializador(instance = gestor_th)
+                return Response ( {"user" : datos_gestor_th.data } )  
+            except:
+                print("medico sexual no encotrado")    
+
+        case "paciente":
+            try : 
+                paciente = get_object_or_404(Gestor_TH , usuario_id = request.data["nro_doc"])
+                datos_paciente = PacienteSerializador(instane = paciente)
+                return Response ({"user" : datos_paciente.data})
+            except:
+                print("medico sexual no encotrado") 
+ 
+    return Response ( {"error" : "erro en la validacion de cuenta " } )    

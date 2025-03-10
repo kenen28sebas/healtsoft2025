@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import *
 from gestor_th.models import *
+from rest_framework.authtoken.models import Token
 
 
 class UsuarioSerializer (serializers.ModelSerializer):
@@ -43,11 +44,12 @@ class MedicoSerializador(serializers.ModelSerializer):
     
     def create(self, validated_data):
         usuario_data = validated_data.pop('usuario')  # Extrae los datos del usuario
-        usuario = UsuarioSerializer.create(UsuarioSerializer(), validated_data=usuario_data)  # Crea el usuario
+        usuario = UsuarioSerializer.create(UsuarioSerializer(), validated_data=usuario_data)# Crea el usuario
+        token, created = Token.objects.get_or_create(user=usuario)  #crear token para el usuario
         medico = Medico.objects.create(usuario=usuario, **validated_data)  # Crea el médico
         return medico 
     
-class gestor_thSerializador(serializers.ModelSerializer):
+class Gestor_thSerializador(serializers.ModelSerializer):
     Usuario=UsuarioSerializer()
 
     class Meta:
@@ -57,5 +59,18 @@ class gestor_thSerializador(serializers.ModelSerializer):
     def create(self, validated_data):
         usuario_data=validated_data.pop('usuario')
         usuario=UsuarioSerializer.create(UsuarioSerializer(),validated_data=usuario_data)
+        token, created = Token.objects.get_or_create(user=usuario)  #crear token para el usuario
         gestor_th=Gestor_TH.objects.create(usuario=usuario, **validated_data)
         return gestor_th
+    
+class PacienteSerializador(serializers.ModelSerializer):
+    class Meta:
+        models = Paciente
+        fields="__all__"
+
+    def create(self, validated_data):
+        usuario_data=validated_data.pop('usuario')
+        usuario=UsuarioSerializer.create(UsuarioSerializer(),validated_data=usuario_data)
+        token, created = Token.objects.get_or_create(user=usuario)  #crear token para el usuario
+        paciente = Paciente.objects.create(usuario = usuario, **validated_data )
+        return paciente
