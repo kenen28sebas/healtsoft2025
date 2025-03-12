@@ -4,5 +4,6 @@ from usuarios.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('registrar' , registrar)
+    path('registrar' , registrar),
+    path('login', login)
 ]

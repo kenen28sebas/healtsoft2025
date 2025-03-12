@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Usuario
+from .models import *
 from .serializer import *
 from rest_framework.authtoken.models import Token
 
@@ -52,7 +52,7 @@ def login (request):
     
     tipo_ususrio = request.data["tipo_usuario"]
     usuario = get_object_or_404(Usuario , nro_doc = request.data["nro_doc"])
-    
+
     if not usuario.check_password(request.data["password"]):
         return Response({"error" : "clave incorrecta"})
     
@@ -61,9 +61,9 @@ def login (request):
             try:
                 medico = get_object_or_404(Medico , usuario_id = request.data["nro_doc"])
                 datos_medico = MedicoSerializador(instance = medico)
-                return Response ({"user" : datos_paciente.data})
+                return Response ({"user" : datos_medico.data})
             except:
-                print("medico sexual no encotrado")        
+                print("medico sexual no encotrado1")        
     
         case "gestor_th":
             try:
