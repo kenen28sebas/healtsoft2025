@@ -15,6 +15,7 @@ def registrar (request):
     match tipo_ususrio:
         case "medico":
             serializer=MedicoSerializador(data= request.data)
+            print(serializer)
             print(serializer.is_valid())
             if serializer.is_valid(): 
                 serializer.save()
@@ -24,20 +25,26 @@ def registrar (request):
             serializerTH=Gestor_thSerializador(data=request.data)
             print(serializerTH.is_valid())
             if serializerTH.is_valid():
-                token = Token.objects.create(user = serializerTH)
+                
                 serializerTH.save()
                 return Response({"user":serializerTH.data})
         case "paciente":
             serializer= PacienteSerializador(data = request.data)
             print(serializer.is_valid())
             if serializer.is_valid():
-                token = Token.objects.create(user = serializer)
+                
                 serializer.save()
                 return Response({"user":serializer.data})
-    
+        case "u":
+            serializer = UsuarioSerializer(data = request.data)   
+            print(serializer.is_valid())
+            if serializer.is_valid():
+                
+                serializer.save()
+                return Response({"user":serializer.data})
 
 
-    return Response({"error": "error" })
+    return Response({"error": "error" ,"user" : request.data})
 
 
 @api_view(["POST"])

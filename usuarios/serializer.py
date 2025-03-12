@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import *
-from gestor_th.models import *
 from rest_framework.authtoken.models import Token
 
 
@@ -31,7 +30,8 @@ class UsuarioSerializer (serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop('password')  # Se extrae la contraseña
         usuario = Usuario.objects.create(**validated_data)
-        usuario.set_password(password)  # Se asegura de que la contraseña esté cifrada
+        usuario.set_password(password) 
+        token, created = Token.objects.get_or_create(user=usuario)# Se asegura de que la contraseña esté cifrada
         usuario.save()
         return usuario 
         
@@ -47,10 +47,10 @@ class MedicoSerializador(serializers.ModelSerializer):
         usuario = UsuarioSerializer.create(UsuarioSerializer(), validated_data=usuario_data)# Crea el usuario
         token, created = Token.objects.get_or_create(user=usuario)  #crear token para el usuario
         medico = Medico.objects.create(usuario=usuario, **validated_data)  # Crea el médico
-        return medico 
+        return medico
     
 class Gestor_thSerializador(serializers.ModelSerializer):
-    Usuario=UsuarioSerializer()
+    usuario=UsuarioSerializer()
 
     class Meta:
         model=Gestor_TH

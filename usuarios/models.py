@@ -38,8 +38,8 @@ class Usuario (AbstractUser):
 
 
 class Medico(models.Model):
-    especialidad=models.CharField(max_length=100, null=False, verbose_name='Especialidad')
-    contrato=models.CharField(max_length=100,null=False, verbose_name='Contrato')
+    especialidad=models.CharField(max_length=100, null=True, verbose_name='Especialidad')
+    contrato=models.CharField(max_length=100,null=True, verbose_name='Contrato')
     sueldo=models.DecimalField(max_digits=6,decimal_places=3, verbose_name='Sueldo')
     usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
 
@@ -105,3 +105,9 @@ class Paciente(models.Model):
     ]
     grupo_sanguineo = models.CharField(max_length=3, null= False, blank= False, verbose_name='RH', choices=GRPO_SANG)
     usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    
+# class Gerente(models.Model) :
+#     pass   
+       
+# class Aux_adm(models.Model) :
+           
