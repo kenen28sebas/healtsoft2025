@@ -109,5 +109,16 @@ class Paciente(models.Model):
 # class Gerente(models.Model) :
 #     pass   
        
-# class Aux_adm(models.Model) :
-           
+class Aux_adm(models.Model) :
+    T_CONTRATO_CHOICES=[
+        ('1',"Contrato a término indefinido"),
+        ('2',"Contrato a término fijo"),
+        ('3',"Contrato por obra o labor"),
+        ('4',"Contrato ocasional, accidental o transitorio"),
+        ('5',"Contrato de aprendizaje"),
+        ('6',"Contrato de prestación de servicios"),
+        ('7',"Contrato sindical ")
+    ]
+    tipo_contrato=models.CharField(max_length=100, choices=T_CONTRATO_CHOICES,null=False,verbose_name="Tipo de contrato" , default="hola")
+    usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    fecha_ingreso=models.DateField(auto_created=False,auto_now=False,auto_now_add=False, verbose_name="Fecha de ingreso")

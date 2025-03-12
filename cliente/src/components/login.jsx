@@ -1,12 +1,13 @@
 
 
 import React, { useState } from 'react';
-
-const Login = () => {
+import { useNavigate } from 'react-router-dom';
+const Login = (url) => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [apiResponse, setApiResponse] = useState(null); // Guardar la respuesta del API
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Evitar recarga de página
@@ -31,11 +32,16 @@ const Login = () => {
       const data = await response.json();
       setApiResponse(data);
       console.log('Datos obtenidos:', data); // Log para comprobar la respuesta
+
+      navigate('/prueba')
     } catch (err) {
       setError(err.message);
       console.error('Error al realizar el fetch:', err);
     }
   };
+
+  const s = <h1>hola</h1>
+
 
   return (
     <div className="form-contenedor login-contenedor">
