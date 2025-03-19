@@ -1,16 +1,18 @@
 
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-const Login = (url) => {
+import { data, useNavigate } from 'react-router-dom';
+const Login = (almacenarTokenp) => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [apiResponse, setApiResponse] = useState(null); // Guardar la respuesta del API
   const [error, setError] = useState(null);
+  const [token , setToken] = useState(null)
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Evitar recarga de página
+    
 
     try {
       const response = await fetch('http://127.0.0.1:8000/login', {
@@ -31,21 +33,22 @@ const Login = (url) => {
 
       const data = await response.json();
       setApiResponse(data);
+      setToken(data.token);
       console.log('Datos obtenidos:', data); // Log para comprobar la respuesta
 
+      almacenarTokenp.almacenarTokenp(data.token)
+
       navigate('/prueba')
+      
     } catch (err) {
       setError(err.message);
       console.error('Error al realizar el fetch:', err);
     }
   };
 
-  const s = <h1>hola</h1>
-
-
   return (
     <div className="form-contenedor login-contenedor">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => {handleSubmit(e)}}>
         <h1>Inicia sesión aquí</h1>
         <input
           type="text"
@@ -63,6 +66,7 @@ const Login = (url) => {
       </form>
 
       {/* Mostrar respuesta o error */}
+      {token && <p>{token}</p>}
       {apiResponse && <p>Respuesta del servidor: {JSON.stringify(apiResponse)}</p>}
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
     </div>

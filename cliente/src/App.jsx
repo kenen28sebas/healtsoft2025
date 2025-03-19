@@ -6,12 +6,18 @@ import Login from './components/login'
 import Overlay from './components/overley'
 import './styles/index.css'
 import { BrowserRouter , Route , Routes} from 'react-router-dom'
-import Nabvar from './components/navbar'
-
+import App_gestor_citas from './components/gestor_citas/App_gestor_citas'
 import Dashboard from './components/Dashboard'
 
 const App = () => {
   const [isActive, setIsActive] = useState(false);
+  const [token,setToken] = useState('ss')
+
+  const almacenarToken = (dato) => {
+    console.log("Token recibido del hijo:", dato);
+    setToken(dato);
+};
+
 
   return (
     <>
@@ -22,11 +28,11 @@ const App = () => {
         <Route path='/' element={
             <div className={`container ${isActive ? 'right-panel-active' : ''}`} id="container">
             <Registro />
-            <Login />
+            <Login almacenarTokenp= {almacenarToken} />
             <Overlay onRegisterClick={() => setIsActive(true)} onLoginClick={() => setIsActive(false)} />
             </div>
         }/>
-        <Route path="/prueba" element={<Nabvar/>} />
+        <Route path="/prueba" element={<App_gestor_citas token= {token}/>} />
       </Routes>
     </BrowserRouter>
     
