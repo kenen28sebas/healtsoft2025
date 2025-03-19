@@ -122,3 +122,8 @@ class Aux_adm(models.Model) :
     tipo_contrato=models.CharField(max_length=100, choices=T_CONTRATO_CHOICES,null=False,verbose_name="Tipo de contrato" , default="hola")
     usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
     fecha_ingreso=models.DateField(auto_created=False,auto_now=False,auto_now_add=False, verbose_name="Fecha de ingreso")
+
+class Gerente(models.Model):
+    usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    profesion=models.CharField(max_length=100)
+    sueldo=models.DecimalField(max_digits=10,decimal_places=3,verbose_name="sueldo")

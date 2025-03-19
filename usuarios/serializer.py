@@ -86,3 +86,15 @@ class AuxiliarAdminSerializador(serializers.ModelSerializer):
         token, created = Token.objects.get_or_create(user=usuario)  #crear token para el usuario
         aux_adm = Aux_adm.objects.create(usuario = usuario, **validated_data )
         return aux_adm
+    
+class GerenteSerializador(serializers.ModelSerializer):
+    class Meta:
+        model=Gerente
+        fields="__all__"
+
+    def create(self, validated_data):
+        usuario_data=validated_data.pop('usuario')
+        usuario=UsuarioSerializer.create(UsuarioSerializer(),validated_data=usuario_data)
+        token,created=Token.objects.get_or_create(user=usuario)
+        gerente=Gerente.objects.create(usuario=usuario,**validated_data)
+        return gerente

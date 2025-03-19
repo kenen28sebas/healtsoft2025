@@ -4,6 +4,7 @@ import { useState , useEffect } from "react";
 import Registro from '../registro'
 import Login from '../login'
 import Overlay from '../overley'
+import { ContenedorNombre } from "./ContenedorNombre";
 
 
 const App_gestor_citas = (token) =>{
@@ -43,10 +44,17 @@ const App_gestor_citas = (token) =>{
     useEffect(() => {
         cargarDatos();
       }, []);
-
+    
+    if(datos == null){
+      return(
+        <h1>nopi jijiji</h1>
+      )
+    }
     return(
         <>
-        {datos && <h1>{datos.user.usuario.first_name}</h1>}
+        {datos && <ContenedorNombre nombre={datos.user.usuario.first_name} email={datos.user.usuario.email}/>}
+        {datos && <ContenedorNombre email={datos.user.usuario.email}/>}
+        
         </>
         
     )

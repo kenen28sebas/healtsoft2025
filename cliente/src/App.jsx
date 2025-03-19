@@ -8,6 +8,7 @@ import './styles/index.css'
 import { BrowserRouter , Route , Routes} from 'react-router-dom'
 import App_gestor_citas from './components/gestor_citas/App_gestor_citas'
 import Dashboard from './components/Dashboard'
+import { AppGestorTh } from './components/gestor_th/AppGestorTh'
 
 const App = () => {
   const [isActive, setIsActive] = useState(false);
@@ -32,7 +33,8 @@ const App = () => {
             <Overlay onRegisterClick={() => setIsActive(true)} onLoginClick={() => setIsActive(false)} />
             </div>
         }/>
-        <Route path="/prueba" element={<App_gestor_citas token= {token}/>} />
+        <Route path="/prueba" element={<App_gestor_citas token= {token}/>} /> 
+        <Route path='/th' element={<AppGestorTh/>}/>
       </Routes>
     </BrowserRouter>
     
