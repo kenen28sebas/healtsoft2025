@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'usuarios',
-    'Gestor_Th'
+    'Gestor_Th',
+    'gestor_citas'
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ WSGI_APPLICATION = 'healtsoft.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ips2025',
+        'NAME': 'healsoftdb',
         'USER' : 'root',
         'PASSWORD' : '',
         'HOST' : 'localhost',

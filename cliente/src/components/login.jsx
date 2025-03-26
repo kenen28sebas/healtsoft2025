@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { data, useNavigate } from 'react-router-dom';
+
 const Login = (almacenarTokenp) => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +22,7 @@ const Login = (almacenarTokenp) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            tipo_usuario : "medico",
+            tipo_usuario : "paciente",
             nro_doc: userId,
             password: password,
         }),

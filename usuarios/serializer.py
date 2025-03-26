@@ -64,8 +64,10 @@ class Gestor_thSerializador(serializers.ModelSerializer):
         return gestor_th
     
 class PacienteSerializador(serializers.ModelSerializer):
+    usuario = UsuarioSerializer()
+
     class Meta:
-        models = Paciente
+        model = Paciente
         fields="__all__"
 
     def create(self, validated_data):

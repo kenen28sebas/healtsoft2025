@@ -68,7 +68,8 @@ class Ips(models.Model):
     def __str__(self):
         return self.nombre
 
-class Servicio(models.Model):
+class Cups(models.Model):
+    codigo = models.CharField(max_length=10 , primary_key=True)
     Nombre= models.CharField(max_length=100)
     descripcion=models.TextField()
     ips=models.ForeignKey(Ips,on_delete=models.CASCADE)

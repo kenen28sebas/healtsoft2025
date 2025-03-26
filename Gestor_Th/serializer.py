@@ -6,9 +6,9 @@ class Ipsserializador(serializers.ModelSerializer):
         model=Ips
         fields='__all__'
 
-class Servicioserializador(serializers.ModelSerializer):
+class Cupsserializador(serializers.ModelSerializer):
     class Meta:
-        model=Servicio
+        model=Cups
         fields='__all__'
 
 class Hojaserializador(serializers.ModelSerializer):

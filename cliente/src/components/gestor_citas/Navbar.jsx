@@ -1,12 +1,15 @@
 import React from "react";
+import "./navbar.css"
 
-const Nabvar = (prop) => {
+
+const Nabvar = ({children}) => {
     return(
         <>
-        <h1> Bienvenido  </h1>
+        <div className="navbar">
+            {children}
+        </div>
         </>
     )
-
 }
 
 export default Nabvar

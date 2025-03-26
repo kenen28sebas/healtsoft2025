@@ -17,9 +17,9 @@ class Ipsvista(viewsets.ModelViewSet):
     serializer_class=Ipsserializador
     queryset=Ips.objects.all()
 
-class Serviciovista(viewsets.ModelViewSet):
-    serializer_class=Servicioserializador
-    queryset=Servicio.objects.all()
+# class Serviciovista(viewsets.ModelViewSet):
+#     serializer_class=Servicioserializador
+#     queryset=Servicio.objects.all()
 
 
 class Hojavista(viewsets.ModelViewSet):
