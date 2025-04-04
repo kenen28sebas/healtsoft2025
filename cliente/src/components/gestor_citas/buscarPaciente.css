@@ -1,0 +1,44 @@
+.buscar_paciente{
+    width: 68vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: antiquewhite;
+    padding: 50px;
+}
+
+.buscar_paciente__contenedor_buscar{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.buscar_paciente__contenedor_input {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Esto asegura que los elementos también se centren verticalmente */
+    height: 100px; /* Puedes ajustar el tamaño del contenedor como prefieras */
+    width: 100px;
+    position: relative;
+    z-index: 0;
+}
+
+.buscar_paciente__contenedor_input input{
+    height: 40px;
+    border-radius: 100px;
+    border: transparent;
+
+}
+
+.buscar_paciente__lupa {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: aqua;
+    position: absolute;
+    left: 96px;
+    z-index: 2;
+}

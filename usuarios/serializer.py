@@ -78,8 +78,10 @@ class PacienteSerializador(serializers.ModelSerializer):
         return paciente
     
 class AuxiliarAdminSerializador(serializers.ModelSerializer):
+    usuario = UsuarioSerializer()
+
     class Meta:
-        models = Aux_adm
+        model = Aux_adm
         fields="__all__"
 
     def create(self, validated_data):

@@ -10,7 +10,8 @@ import './app_gestor_citas.css'
 import Contenedor_opciones from "./Contenedor_opciones";
 import Calendario_citas from "./calendario_citas";
 import ListaCitas from "./ListaCitas";
-
+import BuscarPaciente from "./BuscarPaciente";
+import FormularioPaciente from "./FormularioPaciente";
 
 const App_gestor_citas = ({token}) =>{
     const [listabotones,setListabotones] = useState([])
@@ -42,12 +43,11 @@ const App_gestor_citas = ({token}) =>{
             setDatos(data)
 
             console.log('Datos obtenidos:', data);
-            console.log(data.tipo_usuario == "medico") // Log para comprobar la respuesta
             switch(data.tipo_usuario){
               case "paciente":
                 setListabotones([{id:1,titulo :"crear cita"},{id:2,titulo :"consultar cita"}]) 
                 break;
-              case "medico":
+              case "auxiliar":
                 setListabotones( [{id:1,titulo :"crear cita"},{id:2,titulo :"consultar cita"},{id:3,titulo :"consultar paciente"},{id:4,titulo :"crear paciente"}]) 
                 break;
             } 
@@ -97,14 +97,39 @@ const App_gestor_citas = ({token}) =>{
         <h1>nopi jijiji</h1>
       )
     }
+    if(datos.tipo_usuario == "auxiliar"){
+      return(
+        <>
+        <div className="cuerpo_app">
+        <Nabvar>
+          <ContenedorNombre nombre={`${datos.user.usuario.first_name} ${datos.user.usuario.last_name}`} rol={"Auxiliar administrativo"}></ContenedorNombre>
+          <Contenedor_opciones lista={listabotones} closeOther={cerrarVentanas}></Contenedor_opciones>
+        </Nabvar>
+        <BuscarPaciente isOpen={isOpenCalendario}  token = {token} tipo={"agendar"}>
+            <Calendario_citas isOpen={isOpenCalendario} token={token}></Calendario_citas>
+        </BuscarPaciente>
+        <BuscarPaciente isOpen={isOpenConsulatr}  token = {token} tipo={"consultar citas"}> 
+            <ListaCitas isOpen={isOpenConsulatr} token={token}></ListaCitas>
+        </BuscarPaciente>
+        <FormularioPaciente isOpen={isOpencrearPaciente} ></FormularioPaciente>
+        <BuscarPaciente isOpen={isOpeninfoPaciente}  token = {token} tipo={"ver informacion"}>
+        </BuscarPaciente>
+        </div>
+        </>
+
+      )
+      
+
+
+    }
     return(
         <>
         <Nabvar>
-          <ContenedorNombre nombre={`${datos.user.usuario.first_name} ${datos.user.usuario.last_name}`}></ContenedorNombre>
+          <ContenedorNombre nombre={`${datos.user.usuario.first_name} ${datos.user.usuario.last_name}`} rol={"Paciente"}></ContenedorNombre>
           <Contenedor_opciones lista={listabotones} closeOther={cerrarVentanas}></Contenedor_opciones>
         </Nabvar>
         <Calendario_citas isOpen={isOpenCalendario} token={token}></Calendario_citas>
-        <ListaCitas token={token}></ListaCitas>
+        <ListaCitas isOpen={isOpenConsulatr} token={token}></ListaCitas>
         </>
         
     )

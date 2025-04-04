@@ -1,0 +1,30 @@
+.formulario_cita{
+    background-color: antiquewhite;
+    position: absolute;
+    width: 350px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.formulario_cita__formulario{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+.formulario_cita__cont_input{
+    display: flex;
+    justify-content: space-between;
+}
+
+.formulario_cita__cont_input input{
+    width: 140px;
+}
+
+.formulario_cita__cont_input select{
+    width: 150px;
+}

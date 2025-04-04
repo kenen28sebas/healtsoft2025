@@ -4,11 +4,11 @@ import "./calentadario_citas.css"
 import Card_cita from "./Card_cita"
 import Calendario_horas from "./Calendario_horas";
 
-const Calendario_citas = ({isOpen , token}) =>{
+const Calendario_citas = ({isOpen , token , nro_doc}) =>{
     const [index, setIndex] = useState(0);
     const [open,setOpen] = useState(false);
     const [dia,setDia] = useState(null)
-
+    console.log(nro_doc)
     if (!isOpen){return null}
 
     
@@ -75,20 +75,36 @@ const Calendario_citas = ({isOpen , token}) =>{
 
     return(
         <>
-        <div className="calendario">
-            <button onClick={handleRestaMes}> {texto_meses[index - 1]} </button>
-            <h1>{texto_meses[index]}</h1>
-            <button onClick={handleSumaMes}> {texto_meses[index + 1]} </button>
+        
+            
             {!open && (
+                <>
+                <div className="calendario">
+                <div className="calendario__meses_info">
+                  <button onClick={handleRestaMes}> {texto_meses[index - 1]} </button>
+                  <h1>{texto_meses[index]}</h1>
+                  <button onClick={handleSumaMes}> {texto_meses[index + 1]} </button>
+                </div>
+                <div className="calendario__dias">
+                  <h1>Domingo</h1>
+                  <h1>Lunes</h1>
+                  <h1>Martes</h1>
+                  <h1>Miercoles</h1>
+                  <h1>Jueves</h1>
+                  <h1>Viernes</h1>
+                  <h1>Sabado</h1>
+                </div>
                 <div className="calendario__contenedor">
                 {dias[index].map(dias_card => {
                     if (dias_card == null) return <Card_cita dia={"*"} open={() => handleOpen()} />;
                     return <Card_cita dia={dias_card.getDate()} open={() => handleOpen(dias_card)} />;
                 })}
                 </div>
+                </div>
+                </>
             )}    
-            <Calendario_horas isOpenCH={open} isCloseCH={handleClose} token={token} dia={dia}></Calendario_horas>
-        </div>
+            <Calendario_horas isOpenCH={open} isCloseCH={handleClose} token={token} dia={dia} nro_doc={nro_doc}></Calendario_horas>
+        
         
         
         </>

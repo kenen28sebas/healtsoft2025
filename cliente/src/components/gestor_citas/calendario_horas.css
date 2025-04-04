@@ -1,18 +1,25 @@
 .calendario_horas{
-    position: absolute;
-    top: 0;
-    right: 0;
     width: 68vw;
     display: inline-block;
-    background-color: aqua;
-    padding: 20px;
+    background-color: #159A9C;
+    padding: 16px;
+    border-radius: 18px;
 }
 
 .calendario_horas__contenedor{
-    background-color: antiquewhite;
+    background-color: #D9B504;
     width: 100%;
     height: 350px;
+    padding: 20px;
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(7,1fr);
     grid-template-rows: repeat(6,1fr);
+    border-radius: 16px;
+}
+
+.calendario__boton_atras{
+    padding: 10px;
+    border-radius: 25px;
+    margin: 5px;
 }

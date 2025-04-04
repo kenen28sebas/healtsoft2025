@@ -22,7 +22,7 @@ const Login = (almacenarTokenp) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            tipo_usuario : "paciente",
+            tipo_usuario : "auxiliar",
             nro_doc: userId,
             password: password,
         }),

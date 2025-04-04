@@ -1,0 +1,26 @@
+.alerta{
+    width: 250px ;
+    height: 150px ;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px 2px;
+    position: absolute;
+    background-color: aliceblue;
+    
+  }
+  
+  .alerta__linea{
+      position: absolute;
+    top : 110px;
+  
+    height: 150px ;
+    border-top: solid #23be04;
+    animation: crecer 1000ms linear forwards;
+  }
+  
+  @keyframes crecer {
+      from { width:0 ; }
+      to { width: 200px; }
+  }

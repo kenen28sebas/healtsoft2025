@@ -2,7 +2,7 @@ import React from "react";
 import "./calendario_horas.css"
 import Card_cita_horas from "./Card_cita_hora";
 
-const Calendario_horas = ({isOpenCH,isCloseCH,token,dia}) =>{
+const Calendario_horas = ({isOpenCH,isCloseCH,token,dia,nro_doc}) =>{
 
     function generarHoras(margenInicio, margenFin, intervalo) {
         const horas = [];
@@ -28,9 +28,9 @@ const Calendario_horas = ({isOpenCH,isCloseCH,token,dia}) =>{
 
         <>
         <div className="calendario_horas">
-            <button onClick={isCloseCH}>{"<="}</button>
+            <button className="calendario__boton_atras" onClick={isCloseCH}>{"<="}</button>
             <div className="calendario_horas__contenedor">
-                {arregloHoras.map(horas => <Card_cita_horas hora={horas} token={token} dia={dia}> </Card_cita_horas> )}
+                {arregloHoras.map(horas => <Card_cita_horas hora={horas} token={token} dia={dia} nro_doc={nro_doc}> </Card_cita_horas> )}
             </div>
         </div>
         </>

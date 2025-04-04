@@ -41,6 +41,9 @@ def registrar (request):
         case "auxiliar":
             serializer = AuxiliarAdminSerializador(data = request.data)   
             print(serializer.is_valid())
+            if not serializer.is_valid():
+                # Acceder a los errores
+                print(serializer.errors)
             if serializer.is_valid():
                 
                 serializer.save()
@@ -80,13 +83,9 @@ def login (request):
 
         case "paciente":
             try : 
-                print(1)
                 paciente = get_object_or_404(Paciente , usuario_id = request.data["nro_doc"])
-                print(1)
                 token,create = Token.objects.get_or_create( user = usuario)
-                print(1)
                 datos_paciente = PacienteSerializador(instance  = paciente)
-                print(1)
                 return Response ({"user" : datos_paciente.data  , "token" : token.key })
             except:
                 print("medico sexual no encotrado") 
@@ -115,7 +114,7 @@ def perfil(request):
         datos_medico = MedicoSerializador(instance = medico)
         return Response ({"user" : datos_medico.data, "tipo_usuario" : "medico"})
     except:
-        print("medico sexual no encotrado1")        
+        print("medico no encotrado1")        
     
 
     try:
@@ -123,20 +122,20 @@ def perfil(request):
         datos_gestor_th = Gestor_thSerializador(instance = gestor_th)
         return Response ( {"user" : datos_gestor_th.data , "tipo_usuario" : "gestor_th" } )  
     except:
-        print("medico sexual no encotrado")   
+        print("gth no encotrado")   
 
     try : 
         paciente = get_object_or_404(Paciente , usuario_id = request.user.nro_doc)
         datos_paciente = PacienteSerializador(instance = paciente)
         return Response ({"user" : datos_paciente.data , "tipo_usuario" : "paciente" })
     except:
-        print("medico sexual no encotrado") 
+        print("paciente no encotrado") 
 
     try : 
         auxiliar = get_object_or_404(Aux_adm , usuario_id = request.user.nro_doc)
         datos_paciente = AuxiliarAdminSerializador(instance  = auxiliar)
         return Response ({"user" : datos_paciente.data , "tipo_usuario" : "auxiliar" })
     except:
-        print("medico sexual no encotrado")     
+        print("aux no encotrado")     
 
     return Response({})    

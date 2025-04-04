@@ -1,8 +1,11 @@
 .navbar{
-    width: 30vw; 
+    width: 325px;
+    display: inline-flex;
+
+    align-items: center;
+    padding: 22px;
+    box-sizing: border-box;
+    background-color: #B4BEC9;
+    flex-direction: column;
     height: 100vh;
-    display: inline-block;   
-    position: relative;
-    top: 0  ;
-    left: 0;
 }

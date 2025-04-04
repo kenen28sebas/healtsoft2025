@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-
-const Formulario_cita=({token,isOpen,dia,hora}) => {
+import "./formulario_citas.css"
+import Alerta from "./alerta";
+const Formulario_cita=({token,isOpen,dia,hora,nro_doc,isClose}) => {
     const [prioridad, setPrioridad] = useState(null);
     const [cups, setCups] = useState(null);
     const [medico, setMedico] = useState(null);
-    const [paciente, setPaciente] = useState(null);
+    const [paciente, setPaciente] = useState(nro_doc);
+    const [listaCups, setListaCups] = useState(null);
+    const [listaMedicos , setListaMedicos] = useState(null);
+    const [openAlerta , setOpenAlerta] = useState(false)
 
+    console.log(nro_doc == undefined)
     function convertirHora(horaTexto) {
         const [hora, minutos] = horaTexto.match(/\d+/g); // Extraer números
         const esPM = horaTexto.toLowerCase().includes("p. m.");
@@ -40,7 +45,16 @@ const Formulario_cita=({token,isOpen,dia,hora}) => {
         return `${diaFormateado}-${mesFormateado}-${añoFormateado} ${horasFormateadas}:${minutosFormateados}:${segundosFormateados}`;
     }
     const fechaAsignacion= formatearFechaYHora(dia, hora);
-    const url = "http://127.0.0.1:8000/api/cita/"
+    const urlOpcion= () => {
+        if (nro_doc == undefined){
+            return "http://127.0.0.1:8000/api/cita/"
+        }
+        if (nro_doc){
+            return "http://127.0.0.1:8000/api/citaaux/"
+        }
+    }
+    const url = urlOpcion()
+    console.log(url)
     const body = JSON.stringify({
         fecha_de_solicitud : "2025-03-22T14:33:00Z",
         fecha_de_asignacion:fechaAsignacion,
@@ -55,15 +69,30 @@ const Formulario_cita=({token,isOpen,dia,hora}) => {
         'Authorization': `Token ${token}`
     }
 
-    if(!isOpen){
 
-        return null
+
+    const urlListaCups = "http://127.0.0.1:8000/getCups"
+    const urlListaMedico = "http://127.0.0.1:8000/getMedico"
+
+    const cargarDatos = async () =>{
+        const response = await fetch(urlListaCups,{
+            method: 'GET',
+            headers: header,
+        })
+        const datos = await response.json()
+        setListaCups(datos)
+        const response2 = await fetch(urlListaMedico,{
+            method: 'GET',
+            headers: header,
+        })
+        const datos2 = await response2.json()
+        setListaMedicos(datos2)
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await fetch(url, {
-            method: 'POST', // Si el endpoint requiere un POST
+            method: 'POST',
             headers: header,
             body: body,
           });
@@ -72,19 +101,40 @@ const Formulario_cita=({token,isOpen,dia,hora}) => {
           }
     
         const data = await response.json();
-        
+        setOpenAlerta(true)
+          setTimeout(() =>{
+            setOpenAlerta(false);
+            // cargarCitas()
+            isClose()
+          }, 2000)
         console.log('Datos obtenidos:', data);
     }
+    useEffect(() => {
+        cargarDatos();
+    }, [])
 
+    if(!isOpen){
 
+        return null
+    }
+    if(listaCups == null){
+        return(
+            <>
+            <h1>cargado...</h1>
+            </>
+        )
+    }
+
+    const opcionesCups = listaCups.map(cups => <option value={cups.codigo}>{cups.Nombre}</option>)
+    const opcionesMedico = listaMedicos.map(medico => <option value={medico.usuario.nro_doc}>{medico.usuario.first_name}</option>)
 
     return(
         <>
-        <div>
-            <div>
-            <form onSubmit={handleSubmit}>
+        <div className="formulario_cita">
+            <div >
+            <form onSubmit={handleSubmit} className="formulario_cita__formulario">
                 {/* Select de prioridad */}
-                <div>
+                <div className="formulario_cita__cont_input"> 
                     <label htmlFor="prioridad">Prioridad:</label>
                     <select
                     id="prioridad"
@@ -112,25 +162,31 @@ const Formulario_cita=({token,isOpen,dia,hora}) => {
                 </div> */}
 
                 {/* Inputs restantes */}
-                <div>
+                <div className="formulario_cita__cont_input">
                     <label htmlFor="cups">Cups:</label>
-                    <input
+                    <select 
                     id="cups"
                     type="text"
                     value={cups || ""}
-                    onChange={(e) => setCups(e.target.value)}
-                    />
+                    onChange={(e) => setCups(e.target.value)}>
+                    <option value="">Seleccione una Cups</option>
+                    {opcionesCups}
+
+                    </select>
+                    
                 </div>
-                <div>
+                <div className="formulario_cita__cont_input">
                     <label htmlFor="medico">Médico:</label>
-                    <input
+                    <select 
                     id="medico"
                     type="text"
                     value={medico || ""}
-                    onChange={(e) => setMedico(e.target.value)}
-                    />
+                    onChange={(e) => setMedico(e.target.value)}>
+                        <option value="">Seleccione una Medico</option>
+                        {opcionesMedico}    
+                    </select>
                 </div>
-                <div>
+                <div className="formulario_cita__cont_input">
                     <label htmlFor="paciente">Paciente:</label>
                     <input
                     id="paciente"
@@ -142,7 +198,9 @@ const Formulario_cita=({token,isOpen,dia,hora}) => {
 
                 <button type="submit">Enviar</button>
                 </form>
-
+                <Alerta isOpen={openAlerta}>
+                    <h1>Cita creada correctamente</h1>
+                </Alerta>
             </div>
 
 

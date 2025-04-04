@@ -15,6 +15,7 @@ class CitaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cita
         fields = [
+            'id', 
             'fecha_de_solicitud',
             'fecha_de_asignacion',
             'prioridad',

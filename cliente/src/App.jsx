@@ -7,7 +7,7 @@ import Overlay from './components/overley'
 import { BrowserRouter , Route , Routes} from 'react-router-dom'
 import App_gestor_citas from './components/gestor_citas/App_gestor_citas'
 import Dashboard from './components/Dashboard'
-import './styles/style.css'
+// import './styles/style.css'
 // import { AppGestorTh } from './components/gestor_th/AppGestorTh'
 
 const App = () => {

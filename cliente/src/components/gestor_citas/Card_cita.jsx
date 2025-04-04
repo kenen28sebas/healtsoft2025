@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./card_cita.css"
 const Card_cita = ({dia,open}) =>{
 
     return(
