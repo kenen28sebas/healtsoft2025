@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { data, useNavigate } from 'react-router-dom';
+import Mensaje from './Mensaje';
 
 const Login = (almacenarTokenp) => {
   const [userId, setUserId] = useState('');
@@ -9,6 +10,8 @@ const Login = (almacenarTokenp) => {
   const [apiResponse, setApiResponse] = useState(null); // Guardar la respuesta del API
   const [error, setError] = useState(null);
   const [token , setToken] = useState(null)
+  const [showModal, setShowModal] = useState(false);
+  const closeModal = () => setShowModal(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,24 +25,27 @@ const Login = (almacenarTokenp) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            tipo_usuario : "auxiliar",
+            tipo_usuario : "medico",
             nro_doc: userId,
             password: password,
         }),
       });
 
       if (!response.ok) {
+        setShowModal(true)
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+      else{
+        const data = await response.json();
+        setApiResponse(data);
+        setToken(data.token);
+        console.log('Datos obtenidos:', data); // Log para comprobar la respuesta
 
-      const data = await response.json();
-      setApiResponse(data);
-      setToken(data.token);
-      console.log('Datos obtenidos:', data); // Log para comprobar la respuesta
+        almacenarTokenp.almacenarTokenp(data.token)
 
-      almacenarTokenp.almacenarTokenp(data.token)
-
-      navigate('/prueba')
+        navigate('historia/Medico')
+      }
+      
       
     } catch (err) {
       setError(err.message);
@@ -67,9 +73,14 @@ const Login = (almacenarTokenp) => {
       </form>
 
       {/* Mostrar respuesta o error */}
-      {token && <p>{token}</p>}
+      {/* {token && <p>{token}</p>}
       {apiResponse && <p>Respuesta del servidor: {JSON.stringify(apiResponse)}</p>}
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+      {error && <p style={{ color: 'red' }}>Error: {error}</p>} */}
+    {showModal && 
+      <Mensaje closeModal={closeModal} >
+      <h2>Error de autenticacion</h2>
+      <p>La clave o usuario estan incorrectas</p>
+      </Mensaje>}
     </div>
   );
 };

@@ -72,7 +72,7 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
                 <td>{cita.fecha_de_asignacion}</td>
                 <td>{cita.prioridad}</td>
                 <td>{cita.cups}</td>
-                <td>{cita.paciente}</td>
+                <td>{cita.paciente.usuario.first_name}</td>
                 <td>{cita.medico}</td>
                 <td>{cita.estado}</td>
                 {/* <td><button>Actualizar</button>
@@ -90,8 +90,8 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
                 <td>{cita.fecha_de_asignacion}</td>
                 <td>{cita.prioridad}</td>
                 <td>{cita.cups}</td>
-                <td>{cita.paciente}</td>
-                <td>{cita.medico}</td>
+                <td>{cita.paciente.usuario.first_name}</td>
+                <td>{cita.medico.usuario.first_name}</td>
                 <td>{cita.estado}</td>
                     <td><button >Actualizar</button>
                     <button onClick={() => eliminarCita(cita.id)}>Borrar</button></td>

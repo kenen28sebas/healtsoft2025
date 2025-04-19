@@ -6,10 +6,62 @@ from .serializer import *
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
+
+@swagger_auto_schema(
+    method='post',
+    operation_description="Registra un nuevo auxiliar administrativo.",
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        required=['tipo_usuario', 'usuario'],
+        properties={
+            'tipo_usuario': openapi.Schema(
+                type=openapi.TYPE_STRING,
+                enum=["auxiliar"],
+                description="Debe ser 'auxiliar'"
+            ),
+            'tipo_contrato': openapi.Schema(
+                type=openapi.TYPE_STRING,
+                description="Tipo de contrato del auxiliar."
+            ),
+            'fecha_ingreso': openapi.Schema(
+                type=openapi.TYPE_STRING,
+                format="date",
+                description="Fecha de ingreso (YYYY-MM-DD)."
+            ),
+            'usuario': openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                required=['nro_doc', 'tipo_doc', 'email', 'password'],
+                properties={
+                    'nro_doc': openapi.Schema(type=openapi.TYPE_STRING),
+                    'tipo_doc': openapi.Schema(type=openapi.TYPE_STRING),
+                    'lugar_exp_doc': openapi.Schema(type=openapi.TYPE_STRING),
+                    'fecha_exp_doc': openapi.Schema(type=openapi.TYPE_STRING, format="date"),
+                    'fecha_nacimiento': openapi.Schema(type=openapi.TYPE_STRING, format="date"),
+                    'sexo': openapi.Schema(type=openapi.TYPE_STRING),
+                    'estado_civil': openapi.Schema(type=openapi.TYPE_STRING),
+                    'telefono': openapi.Schema(type=openapi.TYPE_STRING),
+                    'nacionalidad': openapi.Schema(type=openapi.TYPE_STRING),
+                    'municipio': openapi.Schema(type=openapi.TYPE_STRING),
+                    'username': openapi.Schema(type=openapi.TYPE_STRING),
+                    'first_name': openapi.Schema(type=openapi.TYPE_STRING),
+                    'last_name': openapi.Schema(type=openapi.TYPE_STRING),
+                    'email': openapi.Schema(type=openapi.TYPE_STRING, format="email"),
+                    'password': openapi.Schema(type=openapi.TYPE_STRING, format="password"),
+                }
+            )
+        }
+    ),
+    responses={
+        200: "Auxiliar registrado exitosamente",
+        400: "Error en los datos"
+    }
+)
 @api_view(["POST"])
 def registrar (request):
-
+    
     tipo_ususrio = request.data["tipo_usuario"]
     print(tipo_ususrio)
     match tipo_ususrio:
@@ -53,6 +105,50 @@ def registrar (request):
     return Response({"error": "error" ,"user" : request.data})
 
 
+@swagger_auto_schema(
+    method='post',
+    operation_description="Autentica a un usuario y devuelve un token JWT.",
+    request_body=openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        required=['tipo_usuario', 'nro_doc', 'password'],
+        properties={
+            'tipo_usuario': openapi.Schema(type=openapi.TYPE_STRING, enum=["medico", "gestor_th", "paciente", "auxiliar"], description="Tipo de usuario."),
+            'nro_doc': openapi.Schema(type=openapi.TYPE_STRING, description="Número de documento del usuario."),
+            'password': openapi.Schema(type=openapi.TYPE_STRING, description="Contraseña del usuario."),
+        },
+    ),
+    responses={
+        200: openapi.Response(
+            description="Login exitoso",
+            examples={
+                "application/json": {
+                    "user": {
+                        "nro_doc": "12345678",
+                        "tipo_usuario": "medico",
+                        # ... otros campos del serializador
+                    },
+                    "token": "abc123...",
+                }
+            }
+        ),
+        400: openapi.Response(
+            description="Error en las credenciales",
+            examples={
+                "application/json": {
+                    "error": "clave incorrecta"
+                }
+            }
+        ),
+        404: openapi.Response(
+            description="Usuario no encontrado",
+            examples={
+                "application/json": {
+                    "error": "erro en la validacion de cuenta"
+                }
+            }
+        ),
+    }
+)
 @api_view(["POST"])
 def login (request):
     print(request.data)
@@ -60,7 +156,7 @@ def login (request):
     usuario = get_object_or_404(Usuario , nro_doc = request.data["nro_doc"])
 
     if not usuario.check_password(request.data["password"]):
-        return Response({"error" : "clave incorrecta"})
+        return Response({"error" : "clave incorrecta"},status=400)
     
     match tipo_ususrio:
         case "medico":
@@ -100,7 +196,34 @@ def login (request):
 
  
     return Response ( {"error" : "erro en la validacion de cuenta " } )    
-
+@swagger_auto_schema(
+    method='post',
+    operation_description="Obtiene el perfil del usuario autenticado (requiere token JWT).",
+    security=[{"Bearer": []}],  # Indica que requiere autenticación
+    responses={
+        200: openapi.Response(
+            description="Perfil del usuario",
+            examples={
+                "application/json": {
+                    "user": {
+                        "nro_doc": "12345678",
+                        "tipo_usuario": "medico",
+                        # ... otros campos del serializador
+                    },
+                    "tipo_usuario": "medico",
+                }
+            }
+        ),
+        401: openapi.Response(
+            description="No autenticado",
+            examples={
+                "application/json": {
+                    "detail": "Token inválido o no proporcionado."
+                }
+            }
+        ),
+    }
+)
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])

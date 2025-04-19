@@ -105,14 +105,14 @@ const App_gestor_citas = ({token}) =>{
           <ContenedorNombre nombre={`${datos.user.usuario.first_name} ${datos.user.usuario.last_name}`} rol={"Auxiliar administrativo"}></ContenedorNombre>
           <Contenedor_opciones lista={listabotones} closeOther={cerrarVentanas}></Contenedor_opciones>
         </Nabvar>
-        <BuscarPaciente isOpen={isOpenCalendario}  token = {token} tipo={"agendar"}>
+        <BuscarPaciente isOpen={isOpenCalendario}  token = {token} tipo={"agendar"} isLock={false}>
             <Calendario_citas isOpen={isOpenCalendario} token={token}></Calendario_citas>
         </BuscarPaciente>
-        <BuscarPaciente isOpen={isOpenConsulatr}  token = {token} tipo={"consultar citas"}> 
+        <BuscarPaciente isOpen={isOpenConsulatr}  token = {token} tipo={"consultar citas"} isLock={false}> 
             <ListaCitas isOpen={isOpenConsulatr} token={token}></ListaCitas>
         </BuscarPaciente>
         <FormularioPaciente isOpen={isOpencrearPaciente} ></FormularioPaciente>
-        <BuscarPaciente isOpen={isOpeninfoPaciente}  token = {token} tipo={"ver informacion"}>
+        <BuscarPaciente isOpen={isOpeninfoPaciente}  token = {token} tipo={"ver informacion"} isLock={true}>
         </BuscarPaciente>
         </div>
         </>

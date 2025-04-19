@@ -11,6 +11,8 @@ from .models import*
 from .serializer import *
 from usuarios.serializer import *
 from Gestor_Th.serializer import Cupsserializador
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 class CitaPacienteViewSet(ModelViewSet):
     queryset = Cita.objects.all()
@@ -19,6 +21,41 @@ class CitaPacienteViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     http_method_names = ['get', 'post']
 
+    @swagger_auto_schema(
+        operation_description="Crear una nueva cita (Paciente)",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=['medico', 'cups', 'fecha_de_asignacion'],
+            properties={
+                'medico': openapi.Schema(type=openapi.TYPE_STRING, description="Número de documento del médico"),
+                'cups': openapi.Schema(type=openapi.TYPE_STRING, description="Código CUPS"),
+                'fecha_de_asignacion': openapi.Schema(
+                    type=openapi.TYPE_STRING,
+                    format='date-time',
+                    description="Fecha y hora de la cita (formato: DD-MM-YYYY HH:MM:SS)"
+                ),
+                'prioridad': openapi.Schema(
+                    type=openapi.TYPE_STRING,
+                    enum=['URGENTE', 'ALTA', 'MEDIA', 'BAJA'],
+                    description="Prioridad de la cita"
+                ),
+                'estado': openapi.Schema(
+                    type=openapi.TYPE_STRING,
+                    enum=['PENDIENTE', 'CONFIRMADA', 'CANCELADA'],
+                    default='PENDIENTE'
+                )
+            }
+        ),
+        responses={
+            201: openapi.Response(
+                description="Cita creada exitosamente",
+                schema=CitaSerializer
+            ),
+            400: "Datos inválidos",
+            404: "Médico o CUPS no encontrado"
+        },
+        security=[{"Bearer": []}]
+    )
     def create(self, request):
         print(request.user.last_name)
         print(request.data["medico"])
@@ -58,6 +95,17 @@ class CitaPacienteViewSet(ModelViewSet):
 
         return Response(status=status.HTTP_201_CREATED)
 
+    @swagger_auto_schema(
+        operation_description="Detalle de una cita específica",
+        responses={
+            200: openapi.Response(
+                description="Detalle de la cita",
+                schema=CitaSerializer
+            ),
+            404: "Cita no encontrada"
+        },
+        security=[{"Bearer": []}]
+    )
     def retrieve(self, request, pk=None, *args, **kwargs):
         self.queryset = self.queryset.filter(paciente_id = request.user.nro_doc)
         objeto = self.get_object()
@@ -66,6 +114,16 @@ class CitaPacienteViewSet(ModelViewSet):
             "message": "Detalle del objeto con datos personalizados",
             "data": serializer.data
         })
+    
+    @swagger_auto_schema(
+        operation_description="Listar citas del paciente autenticado",
+        responses={
+            200: openapi.Response(
+                description="Lista de citas",
+                schema=CitaSerializer(many=True))
+        },
+        security=[{"Bearer": []}]
+    )
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         queryset = queryset.filter(paciente_id = request.user.nro_doc)
@@ -73,6 +131,16 @@ class CitaPacienteViewSet(ModelViewSet):
         return Response(serializer.data)
     
 
+@swagger_auto_schema(
+    method='get',
+    operation_description="Obtener lista de médicos",
+    responses={
+        200: openapi.Response(
+            description="Lista de médicos",
+            schema=MedicoSerializador(many=True))
+    },
+    security=[{"Bearer": []}]
+)
 @api_view(["get"])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -81,6 +149,16 @@ def getMedicos (resquest):
     serializer = MedicoSerializador(medico , many = True)
     return Response(serializer.data)
 
+@swagger_auto_schema(
+    method='get',
+    operation_description="Obtener lista de códigos CUPS",
+    responses={
+        200: openapi.Response(
+            description="Lista de CUPS",
+            schema=Cupsserializador(many=True))
+    },
+    security=[{"Bearer": []}]
+)
 @api_view(["GET"])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -95,6 +173,32 @@ class CitaAuxViewSet(ModelViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="Crear una cita (Auxiliar)",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=['paciente', 'medico', 'cups'],
+            properties={
+                'paciente': openapi.Schema(type=openapi.TYPE_STRING, description="Número de documento del paciente"),
+                'medico': openapi.Schema(type=openapi.TYPE_STRING, description="Número de documento del médico"),
+                'cups': openapi.Schema(type=openapi.TYPE_STRING, description="Código CUPS"),
+                'fecha_de_asignacion': openapi.Schema(
+                    type=openapi.TYPE_STRING,
+                    format='date-time',
+                    description="Fecha y hora de la cita (formato: DD-MM-YYYY HH:MM:SS)"
+                ),
+                'prioridad': openapi.Schema(
+                    type=openapi.TYPE_STRING,
+                    enum=['URGENTE', 'ALTA', 'MEDIA', 'BAJA']
+                )
+            }
+        ),
+        responses={
+            201: openapi.Response("Cita creada", CitaSerializer),
+            400: "Datos inválidos"
+        },
+        security=[{"Bearer": []}]
+    )
     def create(self, request):
         print(request.user.last_name)
         print(request.data["medico"])
@@ -120,6 +224,20 @@ class CitaAuxViewSet(ModelViewSet):
             serializer.save()
             return Response({"cita" : serializer.data},status=status.HTTP_201_CREATED)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'nro_doc',
+                openapi.IN_QUERY,
+                description="Filtrar por número de documento del paciente",
+                type=openapi.TYPE_STRING
+            )
+        ],
+        responses={
+            200: openapi.Response("Lista de citas", CitaSerializer(many=True))
+        },
+        security=[{"Bearer": []}]
+    )
     def get_queryset(self):
             nro_doc = self.request.query_params.get('nro_doc', None)
             if nro_doc:
@@ -167,7 +285,26 @@ class CitaAuxViewSet(ModelViewSet):
     #     return Response(serializer.data)
 
     
-
+@swagger_auto_schema(
+    method='get',
+    operation_description="Obtener datos de un paciente específico",
+    manual_parameters=[
+        openapi.Parameter(
+            'nro_doc',
+            openapi.IN_PATH,
+            description="Número de documento del paciente",
+            type=openapi.TYPE_STRING
+        )
+    ],
+    responses={
+        200: openapi.Response(
+            description="Datos del paciente",
+            schema=PacienteSerializador
+        ),
+        404: "Paciente no encontrado"
+    },
+    security=[{"Bearer": []}]
+)
 @api_view(["GET"])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -177,3 +314,11 @@ def getPaciente(request,nro_doc):
     serializer = PacienteSerializador(paciente)
     print(serializer.data)
     return Response({"datos" : serializer.data})
+
+@api_view(["GET"])
+def verificarDocumentoExistente(request,nro_doc):
+    try:
+        paciente = get_object_or_404(Usuario , nro_doc = nro_doc)
+        return Response({"exist" : True})
+    except:
+        return Response({"exist" : False})

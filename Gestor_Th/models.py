@@ -74,6 +74,8 @@ class Cups(models.Model):
     descripcion=models.TextField()
     ips=models.ForeignKey(Ips,on_delete=models.CASCADE)
     activo=models.BooleanField(default=False)
+    def __str__(self):
+        return self.Nombre
 
 class SolicitudActualizacionHV(models.Model):
     estado_solicitud=[

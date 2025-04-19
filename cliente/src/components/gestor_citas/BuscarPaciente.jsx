@@ -2,7 +2,7 @@ import react, { useState } from "react";
 import DatosBusuqedaP from "./DatosBusquedaP";
 import "./buscarPaciente.css"
 
-const BuscarPaciente = ({children,isOpen,token,tipo}) => {
+const BuscarPaciente = ({children,isOpen,token,tipo,isLock}) => {
     const [nro_doc, setNro_doc] = useState(null)
     const [childrenIsOpen , setChildrenIsOpen ] = useState(false)
     const [paciente , setPaciente] = useState(null)
@@ -43,7 +43,13 @@ const BuscarPaciente = ({children,isOpen,token,tipo}) => {
         
     }
 
-    if (!isOpen){return null}
+    if (!isOpen){
+        console.log(childrenIsOpen)
+        if(paciente){
+            setPaciente(null)
+            setChildrenIsOpen(false)
+        }
+        return (null)}
     return(
         <>
         <div className="buscar_paciente">
@@ -57,7 +63,7 @@ const BuscarPaciente = ({children,isOpen,token,tipo}) => {
                 onChange={(e) => {setNro_doc(e.target.value)}} />
                 <div className="buscar_paciente__lupa"> 
                 <button onClick={(e) => {cargarDatos(nro_doc);console.log(nro_doc)}}>
-                b
+                buscar
 
                 </button>
                 </div>
@@ -69,7 +75,7 @@ const BuscarPaciente = ({children,isOpen,token,tipo}) => {
         {mensaje && <h1>no se encontro paciente</h1>}
 
         {paciente && 
-        <DatosBusuqedaP tipo={tipo} datos={paciente} onClick={() => {setChildrenIsOpen(true)}}></DatosBusuqedaP>}     
+        <DatosBusuqedaP tipo={tipo} datos={paciente} onClick={() => {setChildrenIsOpen(true)}} isLock={isLock}></DatosBusuqedaP>}     
 
         {childrenIsOpen && react.cloneElement(children , {nro_doc}) }
         </div>
