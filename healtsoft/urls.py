@@ -52,7 +52,8 @@ urlpatterns = [
     path('getMedico' , getMedicos ),
     path('getCups' , getCups),
     path('getPaciente/<str:nro_doc>/' , getPaciente),
-    path('veriP/<str:nro_doc>/' , verificarDocumentoExistente)
+    path('veriP/<str:nro_doc>/' , verificarDocumentoExistente),
+    path('', include('Historia_Clinica.urls')),
 ]
 
 

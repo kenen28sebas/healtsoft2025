@@ -208,6 +208,7 @@ class CitaAuxViewSet(ModelViewSet):
         # serializersMedico = MedicoSerializador(instance = medico)
         cups = get_object_or_404(Cups,codigo = request.data.get('cups'))
         data = request.data
+        print(cups.codigo)
         data["medico"] = medico.id
         data["paciente"] = paciente.id
         data["cups"] = cups.codigo
@@ -238,13 +239,32 @@ class CitaAuxViewSet(ModelViewSet):
         },
         security=[{"Bearer": []}]
     )
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        nro_doc_medico = request.query_params.get('nro_doc_medico', None)
+        nro_doc = self.request.query_params.get('nro_doc', None)
+        if nro_doc_medico:
+            # Usa un serializador diferente solo para este caso
+            serializer = CitaSerializerver(queryset, many=True)
+            return Response(serializer.data)
+        if nro_doc:
+            # Usa un serializador diferente solo para este caso
+            serializer = CitaSerializerver(queryset, many=True)
+            return Response(serializer.data) 
+        # Para otros casos, usa el serializador predeterminado
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
     def get_queryset(self):
-            nro_doc = self.request.query_params.get('nro_doc', None)
-            if nro_doc:
-                print(self.queryset.filter(paciente_id=nro_doc))
-                return self.queryset.filter(paciente_id=nro_doc)
-            return self.queryset
-    
+        nro_doc_medico = self.request.query_params.get('nro_doc_medico', None)
+        nro_doc = self.request.query_params.get('nro_doc', None)
+        if nro_doc_medico:
+            return self.queryset.filter(medico_id=nro_doc_medico)
+        if nro_doc:
+            return self.queryset.filter(paciente_id=nro_doc)
+        return self.queryset
+
     # def delete(self, request ):
     #     fechaSolicitud = self.request.query_params.get('fecha_de_asignacion', None)
     #     if fechaSolicitud:

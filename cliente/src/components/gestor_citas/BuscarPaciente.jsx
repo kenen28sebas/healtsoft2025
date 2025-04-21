@@ -2,7 +2,9 @@ import react, { useState } from "react";
 import DatosBusuqedaP from "./DatosBusquedaP";
 import "./buscarPaciente.css"
 
-const BuscarPaciente = ({children,isOpen,token,tipo,isLock}) => {
+const BuscarPaciente = ({children,isOpen,token,tipo,isLock,userid}) => {
+    console.log(userid)
+    const [userId , setUserId] = useState(userid)
     const [nro_doc, setNro_doc] = useState(null)
     const [childrenIsOpen , setChildrenIsOpen ] = useState(false)
     const [paciente , setPaciente] = useState(null)
@@ -50,6 +52,7 @@ const BuscarPaciente = ({children,isOpen,token,tipo,isLock}) => {
             setChildrenIsOpen(false)
         }
         return (null)}
+        let medicoId = nro_doc
     return(
         <>
         <div className="buscar_paciente">
@@ -77,7 +80,7 @@ const BuscarPaciente = ({children,isOpen,token,tipo,isLock}) => {
         {paciente && 
         <DatosBusuqedaP tipo={tipo} datos={paciente} onClick={() => {setChildrenIsOpen(true)}} isLock={isLock}></DatosBusuqedaP>}     
 
-        {childrenIsOpen && react.cloneElement(children , {nro_doc}) }
+        {childrenIsOpen && react.cloneElement(children , {nro_doc,userId,token}) }
         </div>
         </>
     )

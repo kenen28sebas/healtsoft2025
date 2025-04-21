@@ -11,13 +11,13 @@ const Login = (almacenarTokenp) => {
   const [error, setError] = useState(null);
   const [token , setToken] = useState(null)
   const [showModal, setShowModal] = useState(false);
+  const [tipo, setTipo] = useState(null)
   const closeModal = () => setShowModal(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    console.log(tipo)
     e.preventDefault(); // Evitar recarga de página
-    
-
     try {
       const response = await fetch('http://127.0.0.1:8000/login', {
         method: 'POST', // Si el endpoint requiere un POST
@@ -25,7 +25,7 @@ const Login = (almacenarTokenp) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            tipo_usuario : "medico",
+            tipo_usuario : tipo,
             nro_doc: userId,
             password: password,
         }),
@@ -42,8 +42,19 @@ const Login = (almacenarTokenp) => {
         console.log('Datos obtenidos:', data); // Log para comprobar la respuesta
 
         almacenarTokenp.almacenarTokenp(data.token)
+        switch(tipo){
+          case "medico":
+            navigate('/historia/Medico')
+            break;
+          case "auxiliar":
+            navigate('/prueba')
+            break; 
+          case "paciente":
+            navigate('/prueba')
+            break; 
+        }
 
-        navigate('historia/Medico')
+        
       }
       
       
@@ -57,6 +68,17 @@ const Login = (almacenarTokenp) => {
     <div className="form-contenedor login-contenedor">
       <form onSubmit={(e) => {handleSubmit(e)}}>
         <h1>Inicia sesión aquí</h1>
+        <select 
+          name="tipo" 
+          id=""
+          value={tipo}
+          onChange={(e) => {setTipo(e.target.value);console.log(tipo)}}
+          required>
+            <option value="" disabled>Tipo de usuario</option>
+            <option value="medico">Medico</option>
+            <option value="auxiliar">Auxiliar</option>
+            <option value="paciente">Pacietne</option>
+          </select>
         <input
           type="text"
           placeholder="Número de identificación"

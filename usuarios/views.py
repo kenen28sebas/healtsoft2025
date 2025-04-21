@@ -262,3 +262,4 @@ def perfil(request):
         print("aux no encotrado")     
 
     return Response({})    
+

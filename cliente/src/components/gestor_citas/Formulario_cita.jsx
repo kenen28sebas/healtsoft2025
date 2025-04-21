@@ -75,6 +75,7 @@ const Formulario_cita=({token,isOpen,dia,hora,nro_doc,isClose}) => {
     const urlListaMedico = "http://127.0.0.1:8000/getMedico"
 
     const cargarDatos = async () =>{
+        
         const response = await fetch(urlListaCups,{
             method: 'GET',
             headers: header,
@@ -90,6 +91,7 @@ const Formulario_cita=({token,isOpen,dia,hora,nro_doc,isClose}) => {
     }
 
     const handleSubmit = async (e) => {
+        console.log(body)
         e.preventDefault();
         const response = await fetch(url, {
             method: 'POST',

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'usuarios',
     'Gestor_Th',
     'gestor_citas',
-    'drf_yasg'
+    'drf_yasg',
+    'Historia_Clinica'
 
 ]
 

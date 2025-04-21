@@ -11,7 +11,26 @@ class CitaSerializer(serializers.ModelSerializer):
     format='%d-%m-%Y %H:%M:%S',
     input_formats=['%d-%m-%Y %H:%M:%S', '%d-%m-%Y', '%Y/%m/%d']
 )
-    cups = serializers.StringRelatedField()
+    class Meta:
+        model = Cita
+        fields = [
+            'id', 
+            'fecha_de_solicitud',
+            'fecha_de_asignacion',
+            'prioridad',
+            'cups',
+            'paciente',
+            'medico',
+            'estado'
+        ]
+
+class CitaSerializerver(serializers.ModelSerializer):
+    fecha_de_solicitud = serializers.DateTimeField(format='%d-%m-%Y %H:%M:%S')
+    fecha_de_asignacion = serializers.DateTimeField(
+    format='%d-%m-%Y %H:%M:%S',
+    input_formats=['%d-%m-%Y %H:%M:%S', '%d-%m-%Y', '%Y/%m/%d']
+)
+    cups = serializers.StringRelatedField(read_only=True)
     paciente = PacienteSerializador( read_only=True)
     medico = MedicoSerializador(read_only=True)
 

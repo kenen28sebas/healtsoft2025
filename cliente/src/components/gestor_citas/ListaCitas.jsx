@@ -5,7 +5,9 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
     if (!isOpen){return null}
     const [citas,setCitas] = useState([])
     const [openAlerta , setOpenAlerta] = useState(false)
-
+    const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
+    const [filteredCitas, setFilteredCitas] = useState(citas); // Estado para los datos filtrado
+    const [isList , setIsList] = useState(true)
     const urlOpcion= () => {
         if (nro_doc == undefined){
             return "http://127.0.0.1:8000/api/cita"
@@ -67,7 +69,8 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
     
     if (nro_doc == undefined){
         filasCitas = citas.map(cita => {
-            return(<tr>
+            return(<tr key={cita.id}>
+                
                 <td>{cita.fecha_de_solicitud}</td>
                 <td>{cita.fecha_de_asignacion}</td>
                 <td>{cita.prioridad}</td>
@@ -85,7 +88,7 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
 
     if(nro_doc){
         filasCitas = citas.map(cita => {
-            return(<tr>
+            return(<tr key={cita.id}>
                 <td>{cita.fecha_de_solicitud}</td>
                 <td>{cita.fecha_de_asignacion}</td>
                 <td>{cita.prioridad}</td>
@@ -102,9 +105,33 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
     }
     
 
+    // Función para manejar el cambio del input
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+        if (event.target.value == ""){
+            setIsList(false)
+        }
+        // Filtrar las citas según el término de búsqueda
+        const filtered = citas.filter((cita) =>
+            Object.values(cita).some((value) =>
+                String(value).toLowerCase().includes(event.target.value.toLowerCase())
+            )
+        );
+        setFilteredCitas(filtered);
+    };
+
     return (
         <>
         <div className="styled-table">
+        <div>
+                <input
+                    type="text"
+                    placeholder="Buscar..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                />
+                <button onClick={() => setFilteredCitas(citas)}>Limpiar filtro</button>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -118,7 +145,18 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filasCitas}
+                    {isList && filasCitas}
+                    {filteredCitas.map((cita) => (
+                        <tr key={cita.id}>
+                            <td>{cita.fecha_de_solicitud}</td>
+                            <td>{cita.fecha_de_asignacion}</td>
+                            <td>{cita.prioridad}</td>
+                            <td>{cita.cups}</td>
+                            <td>{cita.paciente.usuario.first_name}</td>
+                            <td>{cita.medico.usuario.first_name}</td>
+                            <td>{cita.estado}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <Alerta isOpen={openAlerta}>
