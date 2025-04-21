@@ -4,6 +4,7 @@ from usuarios.models import *
 
 
 
+
 class Hoja_Vida(models.Model):
     personal_medico=models.ForeignKey(Medico,on_delete=models.CASCADE)
     gestor_th=models.ForeignKey(Gestor_TH,on_delete=models.CASCADE)
@@ -63,14 +64,14 @@ class Ips(models.Model):
         ('IV', 'Nivel IV'),
     ]
     nivel_categorizacion=models.CharField(max_length=100, choices=NIVEL_CATEGORIZACION_CHOICES)
-    telefon= models.CharField(max_length=20,verbose_name='Telefono')
+    telefono = models.CharField(max_length=20,verbose_name='Telefono')
 
     def __str__(self):
         return self.nombre
 
 class Cups(models.Model):
-    codigo = models.CharField(max_length=10 , primary_key=True)
-    Nombre= models.CharField(max_length=100)
+    codigo = models.CharField(max_length=10,primary_key=True)
+    nombre= models.CharField(max_length=100)
     descripcion=models.TextField()
     ips=models.ForeignKey(Ips,on_delete=models.CASCADE)
     activo=models.BooleanField(default=False)
@@ -86,3 +87,12 @@ class SolicitudActualizacionHV(models.Model):
     descripcion=models.TextField()
     estado=models.CharField(max_length=12,choices=estado_solicitud,default='pendiente')
 
+class Cargo(models.Model):
+    ips = models.ForeignKey(Ips,on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=150,unique=True)
+    descripcion = models.TextField(blank=True,null=True)
+    estado = models.BooleanField(default=False)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nombre

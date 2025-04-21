@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { data, useNavigate } from 'react-router-dom';
 
@@ -9,6 +7,7 @@ const Login = (almacenarTokenp) => {
   const [apiResponse, setApiResponse] = useState(null); // Guardar la respuesta del API
   const [error, setError] = useState(null);
   const [token , setToken] = useState(null)
+  const [tipousuario , setTipousuario] = useState('')
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,7 +21,7 @@ const Login = (almacenarTokenp) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            tipo_usuario : "auxiliar",
+            tipo_usuario : tipousuario,
             nro_doc: userId,
             password: password,
         }),
@@ -39,7 +38,11 @@ const Login = (almacenarTokenp) => {
 
       almacenarTokenp.almacenarTokenp(data.token)
 
-      navigate('/prueba')
+      if (tipousuario === 'gestor_th') {
+        navigate('/th'); 
+      }else if (tipousuario === 'gerente') {
+        navigate('/gerente'); 
+      }
       
     } catch (err) {
       setError(err.message);
@@ -49,21 +52,32 @@ const Login = (almacenarTokenp) => {
 
   return (
     <div className="form-contenedor login-contenedor">
-      <form onSubmit={(e) => {handleSubmit(e)}}>
+      <form onSubmit={(e) => {handleSubmit(e)}} className='fromulariol'>
         <h1>Inicia sesión aquí</h1>
+        <select 
+        className='textos'
+        value={tipousuario}
+        onChange={(e) => setTipousuario(e.target.value)}
+        >
+          <option value="" disabled={true}>Selecciona un tipo de usuario</option>
+          <option value="gestor_th">Gestor de talento Humano</option>
+          <option value="gerente">Gerente</option>
+        </select>
         <input
           type="text"
           placeholder="Número de identificación"
           value={userId}
+          className='textos'
           onChange={(e) => setUserId(e.target.value)}
         />
         <input
           type="password"
           placeholder="Contraseña"
           value={password}
+          className='textos'
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Entrar</button>
+        <button type="submit" className='btn'>Entrar</button>
       </form>
 
       {/* Mostrar respuesta o error */}

@@ -35,13 +35,15 @@ class Usuario (AbstractUser):
     nacionalidad = models.CharField(max_length=30,null=False)
     municipio = models.CharField( max_length=50)
     is_superuser = models.BooleanField(default=True)
-
+    is_active = models.BooleanField(default=True)
 
 class Medico(models.Model):
     especialidad=models.CharField(max_length=100, null=True, verbose_name='Especialidad')
     contrato=models.CharField(max_length=100,null=True, verbose_name='Contrato')
     sueldo=models.DecimalField(max_digits=6,decimal_places=3, verbose_name='Sueldo')
     usuario=models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    cargo = models.ForeignKey('Gestor_Th.Cargo', on_delete=models.SET_NULL, null=True, blank=True)
+    activo = models.BooleanField(default=False)
 
 class Gestor_TH(models.Model):
     cargo=models.CharField(max_length=100,null=False,blank=False,verbose_name="Cargo")
