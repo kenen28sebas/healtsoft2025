@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'healtsoft.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'healsoftdb',
+        'NAME': 'nova',
         'USER' : 'root',
         'PASSWORD' : '',
         'HOST' : 'localhost',

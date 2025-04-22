@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { data, useNavigate } from 'react-router-dom';
 import Mensaje from './Mensaje';
@@ -13,6 +11,7 @@ const Login = (almacenarTokenp) => {
   const [showModal, setShowModal] = useState(false);
   const [tipo, setTipo] = useState(null)
   const closeModal = () => setShowModal(false);
+  const [tipousuario , setTipousuario] = useState('')
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -52,6 +51,12 @@ const Login = (almacenarTokenp) => {
           case "paciente":
             navigate('/prueba')
             break; 
+          case "gerente":
+            navigate('/gerente')  
+            break;
+          case "gestor_th":
+            navigate('/th')  
+            break
         }
 
         
@@ -66,7 +71,7 @@ const Login = (almacenarTokenp) => {
 
   return (
     <div className="form-contenedor login-contenedor">
-      <form onSubmit={(e) => {handleSubmit(e)}}>
+      <form onSubmit={(e) => {handleSubmit(e)}} className='fromulariol'>
         <h1>Inicia sesión aquí</h1>
         <select 
           name="tipo" 
@@ -78,20 +83,25 @@ const Login = (almacenarTokenp) => {
             <option value="medico">Medico</option>
             <option value="auxiliar">Auxiliar</option>
             <option value="paciente">Pacietne</option>
+            <option value="gestor_th">Gestor de talento Humano</option>
+            <option value="gerente">Gerente</option>
           </select>
+        
         <input
           type="text"
           placeholder="Número de identificación"
           value={userId}
+          className='textos'
           onChange={(e) => setUserId(e.target.value)}
         />
         <input
           type="password"
           placeholder="Contraseña"
           value={password}
+          className='textos'
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Entrar</button>
+        <button type="submit" className='btn'>Entrar</button>
       </form>
 
       {/* Mostrar respuesta o error */}

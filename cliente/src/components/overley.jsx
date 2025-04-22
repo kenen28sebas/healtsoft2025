@@ -10,7 +10,7 @@ const Overlay = ({ onRegisterClick, onLoginClick }) => {
             ¡Hola de nuevo! Para acceder a nuestros servicios y disfrutar de todas sus funciones,
             por favor inicie sesión con sus credenciales.
           </p>
-          <button className="boton" id="login" onClick={onLoginClick}>
+          <button className="boton btn" id="login" onClick={onLoginClick}>
             Entrar
           </button>
         </div>
@@ -19,7 +19,7 @@ const Overlay = ({ onRegisterClick, onLoginClick }) => {
           <p>
             ¿Aún no tienes una cuenta? Regístrate aquí para acceder a nuestro sistema de salud.
           </p>
-          <button className="boton" id="registrar" onClick={onRegisterClick}>
+          <button className="boton btn" id="registrar" onClick={onRegisterClick}>
             Registrarse
           </button>
         </div>

@@ -1,11 +1,13 @@
 from rest_framework import serializers
 from .models import *
 from rest_framework.authtoken.models import Token
+from Gestor_Th.models import Cargo
 
 
 class UsuarioSerializer (serializers.ModelSerializer):
-    fecha_exp_doc = serializers.DateField(format="%d/%m/%Y", input_formats=["%d/%m/%Y"])
-    fecha_nacimiento = serializers.DateField(format="%d/%m/%Y", input_formats=["%d/%m/%Y"])
+    fecha_exp_doc = serializers.DateField(format="%d/%m/%Y", input_formats=["%d/%m/%Y", "%Y-%m-%d"])
+    fecha_nacimiento = serializers.DateField(format="%d/%m/%Y", input_formats=["%d/%m/%Y", "%Y-%m-%d"])
+
 
     class Meta :
         model = Usuario
@@ -25,6 +27,7 @@ class UsuarioSerializer (serializers.ModelSerializer):
             "last_name",
             "email",
             "password",
+            "is_active",
         ]
 
     def create(self, validated_data):
@@ -36,8 +39,8 @@ class UsuarioSerializer (serializers.ModelSerializer):
         return usuario 
         
 class MedicoSerializador(serializers.ModelSerializer):
-    usuario = UsuarioSerializer()        
-    
+    usuario = UsuarioSerializer() 
+    cargo = serializers.StringRelatedField()
     class Meta : 
         model = Medico
         fields = "__all__"
@@ -64,8 +67,7 @@ class Gestor_thSerializador(serializers.ModelSerializer):
         return gestor_th
     
 class PacienteSerializador(serializers.ModelSerializer):
-    usuario = UsuarioSerializer()
-
+    usuaro= UsuarioSerializer()
     class Meta:
         model = Paciente
         fields="__all__"
@@ -79,7 +81,6 @@ class PacienteSerializador(serializers.ModelSerializer):
     
 class AuxiliarAdminSerializador(serializers.ModelSerializer):
     usuario = UsuarioSerializer()
-
     class Meta:
         model = Aux_adm
         fields="__all__"
@@ -92,6 +93,7 @@ class AuxiliarAdminSerializador(serializers.ModelSerializer):
         return aux_adm
     
 class GerenteSerializador(serializers.ModelSerializer):
+    usuario = UsuarioSerializer()
     class Meta:
         model=Gerente
         fields="__all__"
@@ -100,5 +102,5 @@ class GerenteSerializador(serializers.ModelSerializer):
         usuario_data=validated_data.pop('usuario')
         usuario=UsuarioSerializer.create(UsuarioSerializer(),validated_data=usuario_data)
         token,created=Token.objects.get_or_create(user=usuario)
-        gerente=Gerente.objects.create(usuario=usuario,**validated_data)
+        gerente = Gerente.objects.create(usuario = usuario, **validated_data)
         return gerente

@@ -1,0 +1,50 @@
+.inputs{
+    width: 250px;
+    height: 35px;
+    border-radius:5px ;
+    border: solid black 1px;
+}
+.cont{
+    width: 100%;
+    height: 800px;
+    display: flex ;
+    /* align-items: center; */
+    justify-content: center;
+}
+.fromularios{
+    width: 650px;
+    /* border: blueviolet solid 2px; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    max-height:600px;
+    overflow-y: auto;
+}
+.cont{
+    width: 100%;
+    height: 100%;
+    border: solid rgb(49, 16, 196) 2px;
+}
+.inputscont{
+    width: 600px;
+    height: 300px;
+    /* border: saddlebrown 2px solid; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.contpassword{
+    width: 600px;
+    height: 300px;
+    /* border: solid saddlebrown 2px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnguardar{
+    width: 200px;
+    height: 200px;
+}

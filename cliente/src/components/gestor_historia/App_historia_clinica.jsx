@@ -18,7 +18,7 @@ const AppHistoriaClinica = ({  token }) => {
         { id: 3, titulo: "consultar paciente" },
     ]);
 
-
+    
     const [isOpenCrearhc, setIsOpenCrearhc] = useState(false);
     const [isOpenConsultar, setIsOpenConsultar] = useState(false);
     const [isOpenPaciente, setIsOpenPaciente] = useState(false);

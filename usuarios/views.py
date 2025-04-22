@@ -62,19 +62,21 @@ from drf_yasg import openapi
 @api_view(["POST"])
 def registrar (request):
     
-    tipo_ususrio = request.data["tipo_usuario"]
-    print(tipo_ususrio)
-    match tipo_ususrio:
+    tipo_usuario = request.data["tipo_usuario"]
+    match tipo_usuario:
         case "medico":
             serializer=MedicoSerializador(data= request.data)
             print(serializer.is_valid())
+            print(serializer.errors)
             if serializer.is_valid(): 
                 serializer.save()
                 
                 return Response({"user":serializer.data})
         case "gestor_th":
             serializerTH=Gestor_thSerializador(data=request.data)
-            print(serializerTH.is_valid())
+            if not serializerTH.is_valid():
+
+                print(serializerTH.errors)
             if serializerTH.is_valid():
                 
                 serializerTH.save()
@@ -82,10 +84,6 @@ def registrar (request):
         case "paciente":
             serializer= PacienteSerializador(data = request.data)
             print(serializer.is_valid())
-
-            if not serializer.is_valid():
-                # Acceder a los errores
-                print(serializer.errors)
             if serializer.is_valid():
                 
                 serializer.save()
@@ -93,13 +91,19 @@ def registrar (request):
         case "auxiliar":
             serializer = AuxiliarAdminSerializador(data = request.data)   
             print(serializer.is_valid())
-            if not serializer.is_valid():
-                # Acceder a los errores
-                print(serializer.errors)
             if serializer.is_valid():
                 
                 serializer.save()
                 return Response({"user":serializer.data})
+            
+        case "gerente":
+            serializer =GerenteSerializador(data = request.data)   
+            if serializer.is_valid():
+                
+                serializer.save()
+                return Response({"user":serializer.data})
+            else:
+                print(serializer.errors)
 
 
     return Response({"error": "error" ,"user" : request.data})
@@ -164,7 +168,7 @@ def login (request):
                 medico = get_object_or_404(Medico , usuario_id = request.data["nro_doc"])
                 token,create = Token.objects.get_or_create( user = usuario)
                 datos_medico = MedicoSerializador(instance = medico)
-                return Response ({"user" : datos_medico.data , "token" : token.key})
+                return Response ({"user" : datos_medico.data , "token" : token.key , "tipo de usuario":"medico"})
             except:
                 print("medico sexual no encotrado1")        
     
@@ -192,9 +196,17 @@ def login (request):
                 datos_paciente = AuxiliarAdminSerializador(instance  = auxiliar)
                 return Response ({"user" : datos_paciente.data  , "token" : token.key })
             except:
-                print("medico sexual no encotrado") 
+                print("medico sexual no encotrado")
 
- 
+        case "gerente":
+            try:
+                gerente=get_object_or_404(Gerente,usuario_id = request.data["nro_doc"])
+                token,create=Token.objects.get_or_create(user = usuario)
+                datos_gerente = GerenteSerializador(instance=gerente)
+                return Response ({"user": datos_gerente.data , "token": token.key})
+            except:
+                print("señor gerente no encontrado jijiji")
+
     return Response ( {"error" : "erro en la validacion de cuenta " } )    
 @swagger_auto_schema(
     method='post',
@@ -248,9 +260,9 @@ def perfil(request):
         print("gth no encotrado")   
 
     try : 
-        paciente = get_object_or_404(Paciente , usuario_id = request.user.nro_doc)
+        paciente = get_object_or_404(Paciente , usuario_id = request.data["nro_doc"])
         datos_paciente = PacienteSerializador(instance = paciente)
-        return Response ({"user" : datos_paciente.data , "tipo_usuario" : "paciente" })
+        return Response ({"user" : datos_paciente.data  })
     except:
         print("paciente no encotrado") 
 
@@ -259,7 +271,53 @@ def perfil(request):
         datos_paciente = AuxiliarAdminSerializador(instance  = auxiliar)
         return Response ({"user" : datos_paciente.data , "tipo_usuario" : "auxiliar" })
     except:
-        print("aux no encotrado")     
+        print("medico sexual no encotrado")     
+
+    try:
+        gerente=get_object_or_404(Gerente,usuario_id = request.data["nro_doc"])
+        datos_gerente = GerenteSerializador(instance = gerente)
+        return Response ({"user":datos_gerente.data})
+    except:
+        print("jijjijij nop")
 
     return Response({})    
+
+
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def eliminar_usuario(request,nro_doc):
+    usuario = get_object_or_404(Usuario, nro_doc=nro_doc)
+    usuario.delete()
+    return Response({"message": "Usuario eliminado correctamente."})
+
+@api_view(['PATCH'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def actualizar_usuario(request, nro_doc):
+    usuario_autenticado = request.user
+    gestor_th = get_object_or_404(Gestor_TH, usuario=usuario_autenticado)
+
+    medico = get_object_or_404(Medico, usuario__nro_doc=nro_doc)
+    usuario = medico.usuario
+
+    usuario_serializer = UsuarioSerializer(usuario, data=request.data, partial=True)
+    medico_serializer = MedicoSerializador(medico, data=request.data, partial=True)
+
+    usuario_valido = usuario_serializer.is_valid()
+    medico_valido = medico_serializer.is_valid()
+
+    if usuario_valido and medico_valido:
+        usuario_serializer.save()
+        medico_serializer.save()
+        return Response({"message": "Usuario y médico actualizados correctamente"})
+
+    errores = {}
+    if not usuario_valido:
+        errores["usuario_errors"] = usuario_serializer.errors
+    if not medico_valido:
+        errores["medico_errors"] = medico_serializer.errors
+
+    return Response({"error": "Error en la actualización", "details": errores})
+
 

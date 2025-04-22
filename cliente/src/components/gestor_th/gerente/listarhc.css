@@ -1,0 +1,7 @@
+.cont_info{
+    width: 100%;
+    border: salmon 2px solid;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+}

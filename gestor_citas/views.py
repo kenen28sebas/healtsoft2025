@@ -9,6 +9,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from .models import*
 from .serializer import *
+from usuarios.models import *
 from usuarios.serializer import *
 from Gestor_Th.serializer import Cupsserializador
 from drf_yasg.utils import swagger_auto_schema

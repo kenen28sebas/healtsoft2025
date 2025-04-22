@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+body{
+    background-color: #e7e9f5;
+}
+.sidebar{
+    font-family: "Poppins", sans-serif;
+    position: fixed;
+    width: 350px;
+    background-color: white;
+    padding: 6px 16px;
+    height: 100%;
+    box-shadow: 5px 0 30px rgba(0,0,0,0.1);
+}
+.sidebar .logo_content .logo{
+    display: flex;
+    color: #0b2997;
+    height: 50px;
+    width: 100%;
+    margin-left: 5px;
+    align-items: center;
+    pointer-events: none;
+    margin-top: 50px;
+    opacity: 1;
+}
+.kenayhealth{
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0 10px;
+    /* margin-top: 50px; */
+}
+.sidebar .logo_content .logo .logo_nombre{
+    font-size: 23px;
+}
+
+.sidebar .btn_menu{
+    position: absolute;
+    color: #b3b3b3;
+    left: 90%;
+    top: 60px;
+    font-size: 25px;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    line-height: 50px;
+    transform: translate(-50%);
+}
+
+.sidebar box-icon{
+    height: 30px;
+    min-width: 30px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 20px;
+    /* fill: #b3b3b3 !important; */
+}
+
+.sidebar .navbar{
+    margin-top: 50px;
+}
+
+.sidebar .navbar .opciones {
+    position: relative;
+    height: 60px;
+    width: 100%;
+    margin: 0;
+    list-style: none;
+    line-height: 50px;
+    display: flex;         
+    align-items: center;    
+    gap: 20px;               
+    cursor: pointer;         
+    padding-left: 10px;       
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .navbar .opciones:hover {
+    background-color: #e7e9f5;
+}
+
+.sidebar .navbar .opciones .textoop {
+    color: #989696;
+    font-size: 18px;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.sidebar .navbar .opciones:hover .textoop {
+    color: #0b2997;
+}
+
+.sidebar box-icon {
+    fill: #b3b3b3;
+    transition: fill 0.3s ease;
+}
+
+.sidebar .navbar .opciones:hover box-icon {
+    fill: #0b2997;
+}
+
