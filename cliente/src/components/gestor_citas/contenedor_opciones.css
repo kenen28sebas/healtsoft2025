@@ -1,34 +1,40 @@
-h1,p,button{
-	margin: 0;
-	padding: 0;
-	border: 0;
-    font-family:sans-serif;
-	font-size: 100%;
-
-	vertical-align: baseline;
+h1, p, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Roboto', sans-serif; /* Tipografía elegante */
+    font-size: 100%;
+    vertical-align: baseline;
 }
 
-.opciones{
-    background-color: #B4BEC9;
-    width: 280px;
+.opciones {
+    background-color: #D9E2EC; /* Un tono más suave y moderno */
+    width: 90%;
     box-sizing: border-box;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-
+    border-radius: 10px; /* Bordes redondeados */
+border-top-right-radius: 0%;
+border-top-left-radius: 0%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border: 2px solid #A0AEC0; /* Bordes ligeros */
 }
 
-.opciones__boton{
+.opciones__boton {
     color: white;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     border-radius: 9px;
     height: 40px;
-    background-color: #013A67;
-    box-shadow: 0 0 20px 1px #049DBF inset;
-    transition: all 2500ms ;
+    background-color: #0277BD; /* Azul vibrante */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15), 0 0 20px 1px #049DBF inset;
+    transition: all 0.3s ease-in-out; /* Transición más rápida */
+    border: none; /* Sin borde para limpieza */
 }
 
-.opciones__boton:hover{
-   box-shadow: none; 
+.opciones__boton:hover {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra reducida al pasar el mouse */
+    background-color: #01579B; /* Un azul más oscuro para el hover */
+    transform: scale(1.05); /* Efecto de zoom */
 }

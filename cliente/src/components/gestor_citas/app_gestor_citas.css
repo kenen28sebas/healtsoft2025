@@ -20,7 +20,15 @@ time, mark, audio, video {
 }
 
 .cuerpo_app{
-	display: flex;
-
+	display: flex; /* Usamos flexbox para alinear el navbar y el contenido principal */
+    height: 100vh;
+	width: 100vw;
 }
 
+.contenido{
+	width:60%;
+	box-sizing: border-box;
+	margin-left: 230px; /* Desplaza el contenido principal para dejar espacio al navbar */
+    padding: 20px;
+    flex: 1; /* Permite que el contenido ocupe todo el espacio restante */
+}

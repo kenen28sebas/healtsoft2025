@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Alerta from "./alerta";
+import "./formularioP.css"
 
 const FormularioPaciente = ({isOpen}) => {
     let abrirFormCitas = isOpen
@@ -87,13 +88,13 @@ const FormularioPaciente = ({isOpen}) => {
   return (
     <>
     <Alerta isOpen={openAlerta}>¡Registro exitoso!</Alerta>
-    <form onSubmit={handleSubmit}>
-      <h1>Registro de Usuario</h1>
+    <form className="user-form" onSubmit={handleSubmit}>
+      <h1 className="user-form__title">Registro de Usuario</h1>
       
       {/* Campos principales */}
-      <div>
-        <label>Estrato:</label>
-        <select value={estrato} onChange={(e) => setEstrato(e.target.value)}>
+      <div className="user-form__section">
+        <label className="user-form__label">Estrato:</label>
+        <select className="user-form__select" value={estrato} onChange={(e) => setEstrato(e.target.value)}>
           <option value="1">Estrato 1</option>
           <option value="2">Estrato 2</option>
           <option value="3">Estrato 3</option>
@@ -102,9 +103,10 @@ const FormularioPaciente = ({isOpen}) => {
           <option value="6">Estrato 6</option>
         </select>
       </div>
-      <div>
-        <label>Grupo de Atención Especial:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Grupo de Atención Especial:</label>
         <select
+        className="user-form__select"
           value={grupoAtencionEspecial}
           onChange={(e) => setGrupoAtencionEspecial(e.target.value)}
         >
@@ -114,9 +116,10 @@ const FormularioPaciente = ({isOpen}) => {
           <option value="O">Otro</option>
         </select>
       </div>
-      <div>
-        <label>Grupo Sanguíneo:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Grupo Sanguíneo:</label>
         <select
+        className="user-form__select"
           value={grupoSanguineo}
           onChange={(e) => setGrupoSanguineo(e.target.value)}
         >
@@ -130,26 +133,27 @@ const FormularioPaciente = ({isOpen}) => {
           <option value="O-">O Negativo</option>
         </select>
       </div>
-      <div>
-        <label>Ocupación:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Ocupación:</label>
         <input
+        className="user-form__input"
           type="text"
           value={ocupacion}
           onChange={(e) => setOcupacion(e.target.value)}
         />
       </div>
-      <div>
-        <label>Régimen:</label>
-        <select value={regimen} onChange={(e) => setRegimen(e.target.value)}>
+      <div className="user-form__section">
+        <label className="user-form__label">Régimen:</label>
+        <select  className="user-form__select" value={regimen} onChange={(e) => setRegimen(e.target.value)}>
           <option value="RC">Régimen Contributivo</option>
           <option value="RS">Régimen Subsidiado</option>
           <option value="RE">Régimen Especial</option>
           <option value="PA">Particular</option>
         </select>
       </div>
-      <div>
-        <label>Tipo de Afiliación:</label>
-        <select value={tipoAfiliacion} onChange={(e) => setTipoAfiliacion(e.target.value)}>
+      <div className="user-form__section">
+        <label className="user-form__label">Tipo de Afiliación:</label>
+        <select className="user-form__select" value={tipoAfiliacion} onChange={(e) => setTipoAfiliacion(e.target.value)}>
           <option value="COT">Cotizante</option>
           <option value="BEN">Beneficiario</option>
           <option value="ADI">Adicional</option>
@@ -158,17 +162,18 @@ const FormularioPaciente = ({isOpen}) => {
       </div>
 
       {/* Datos del Usuario */}
-      <div>
-        <label>Número de Documento:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Número de Documento:</label>
         <input
+          className="user-form__input"
           type="text"
           value={nroDoc}
           onChange={(e) => setNroDoc(e.target.value)}
         />
       </div>
-      <div>
-        <label>Tipo de Documento:</label>
-        <select value={tipoDoc} onChange={(e) => setTipoDoc(e.target.value)}>
+      <div className="user-form__section">
+        <label className="user-form__label">Tipo de Documento:</label>
+        <select className="user-form__select" value={tipoDoc} onChange={(e) => setTipoDoc(e.target.value)}>
           <option value="CC">Cédula de Ciudadanía</option>
           <option value="CE">Cédula de Extranjería</option>
           <option value="TI">Tarjeta de Identidad</option>
@@ -178,41 +183,44 @@ const FormularioPaciente = ({isOpen}) => {
           <option value="MSI">Menor sin Identificación</option>
         </select>
       </div>
-      <div>
-        <label>Lugar de Expedición:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Lugar de Expedición:</label>
         <input
+        className="user-form__input"
           type="text"
           value={lugarExpDoc}
           onChange={(e) => setLugarExpDoc(e.target.value)}
         />
       </div>
-      <div>
-        <label>Fecha de Expedición:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Fecha de Expedición:</label>
         <input
+        className="user-form__input"
           type="date"
           value={fechaExpDoc}
           onChange={(e) => setFechaExpDoc(e.target.value)}
         />
       </div>
-      <div>
-        <label>Fecha de Nacimiento:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Fecha de Nacimiento:</label>
         <input
+        className="user-form__input"
           type="date"
           value={fechaNacimiento}
           onChange={(e) => setFechaNacimiento(e.target.value)}
         />
       </div>
-      <div>
-        <label>Sexo:</label>
-        <select value={sexo} onChange={(e) => setSexo(e.target.value)}>
+      <div className="user-form__section">
+        <label className="user-form__label">Sexo:</label>
+        <select className="user-form__select" value={sexo} onChange={(e) => setSexo(e.target.value)}>
           <option value="M">Masculino</option>
           <option value="F">Femenino</option>
           <option value="I">Indeterminado</option>
         </select>
       </div>
-      <div>
-        <label>Estado Civil:</label>
-        <select value={estadoCivil} onChange={(e) => setEstadoCivil(e.target.value)}>
+      <div className="user-form__section">
+        <label className="user-form__label">Estado Civil:</label>
+        <select className="user-form__select" value={estadoCivil} onChange={(e) => setEstadoCivil(e.target.value)}>
           <option value="Soltero">Soltero</option>
           <option value="Casado">Casado</option>
           <option value="Divorciado">Divorciado</option>
@@ -221,72 +229,80 @@ const FormularioPaciente = ({isOpen}) => {
           <option value="Separado">Separado</option>
         </select>
       </div>
-      <div>
-        <label>Teléfono:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Teléfono:</label>
         <input
+        className="user-form__input"
           type="text"
           value={telefono}
           onChange={(e) => setTelefono(e.target.value)}
         />
       </div>
-      <div>
-        <label>Nacionalidad:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Nacionalidad:</label>
         <input
+        className="user-form__input"
           type="text"
           value={nacionalidad}
           onChange={(e) => setNacionalidad(e.target.value)}
         />
       </div>
-      <div>
-        <label>Municipio:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Municipio:</label>
         <input
+        className="user-form__input"
           type="text"
           value={municipio}
           onChange={(e) => setMunicipio(e.target.value)}
         />
       </div>
-      <div>
-        <label>Username:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Username:</label>
         <input
+        className="user-form__input"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div>
-        <label>Nombre:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Nombre:</label>
         <input
+        className="user-form__input"
           type="text"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
       </div>
-      <div>
-        <label>Apellido:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Apellido:</label>
         <input
+        className="user-form__input"
           type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
       </div>
-      <div>
-        <label>Correo Electrónico:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Correo Electrónico:</label>
         <input
+        className="user-form__input"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <div>
-        <label>Contraseña:</label>
+      <div className="user-form__section">
+        <label className="user-form__label">Contraseña:</label>
         <input
+        className="user-form__input"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
       
-      <button type="submit">Registrar</button>
+      <button className="user-form__button" type="submit">Registrar</button>
     </form>
     </>
   );

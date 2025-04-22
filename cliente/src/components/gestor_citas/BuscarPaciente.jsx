@@ -2,7 +2,7 @@ import react, { useState } from "react";
 import DatosBusuqedaP from "./DatosBusquedaP";
 import "./buscarPaciente.css"
 import React from 'react';
-import Lupa from '/react.svg'
+import Lupa from '/lupa.png'
 import reactLogo from '../../assets/react.svg';
 
 const BuscarPaciente = ({children,isOpen,token,tipo,isLock,userid}) => {
@@ -69,7 +69,7 @@ const BuscarPaciente = ({children,isOpen,token,tipo,isLock,userid}) => {
                 onChange={(e) => {setNro_doc(e.target.value)}} />
                 <div className="buscar_paciente__lupa" > 
                 <button onClick={(e) => {cargarDatos(nro_doc);console.log(nro_doc)}}>
-                    <img src={reactLogo} alt="" className="buscar_paciente__img" style={{ filter: 'brightness(1.2)' }}/>
+                    <img src={Lupa} alt="" className="buscar_paciente__img" style={{ filter: 'brightness(1.2)' }}/>
                 </button>
                 </div>
                 

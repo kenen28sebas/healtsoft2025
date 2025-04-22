@@ -18,8 +18,8 @@ export function ContenedorNombre({nombre,rol}){
         </div>
         
         <div className="info_usuario__barra_datos">
-            <h1>{nombre}</h1>
-            <p>{rol}</p>
+            <h1 className="info_usuario__nombre">{nombre}</h1>
+            <p className="info_usuario__rol">{rol}</p>
         </div>
         
     </div>

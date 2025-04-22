@@ -102,6 +102,14 @@ const AppHistoriaClinica = ({  token }) => {
                 <ContenedorNombre nombre={`${datos.user.usuario.first_name} ${datos.user.usuario.last_name}`} rol={"Medico"}></ContenedorNombre>
                 <Contenedor_opciones lista={listabotones} closeOther={cerrarVentanas}></Contenedor_opciones>
             </Nabvar>
+            <div style={{
+                width: '60%',
+                boxSizing: 'border-box',
+                marginLeft: '230px', /* Desplaza el contenido principal para dejar espacio al navbar */
+                padding: '20px',
+                flex: '1',
+              }
+            }>
             <BuscarPaciente isOpen={isOpenCrearhc}  token={token} tipo={"crear nuevo folio"} isLock={false} userid={datos.user.id}>
                 <CrearHv></CrearHv>
             </BuscarPaciente>
@@ -109,6 +117,7 @@ const AppHistoriaClinica = ({  token }) => {
             <BuscarPaciente isOpen={isOpenPaciente}  token={token} tipo={"crear nuevo folio"} isLock={false} >
                 <ListaHistoriaClinica></ListaHistoriaClinica>
             </BuscarPaciente>
+            </div>
             {/* 
             <ListaCitas isOpen={isOpenConsultar} token={token} /> */}
             </div>

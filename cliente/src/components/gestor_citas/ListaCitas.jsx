@@ -88,17 +88,19 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
 
     if(nro_doc){
         filasCitas = citas.map(cita => {
-            return(<tr key={cita.id}>
-                <td>{cita.fecha_de_solicitud}</td>
-                <td>{cita.fecha_de_asignacion}</td>
-                <td>{cita.prioridad}</td>
-                <td>{cita.cups}</td>
-                <td>{cita.paciente.usuario.first_name}</td>
-                <td>{cita.medico.usuario.first_name}</td>
-                <td>{cita.estado}</td>
-                    <td><button >Actualizar</button>
-                    <button onClick={() => eliminarCita(cita.id)}>Borrar</button></td>
-                    
+            return(<tr className="styled-table__row" key={cita.id}>
+                <td className="styled-table__cell">{cita.fecha_de_solicitud}</td>
+                <td className="styled-table__cell">{cita.fecha_de_asignacion}</td>
+                <td className="styled-table__cell">{cita.prioridad}</td>
+                <td className="styled-table__cell">{cita.cups}</td>
+                <td className="styled-table__cell">{cita.paciente.usuario.first_name}</td>
+                <td className="styled-table__cell">{cita.medico.usuario.first_name}</td>
+                <td className="styled-table__cell">{cita.estado}</td>
+                <td className="styled-table__actions-cell">
+                    <button className="styled-table__button styled-table__button--update">Actualizar</button>
+                    <button className="styled-table__button styled-table__button--delete" 
+                        onClick={() => eliminarCita(cita.id)}>Borrar</button>
+                </td>
             </tr>)
             
         })   
@@ -123,38 +125,42 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
     return (
         <>
         <div className="styled-table">
-        <div>
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                />
-                <button onClick={() => setFilteredCitas(citas)}>Limpiar filtro</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>fecha_de_solicitud</th>
-                        <th>fecha_de_asignacion</th>
-                        <th>prioridad</th>
-                        <th>cups</th>
-                        <th>paciente</th>
-                        <th>medico</th>
-                        <th>estado</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <div className="styled-table__actions">
+        <input
+            type="text"
+            className="styled-table__input"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+        />
+        <button className="styled-table__clear-button" onClick={() => setFilteredCitas(citas)}>
+            Limpiar filtro
+        </button>
+    </div>
+    <table className="styled-table__table">
+        <thead className="styled-table__header">
+            <tr className="styled-table__row">
+                <th className="styled-table__cell">fecha_de_solicitud</th>
+                <th className="styled-table__cell">fecha_de_asignacion</th>
+                <th className="styled-table__cell">prioridad</th>
+                <th className="styled-table__cell">cups</th>
+                <th className="styled-table__cell">paciente</th>
+                <th className="styled-table__cell">medico</th>
+                <th className="styled-table__cell">estado</th>
+                <th className="styled-table__cell">acciones</th>
+            </tr>
+        </thead>
+        <tbody className="styled-table__body">
                     {isList && filasCitas}
                     {filteredCitas.map((cita) => (
-                        <tr key={cita.id}>
-                            <td>{cita.fecha_de_solicitud}</td>
-                            <td>{cita.fecha_de_asignacion}</td>
-                            <td>{cita.prioridad}</td>
-                            <td>{cita.cups}</td>
-                            <td>{cita.paciente.usuario.first_name}</td>
-                            <td>{cita.medico.usuario.first_name}</td>
-                            <td>{cita.estado}</td>
+                        <tr className="styled-table__cell" key={cita.id}>
+                            <td className="styled-table__cell">{cita.fecha_de_solicitud}</td>
+                            <td className="styled-table__cell">{cita.fecha_de_asignacion}</td>
+                            <td className="styled-table__cell">{cita.prioridad}</td>
+                            <td className="styled-table__cell">{cita.cups}</td>
+                            <td className="styled-table__cell">{cita.paciente.usuario.first_name}</td>
+                            <td className="styled-table__cell">{cita.medico.usuario.first_name}</td>
+                            <td className="styled-table__cell">{cita.estado}</td>
                         </tr>
                     ))}
                 </tbody>

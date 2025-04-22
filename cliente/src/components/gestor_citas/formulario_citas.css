@@ -1,30 +1,51 @@
-.formulario_cita{
-    background-color: antiquewhite;
+.formulario_cita {
+    font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+    font-size: 16px;
+    background-color: #FAF3E0; /* Un color cálido y agradable */
     position: absolute;
     width: 350px;
-    height: 300px;
+    height: auto; /* Ajusta la altura automáticamente al contenido */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #E1CFAF; /* Bordes suaves */
 }
 
-.formulario_cita__formulario{
+.formulario_cita__formulario {
     display: flex;
     flex-direction: column;
     gap: 20px;
-
+    width: 100%; /* Para ajustar al contenedor */
 }
-.formulario_cita__cont_input{
+
+.formulario_cita__cont_input {
     display: flex;
     justify-content: space-between;
+    align-items: center; /* Centra los elementos verticalmente */
+    width: 100%;
+    gap: 10px; /* Espaciado entre elementos */
 }
 
-.formulario_cita__cont_input input{
+.formulario_cita__cont_input input {
     width: 140px;
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px;
+    border: 1px solid #D3D3D3; /* Borde ligero */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna */
+    font-family: 'Roboto', sans-serif; /* Tipografía moderna */
+    font-size: 14px;
 }
 
-.formulario_cita__cont_input select{
+.formulario_cita__cont_input select {
     width: 150px;
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px;
+    border: 1px solid #D3D3D3;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
 }
