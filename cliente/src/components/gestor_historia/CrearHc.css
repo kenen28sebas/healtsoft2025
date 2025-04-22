@@ -1,0 +1,187 @@
+.Contenedor_botones{
+	height: 100px;
+	border-bottom: 2px black solid;
+	display: flex;
+	justify-content: space-around;
+	align-items: end;
+	box-sizing: border-box;
+}
+
+.Contenedor_botones button{
+	height: 70%;
+
+	border-top-right-radius: 25%;
+	border-top-left-radius: 25%;
+	padding: 5px;
+}
+
+
+.Contenedor_botones button:hover{
+	background-color: rgb(152, 223, 255);
+	box-shadow: 0 0 20px 10px transparent inset;
+}
+
+.anamnesis-form{
+
+}	
+.contenedor_forms{
+	width: 100%;
+	box-sizing: border-box;
+	background-color: #f6f5f7;
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 16px;
+	display: flex;
+	justify-content: center;
+	padding: 25px;
+}
+
+
+
+.evolucion-form,.orden-procedimientos-form,.paraclinicos-form,.signos-vitales-form,.antecedentes-medicos-form,.diagnostico-form,.anamnesis-form,.formula-medica-form{
+	width: 80%;
+}
+.formula-medica-form__body {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 1.5rem;
+	background: #f9f9f9;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formula-medica-form__field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+  }
+  
+  .formula-medica-form__field label {
+	font-weight: bold;
+  }
+  
+  .formula-medica-form__field input,
+  .formula-medica-form__field textarea,
+  .formula-medica-form__field select {
+	padding: 0.75rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 1rem;
+  }
+  
+  .formula-medica-form__submit {
+	padding: 0.75rem 1.5rem;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: bold;
+	align-self: flex-end;
+  }
+  
+  .formula-medica-form__submit:hover {
+	background-color: #0056b3;
+  }
+  
+/* Estilo para .evolucion-form__body */
+.evolucion-form__body,
+.orden-procedimientos-form__body,
+.paraclinicos-form__body,
+.signos-vitales-form__body,
+.antecedentes-medicos-form__body,
+.diagnostico-form__body,
+.anamnesis-form__body {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 1.5rem;
+	background: #f9f9f9;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los campos */
+.evolucion-form__field,
+.orden-procedimientos-form__field,
+.paraclinicos-form__field,
+.signos-vitales-form__field,
+.antecedentes-medicos-form__field,
+.diagnostico-form__field,
+.anamnesis-form__field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.evolucion-form__field label,
+.orden-procedimientos-form__field label,
+.paraclinicos-form__field label,
+.signos-vitales-form__field label,
+.antecedentes-medicos-form__field label,
+.diagnostico-form__field label,
+.anamnesis-form__field label {
+  font-weight: bold;
+}
+
+/* Estilo para inputs, textareas y selects */
+.evolucion-form__field input,
+.evolucion-form__field textarea,
+.evolucion-form__field select,
+.orden-procedimientos-form__field input,
+.orden-procedimientos-form__field textarea,
+.orden-procedimientos-form__field select,
+.paraclinicos-form__field input,
+.paraclinicos-form__field textarea,
+.paraclinicos-form__field select,
+.signos-vitales-form__field input,
+.signos-vitales-form__field textarea,
+.signos-vitales-form__field select,
+.antecedentes-medicos-form__field input,
+.antecedentes-medicos-form__field textarea,
+.antecedentes-medicos-form__field select,
+.diagnostico-form__field input,
+.diagnostico-form__field textarea,
+.diagnostico-form__field select,
+.anamnesis-form__field input,
+.anamnesis-form__field textarea,
+.anamnesis-form__field select {
+	padding: 0.75rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 1rem;
+}
+
+/* Estilo para botones de submit */
+.evolucion-form__submit,
+.orden-procedimientos-form__submit,
+.paraclinicos-form__submit,
+.signos-vitales-form__submit,
+.antecedentes-medicos-form__submit,
+.diagnostico-form__submit,
+.anamnesis-form__submit {
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  align-self: flex-end;
+}
+
+.evolucion-form__submit:hover,
+.orden-procedimientos-form__submit:hover,
+.paraclinicos-form__submit:hover,
+.signos-vitales-form__submit:hover,
+.antecedentes-medicos-form__submit:hover,
+.diagnostico-form__submit:hover,
+.anamnesis-form__submit:hover {
+  background-color: #0056b3;
+}

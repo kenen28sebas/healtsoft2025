@@ -84,6 +84,8 @@ def registrar (request):
         case "paciente":
             serializer= PacienteSerializador(data = request.data)
             print(serializer.is_valid())
+            if not serializer.is_valid():
+                print(serializer.errors)
             if serializer.is_valid():
                 
                 serializer.save()
@@ -260,9 +262,9 @@ def perfil(request):
         print("gth no encotrado")   
 
     try : 
-        paciente = get_object_or_404(Paciente , usuario_id = request.data["nro_doc"])
+        paciente = get_object_or_404(Paciente , usuario_id = request.user.nro_doc)
         datos_paciente = PacienteSerializador(instance = paciente)
-        return Response ({"user" : datos_paciente.data  })
+        return Response ({"user" : datos_paciente.data ,"tipo_usuario" : "paciente" })
     except:
         print("paciente no encotrado") 
 
@@ -274,7 +276,7 @@ def perfil(request):
         print("medico sexual no encotrado")     
 
     try:
-        gerente=get_object_or_404(Gerente,usuario_id = request.data["nro_doc"])
+        gerente=get_object_or_404(Gerente,usuario_id = request.request.user.nro_doc)
         datos_gerente = GerenteSerializador(instance = gerente)
         return Response ({"user":datos_gerente.data})
     except:

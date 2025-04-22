@@ -1,4 +1,5 @@
 import React, { useState ,useEffect} from "react";
+import "./CrearHc.css"
 
 const CrearHv= ({nro_doc,userId,token}) => {
     const [listaCie10 , setListaCie10] = useState(null)
@@ -319,7 +320,7 @@ const CrearHv= ({nro_doc,userId,token}) => {
     const handleSubmit = (e) => { e.preventDefault(); console.log("Datos de Anamnesis:", anamnesis); alert("Formulario enviado con éxito!"); };
     return (
         <>
-        <div>
+        <div className="Contenedor_botones">
                 <button onClick={handlesOpenAnamnesis}>Anamnesis</button>
                 <button onClick={handleOpenDiagnostico}>Diagnóstico</button>
                 <button onClick={handleOpenAntecedentesMedicos}>Antecedentes Médicos</button>
@@ -329,6 +330,7 @@ const CrearHv= ({nro_doc,userId,token}) => {
                 <button onClick={handleOpenFormulaMedica}>Formula Médica</button>
                 <button onClick={handleOpenEvolucion}>Evolución</button>
             </div>
+        <div className="contenedor_forms"> 
         {isOpenAnamnesis && <div className="anamnesis-form">
             <h2 className="anamnesis-form__title">Formulario de Anamnesis</h2>
             <form onSubmit={handleSubmit} className="anamnesis-form__body">
@@ -420,7 +422,7 @@ const CrearHv= ({nro_doc,userId,token}) => {
                     <h2 className="diagnostico-form__title">Formulario de Diagnóstico</h2>
                     <form onSubmit={handleSubmit} className="diagnostico-form__body">
                         
-                        <div className="formulario_cita__cont_input">
+                        <div className="diagnostico-form__field">
                             <label htmlFor="cie10">CIE10:</label>
                             <select 
                             type="text"
@@ -487,7 +489,7 @@ const CrearHv= ({nro_doc,userId,token}) => {
                 <div className="antecedentes-medicos-form">
                     <h2 className="antecedentes-medicos-form__title">Formulario de Antecedentes Médicos</h2>
                     <form onSubmit={handleSubmit} className="antecedentes-medicos-form__body">
-                        <div className="formulario_cita__cont_input">
+                        <div className="antecedentes-medicos-form__field">
                             <label htmlFor="cie10">CIE10:</label>
                             <select 
                             type="text"
@@ -680,7 +682,7 @@ const CrearHv= ({nro_doc,userId,token}) => {
                                 required
                             />
                         </div>
-                        <div className="formulario_cita__cont_input">
+                        <div className="orden-procedimientos-form__field">
                             <label htmlFor="cups">Cups:</label>
                             <select 
                                 id="cups"
@@ -950,7 +952,8 @@ const CrearHv= ({nro_doc,userId,token}) => {
                     </form>
                 </div>
             )}
-            <button onClick={crearFolio}>probar</button>
+            </div>   
+            <button onClick={crearFolio}>crearFolio</button>
         </>
     );
 };

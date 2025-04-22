@@ -79,7 +79,7 @@ class Cups(models.Model):
     ips=models.ForeignKey(Ips,on_delete=models.CASCADE)
     activo=models.BooleanField(default=False)
     def __str__(self):
-        return self.Nombre
+        return self.nombre
 
 class SolicitudActualizacionHV(models.Model):
     estado_solicitud=[

@@ -6,7 +6,7 @@ import Nabvar from '../gestor_citas/Navbar';
 import { ContenedorNombre } from '../gestor_citas/ContenedorNombre';
 import Contenedor_opciones from '../gestor_citas/Contenedor_opciones';
 import BuscarPaciente from '../gestor_citas/BuscarPaciente';
-import CrearHv from './crearHc';
+import CrearHv from './CrearHc';
 import ListaCitasMedico from './ListaCitas';
 import ListaHistoriaClinica from './ListaFolios';
 
@@ -92,6 +92,12 @@ const AppHistoriaClinica = ({  token }) => {
     };
     return (
         <>
+            <div style={{
+                display: 'flex',
+                height: '100vh',
+                fontFamily: "'Poppins', sans-serif",
+              }
+            }>
             <Nabvar>
                 <ContenedorNombre nombre={`${datos.user.usuario.first_name} ${datos.user.usuario.last_name}`} rol={"Medico"}></ContenedorNombre>
                 <Contenedor_opciones lista={listabotones} closeOther={cerrarVentanas}></Contenedor_opciones>
@@ -105,6 +111,7 @@ const AppHistoriaClinica = ({  token }) => {
             </BuscarPaciente>
             {/* 
             <ListaCitas isOpen={isOpenConsultar} token={token} /> */}
+            </div>
         </>
     );
 };

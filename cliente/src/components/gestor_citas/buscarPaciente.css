@@ -1,10 +1,10 @@
 .buscar_paciente{
-    width: 68vw;
+    width: 72vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: antiquewhite;
-    padding: 50px;
+    padding: 25px;
 }
 
 .buscar_paciente__contenedor_buscar{
@@ -37,8 +37,18 @@
     width: 40px;
     height: 40px;
     border-radius: 100%;
-    background-color: aqua;
+    background-color: "lightgray";
+     padding: "10px" ;
     position: absolute;
     left: 96px;
     z-index: 2;
+}
+.buscar_paciente__img{
+
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        display: block;
+        border: none;
+    
 }

@@ -1,6 +1,9 @@
 import react, { useState } from "react";
 import DatosBusuqedaP from "./DatosBusquedaP";
 import "./buscarPaciente.css"
+import React from 'react';
+import Lupa from '/react.svg'
+import reactLogo from '../../assets/react.svg';
 
 const BuscarPaciente = ({children,isOpen,token,tipo,isLock,userid}) => {
     console.log(userid)
@@ -64,10 +67,9 @@ const BuscarPaciente = ({children,isOpen,token,tipo,isLock,userid}) => {
                 type="text"
                 placeholder="Buscar paciente"
                 onChange={(e) => {setNro_doc(e.target.value)}} />
-                <div className="buscar_paciente__lupa"> 
+                <div className="buscar_paciente__lupa" > 
                 <button onClick={(e) => {cargarDatos(nro_doc);console.log(nro_doc)}}>
-                buscar
-
+                    <img src={reactLogo} alt="" className="buscar_paciente__img" style={{ filter: 'brightness(1.2)' }}/>
                 </button>
                 </div>
                 
