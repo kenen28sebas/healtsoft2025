@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contservicio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background-color: #f3f6fb;
+  min-height: 100vh;
+}
+
+.formulariosservicio {
+
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.tltservicio {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #274c77;
+  margin-bottom: 30px;
+  animation: bounceIn 1s ease-in-out;
+}
+
+.inputsservicio {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.labelservicio {
+  font-size: 1.2rem;
+  color: #274c77;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.inputsservicio input,
+.inputsservicio select {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s ease;
+  width: 100%; 
+}
+
+.inputsservicio input:focus,
+.inputsservicio select:focus {
+  border: 1px solid #4f9ec4;
+}
+
+
+
+
+.formulariosservicio > .inputsservicio:nth-child(3n) {
+  margin-right: 0;
+}
+
+
+.btnguardarservicio {
+  display: block;
+  margin: 30px auto 0 auto;
+  background-color: #4f9ec4;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btnguardarservicio:hover {
+  background-color: #2b7aa0;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 30px 50px;
+  border-radius: 20px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.progress-line {
+  height: 5px;
+  width: 100%;
+  background: linear-gradient(90deg, #4f9ec4 0%, #c4e0f9 100%);
+  animation: progress 3s linear;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* Animaciones lindas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+
+
+
+

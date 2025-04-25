@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './fromularioips.css'
 export default function CrearIps({token , abrirform}){
 
     if (!abrirform){
@@ -9,6 +10,7 @@ export default function CrearIps({token , abrirform}){
     const [direccion , setDireccion] = useState('')
     const [nivel_categorizacion , setNivel] = useState('I')
     const [telefono , setTelefono] = useState('')
+    const [showModal, setShowModal] = useState(false);
 
     const ruta = 'http://127.0.0.1:8000/ips/'
     const header = {
@@ -24,7 +26,11 @@ export default function CrearIps({token , abrirform}){
             direccion : direccion,
             nivel_categorizacion : nivel_categorizacion,
             telefono : telefono,
-        })
+        });
+        setShowModal(true);
+        setTimeout(() => {
+            setShowModal(false); 
+        }, 3000);
         const respuesta = await fetch(ruta,{
             method : 'POST',
             headers : header,
@@ -39,9 +45,18 @@ export default function CrearIps({token , abrirform}){
     }
     return(
         <>
+        {showModal && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h2>Guardando contenido...</h2>
+                        <div className="progress-line"></div>
+                    </div>
+                </div>
+            )}
         <div className="cont">
-            <form onSubmit={handleSubmit} className="formularios">
-                <div>
+            <form onSubmit={handleSubmit} className="formularioips">
+                <h1 className="tltcrearips">Registrar eps</h1>
+                <div className="contopciones">
                     <input 
                     placeholder="Nombre de la ips"
                     className="inputs"
@@ -51,7 +66,7 @@ export default function CrearIps({token , abrirform}){
                     onChange={(e) => setNombre(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="contopciones">
                     <input 
                     placeholder="Direccion"
                     className="inputs"
@@ -61,7 +76,7 @@ export default function CrearIps({token , abrirform}){
                     onChange={(e) => setDireccion(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="contopciones">
                     <select
                     placeholder="Nivel de categorizacion"
                     className="inputs"
@@ -75,7 +90,7 @@ export default function CrearIps({token , abrirform}){
                         <option value="IV">IV</option>
                     </select>
                 </div>
-                <div>
+                <div className="contopciones">
                     <input 
                     type="text"
                     className="inputs"
@@ -85,7 +100,7 @@ export default function CrearIps({token , abrirform}){
                     onChange={(e) => setTelefono(e.target.value)}
                     />
                 </div>
-                <button type="submit" className='btnguardar'>Guardar</button>
+                <button type="submit" className='btnguardarips'>Guardar</button>
             </form>
         </div>
         </>

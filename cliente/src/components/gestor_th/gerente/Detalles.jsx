@@ -1,4 +1,7 @@
 import React, { act , useState , useEffect} from "react";
+import './listarips.css'
+import './modal.css'
+import './detalleips.css'
 
 export default function Detallesservicio({abrirdetallesservicio, cerrardetallesservicio , nombre,descripcion, activo,codigo,token,cargarListaNueva,codigoips}){
     const [isOpenabrirdetallesservicio ,setIsOpenabrirdetallesservicio] = useState(abrirdetallesservicio)
@@ -77,48 +80,70 @@ export default function Detallesservicio({abrirdetallesservicio, cerrardetalless
     }
     return(
         <>
-        <div>
-            <p>{nombre}</p>
-            <p>{descripcion}</p>
-            <p>{activo}
-            {activo ? (
-                    <span style={{ color: 'green', fontWeight: 'bold' }}>Activo</span>
-                ) : (
-                    <span style={{ color: 'red', fontWeight: 'bold' }}>Inactivo</span>
-                )}
+        <div className="contenedordetallesips animarEntrada">
+            <h1 className="detallestituloips">Detalles del servicio</h1>
+            <div className="consultaipse">
+                <p>Nombre del servicio:</p>
+                <p className="textoips">{nombre}</p>
+            </div>
+            <div className="consultaipse">
+                <p>Descripcion:</p>
+                <p className="textoips">{descripcion}</p>
+            </div>
+            <div className="consultaipse">
+                <p>Estado del servicio.</p>
+                <p className="textoips">{activo}
+                    {activo ? (
+                            <span style={{ color: 'green', fontWeight: 'bold' }}>Activo</span>
+                        ) : (
+                            <span style={{ color: 'red', fontWeight: 'bold' }}>Inactivo</span>
+                        )}
             </p>
-            <p>{codigo}</p>
-            <button onClick={cerrardetallesservicio}>cerrar</button>
-            <button onClick={eliminarServicio}>Eliminar</button>
-            <button onClick={handleActualizar}>Actualizar</button>
+            </div>
+            <div className="consultaipse">
+                <p>Codigo:</p>
+                <p className="textoips">{codigo}</p>
+            </div>
+            <div className="botonesacciones">
+                <button onClick={handleActualizar} className="btnips actualizar">Actualizar</button>
+                <button onClick={eliminarServicio} className="btnips eliminar">Eliminar</button>
+            </div>
+            <button onClick={cerrardetallesservicio} className="btnips cerrar">cerrar</button>
+            
         </div>
         {isUpdate && (
-            <div>
-                <form onSubmit={handleSubmitUpdate}>
-                    <input 
-                    type="text"
-                    placeholder="Nombre del servicio"
-                    value={nuevoNombre}
-                    onChange={handleChange}
-                    name="nombre"
-                    />
-                    <input 
-                    type="text" 
-                    placeholder="Descripcion del servicio"
-                    value={nuevaDescripcion}
-                    onChange={handleChange}
-                    name="descripcion"
-                    />
-                    <label htmlFor="">Estado del servicio</label>
-                    <input 
-                    type="checkbox" 
-                    checked={nuevoActivo}
-                    onChange={handleChange}
-                    name="activo"
-                    />
-                    <button type="submit">Guardar cambios</button>
-                    <button type="buttom" onClick={handkecancelupdate}>Cancelar</button>
-                </form>
+            <div className="modal-overlay">
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <form onSubmit={handleSubmitUpdate} className="formupdateips">
+                        <h1 className="tituloactualizarips">Actualizar registro</h1>
+                        <input 
+                        type="text"
+                        placeholder="Nombre del servicio"
+                        value={nuevoNombre}
+                        onChange={handleChange}
+                        name="nombre"
+                        className="textosupdateips"
+                        />
+                        <input 
+                        type="text" 
+                        placeholder="Descripcion del servicio"
+                        value={nuevaDescripcion}
+                        onChange={handleChange}
+                        name="descripcion"
+                        className="textosupdateips"
+                        />
+                        <label htmlFor="">Estado del servicio</label>
+                        <input 
+                        type="checkbox" 
+                        checked={nuevoActivo}
+                        onChange={handleChange}
+                        name="activo"
+                        className="textosupdateips"
+                        />
+                        <button type="submit" className="btnguardarcambios">Guardar cambios</button>
+                        <button type="buttom" onClick={handkecancelupdate} className="btncancelarupdate">Cancelar</button>
+                    </form>
+                </div>
             </div>
         )}
         </>
@@ -206,54 +231,76 @@ export function Detallesips({abrirdetallesips , cerrardetallesips , nombre , dir
 
     return(
         <>
-        <div>
-            <p>{nombre}</p>
-            <p>{direccion}</p>
-            <p>{nivel_categorizacion}</p>
-            <p>{telefono}</p>
-            <button onClick={handleActualizar}>Actualizar</button>
-            <button onClick={eliminarIps}>Eliminar</button>
-            <button onClick={cerrardetallesips}>Cerrar</button>
+        <div className="contenedordetallesips animarEntrada">
+            <h1 className="detallestituloips">Detalles de la ips</h1>
+            <div className="consultaipse">
+                <p>Nombre de la ips:</p>
+                <p className="textoips">{nombre}</p>
+            </div>
+            <div className="consultaipse">
+                <p>Direccion:</p>
+                <p className="textoips">{direccion}</p>
+            </div>
+            <div className="consultaipse">
+                <p>Nivel de categorizacion:</p>
+                <p className="textoips">{nivel_categorizacion}</p>
+            </div>
+            <div className="consultaipse">
+                <p>Telefono:</p>
+                <p className="textoips">{telefono}</p>
+            </div>
+            <div className="botonesacciones">
+                <button onClick={handleActualizar} className="btnips actualizar">Actualizar</button>
+                <button onClick={eliminarIps} className="btnips eliminar">Eliminar</button>
+            </div>
+            <button onClick={cerrardetallesips} className="btnips cerrar">Cerrar</button>
         </div>
         {isUpdate &&(
-            <div>
-                <form onSubmit={handleSubmitUpdate}>
-                    <input 
-                    type="text"
-                    placeholder="Nombre de la ips"
-                    value={nuevoNombre}
-                    onChange={handleChange}
-                    name="nombre"
-                    />
-                    <input 
-                    type="text" 
-                    placeholder="Direccion de la ips"
-                    value={nuevaDireccion}
-                    onChange={handleChange}
-                    name="direccion"
-                    />
-                    <select
-                    type="text" 
-                    placeholder="Nivel de categorizacion"
-                    value={nuevoNivel}
-                    onChange={handleChange}
-                    name="nivel_categorizacion"
-                    >
-                        <option value="I">I</option>
-                        <option value="II">II</option>
-                        <option value="III">III</option>
-                        <option value="IV">IV</option>
-                    </select>
-                    <input 
-                    type="text" 
-                    placeholder="Telefono de la ips"
-                    value={nuevoTelefono}
-                    onChange={handleChange}
-                    name="telefono"
-                    />
-                    <button type="submit">Guardar cambios</button>
-                    <button type="button" onClick={handleCancelUpdate}>Cancelar</button>
-                </form>
+            <div className="modal-overlay">
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <form onSubmit={handleSubmitUpdate} className="formupdateips">
+                        <h1 className="tituloactualizarips">Actualizar registro</h1>
+                        <input 
+                        type="text"
+                        placeholder="Nombre de la ips"
+                        value={nuevoNombre}
+                        onChange={handleChange}
+                        name="nombre"
+                        className="textosupdateips"
+                        />
+                        <input 
+                        type="text" 
+                        placeholder="Direccion de la ips"
+                        value={nuevaDireccion}
+                        onChange={handleChange}
+                        name="direccion"
+                        className="textosupdateips"
+                        />
+                        <select
+                        type="text" 
+                        placeholder="Nivel de categorizacion"
+                        value={nuevoNivel}
+                        onChange={handleChange}
+                        name="nivel_categorizacion"
+                        className="textosupdateips"
+                        >
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                        </select>
+                        <input 
+                        type="text" 
+                        placeholder="Telefono de la ips"
+                        value={nuevoTelefono}
+                        onChange={handleChange}
+                        name="telefono"
+                        className="textosupdateips"
+                        />
+                        <button type="submit" className="btnguardarcambios">Guardar cambios</button>
+                        <button type="button" onClick={handleCancelUpdate} className="btncancelarupdate">Cancelar</button>
+                    </form>
+                </div>
             </div>
         )}
         </>
@@ -337,49 +384,70 @@ export function DetallesCargo ({abrirdetallescargo , cerrardetallescargo, nombre
 
     return(
         <>
-        <div>
-            <p>{nombre}</p>
-            <p>{descripcion}</p>
-            <p>{estado}
-            {estado ? (
-                    <span style={{ color: 'green', fontWeight: 'bold' }}>Activo</span>
-                ) : (
-                    <span style={{ color: 'red', fontWeight: 'bold' }}>Inactivo</span>
+        <div className="contenedordetallesips animarEntrada">
+            <h1 className="detallestituloips">Detalles del cargo</h1>
+            <div className="consultaipse">
+                <p>Nombre del cargo:</p>
+                <p className="textoips">{nombre}</p>
+            </div>
+            <div className="consultaipse">
+                <p>Descripcion del cargo:</p>
+                <p className="textoips">{descripcion}</p>
+            </div>
+            <div className="consultaipse">
+                <p>Estado del cargo:</p>
+                <p className="textoips">{estado}
+                    {estado ? (
+                            <span style={{ color: 'green', fontWeight: 'bold' }}>Activo</span>
+                        ) : (
+                            <span style={{ color: 'red', fontWeight: 'bold' }}>Inactivo</span>
                 )}
             </p>
-            <p>{fecha_creacion}</p>
-            <button onClick={handleActualizar}>Actualizar</button>
-            <button onClick={eliminarCArgo}>Eliminar</button>
-            <button onClick={cerrardetallescargo}>cerrar</button>
+            </div>
+            <div className="consultaipse">
+                <p>Fecha de Creacion</p>
+                <p className="textoips">{fecha_creacion}</p>
+            </div>
+            <div className="botonesacciones">
+                <button onClick={handleActualizar} className="btnips actualizar">Actualizar</button>
+                <button onClick={eliminarCArgo} className="btnips eliminar">Eliminar</button>
+            </div>
+            <button onClick={cerrardetallescargo} className="btnips cerrar">cerrar</button>
         </div>
         {isUpdate &&(
-            <div>
-                <form onSubmit={handleSubmitUpdate}>
-                    <input 
-                    type="text"
-                    placeholder="Nombre del cargo"
-                    value={nuevoNombre}
-                    onChange={handleChange}
-                    name="nombre"
-                    />
-                    <input 
-                    type="text" 
-                    placeholder="Descripcion del cargo"
-                    value={nuevaDescripcion}
-                    onChange={handleChange}
-                    name="descripcion"
-                    />
-                    <label htmlFor="">Estado del cargo</label>
-                    <input 
-                    type="checkbox" 
-                    checked={nuevoEstado}
-                    onChange={handleChange}
-                    name="estado"
-                    />
-                    <button type="submit">Guardar cambios</button>
-                    <button type="button" onClick={handleCancelUpdate}>Cancelar</button>
-                </form>
+            <div className="modal-overlay">
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <form onSubmit={handleSubmitUpdate} className="formupdateips">
+                        <input 
+                        type="text"
+                        placeholder="Nombre del cargo"
+                        value={nuevoNombre}
+                        onChange={handleChange}
+                        name="nombre"
+                        className="textosupdateips"
+                        />
+                        <input 
+                        type="text" 
+                        placeholder="Descripcion del cargo"
+                        value={nuevaDescripcion}
+                        onChange={handleChange}
+                        name="descripcion"
+                        className="textosupdateips"
+                        />
+                        <label htmlFor="">Estado del cargo</label>
+                        <input 
+                        type="checkbox" 
+                        checked={nuevoEstado}
+                        onChange={handleChange}
+                        name="estado"
+                        className="textosupdateips"
+                        />
+                        <button type="submit" className="btnguardarcambios">Guardar cambios</button>
+                        <button type="button" onClick={handleCancelUpdate} className="btncancelarupdate">Cancelar</button>
+                    </form>
+                </div>
             </div>
+            
         )}
         </>
     )

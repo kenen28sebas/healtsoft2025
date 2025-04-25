@@ -8,15 +8,15 @@ const ListaCitas = ({isOpen,token,nro_doc}) => {
     const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
     const [filteredCitas, setFilteredCitas] = useState(citas); // Estado para los datos filtrado
     const [isList , setIsList] = useState(true)
-    const urlOpcion= () => {
-        if (nro_doc == undefined){
-            return "http://127.0.0.1:8000/api/cita"
-        }
-        if (nro_doc){
-            return `http://127.0.0.1:8000/api/citaaux/?nro_doc=${nro_doc}`
-        }
-    }
-    const url = urlOpcion()
+    // const urlOpcion= () => {
+    //     if (nro_doc == undefined){
+    //         return `http://127.0.0.1:8000/api/cita/?nro_doc=${nro_doc}`
+    //     }
+    //     if (nro_doc){
+    //         return `http://127.0.0.1:8000/api/citaaux/?nro_doc=${nro_doc}`
+    //     }
+    // }
+    const url = `http://127.0.0.1:8000/api/cita/?nro_doc=${nro_doc}`
     const header = {
         'Content-Type': 'application/json',
         'Authorization': `Token ${token}`

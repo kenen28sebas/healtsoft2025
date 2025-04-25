@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+
+
+.contenedortable {
+    width: 80%;
+    height: 100%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+.tablagenial {
+    /* margin: 0 auto; */
+    width: 950px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.tltlista {
+    font-size: 2rem;
+    color: #274c77;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.tableips {
+    width: 100%;
+    border-collapse: collapse;
+    animation: fadeIn 1s ease-out;
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.cabezatablaips {
+    background-color: #4f9ec4;
+}
+
+.encabezadosips th {
+    padding: 15px 20px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.tltipsn {
+    font-size: 1rem;
+    color: white;
+}
+
+
+.cuerpotableips {
+    font-size: 1rem;
+}
+
+.cuerpoopips {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s;
+}
+
+.cuerpoopips:hover {
+    background-color: #f1f1f1;
+}
+
+
+.optdtabla {
+    padding: 12px 20px;
+    text-align: left;
+    background-color: #ffffff;
+    color: #333;
+}
+
+button.verdetallesips {
+    background-color: #4f9ec4;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+button.verdetallesips:hover {
+    background-color: #3580a1;
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+
+.detalles-ips {
+    margin-top: 30px;
+}
+
+
+
+.contenedordetallesips{
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.consultaipse{
+    display: flex;
+    flex-direction: row;
+}
+.detallestituloips{
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+}
+

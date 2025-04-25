@@ -27,6 +27,7 @@ const Calendario_horas = ({isOpenCH,isCloseCH,token,dia,nro_doc}) =>{
     return(
 
         <>
+        <h1>Crear cita</h1>
         <div className="calendario_horas">
             <button className="calendario__boton_atras" onClick={isCloseCH}>{"<="}</button>
             <div className="calendario_horas__contenedor">

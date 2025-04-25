@@ -3,6 +3,7 @@ import VerPerfil from "./VerPerfil";
 import  './gerente/listarhc.css'
 import ConsultarAcademico from "./gerente/ConsultarAcademico";
 import ConsultarExperienciaL from "./gerente/ConsultarExperienciaL";
+import './listarhv.css'
 
 function ListarHv({token , openlistarhv}){
     if (!openlistarhv){
@@ -53,15 +54,15 @@ function ListarHv({token , openlistarhv}){
     }
     console.log(datosMedico)
     const hv = lista.map(item =>
-        <tr>
-            <td>{item.personal_medico.usuario.first_name}</td>
-            <td>{item.personal_medico.usuario.last_name}</td>
-            <td>{item.personal_medico.usuario.nro_doc}</td>
-            <td>{item.personal_medico.usuario.tipo_doc}</td>
-            <td><button onClick={() => cargarDatosMedico(item.personal_medico)}>ver perfil</button></td>
-            <td><button onClick={() => abrirlistaacademicos(item.personal_medico)}>Ver información Académica</button>
+        <tr className="tablainfohv">
+            <td className="itemingohv">{item.personal_medico.usuario.first_name}</td>
+            <td className="itemingohv">{item.personal_medico.usuario.last_name}</td>
+            <td className="itemingohv">{item.personal_medico.usuario.nro_doc}</td>
+            <td className="itemingohv">{item.personal_medico.usuario.tipo_doc}</td>
+            <td className="btnverperfil"><button onClick={() => cargarDatosMedico(item.personal_medico)}>ver perfil</button></td>
+            <td className="btnveracademico"><button onClick={() => abrirlistaacademicos(item.personal_medico)}>Ver información Académica</button>
             </td>
-            <td><button onClick={() => abrirexperienciasl(item.personal_medico)}>Ver experiencia laboral</button></td>
+            <td className="btnverexperiencia"><button onClick={() => abrirexperienciasl(item.personal_medico)}>Ver experiencia laboral</button></td>
         </tr>
     )
 

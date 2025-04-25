@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './listaracademicos.css'
 
 function ConsultarAcademico({ abrir, token, nro_doc }) {
     const [listaAcademicos, setlistaAcademicos] = useState([]);
@@ -149,33 +150,33 @@ function ConsultarAcademico({ abrir, token, nro_doc }) {
                 <button onClick={() => setacademicoseleccionado(null)}>Cancelar</button>
             </form>
         )}
-            <div>
-                <h3>Información académica</h3>
-                <table>
-                    <thead>
+            <div className="continfoacademica">
+                <h3 className="tltinformacionacademica">Información académica</h3>
+                <table className="tablainfoaca">
+                    <thead className="encabezadosinfo">
                         <tr>
-                            <th>Título obtenido</th>
-                            <th>Institución educativa</th>
-                            <th>Fecha inicio</th>
-                            <th>Fecha finalización</th>
-                            <th>Nivel Educativo</th>
+                            <th className="itemsacademicos">Título obtenido</th>
+                            <th className="itemsacademicos">Institución educativa</th>
+                            <th className="itemsacademicos">Fecha inicio</th>
+                            <th className="itemsacademicos">Fecha finalización</th>
+                            <th className="itemsacademicos">Nivel Educativo</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="tablacuerpoacademico">
                         {listaAcademicos.length === 0 ? (
                             <tr>
                                 <td colSpan="5">No se encontraron registros académicos</td>
                             </tr>
                         ) : (
                             listaAcademicos.map((item) => (
-                                <tr key={item.id}>
-                                    <td>{item.titulo_obtenido}</td>
-                                    <td>{item.institucion_educativa}</td>
-                                    <td>{item.fecha_inicio}</td>
-                                    <td>{item.fecha_culminado}</td>
-                                    <td>{item.nivel_educativo}</td>
-                                    <td><button onClick={() => setacademicoseleccionado(item)}>Actualizar académico</button></td>
-                                    <td><button onClick={() => eliminarAcademico(item.id)}>Eliminar académico</button></td>
+                                <tr key={item.id} className="itemsacademicos4">
+                                    <td className="itemsacademicosinformacion">{item.titulo_obtenido}</td>
+                                    <td className="itemsacademicosinformacion">{item.institucion_educativa}</td>
+                                    <td className="itemsacademicosinformacion">{item.fecha_inicio}</td>
+                                    <td className="itemsacademicosinformacion">{item.fecha_culminado}</td>
+                                    <td className="itemsacademicosinformacion">{item.nivel_educativo}</td>
+                                    <td className="itemsacademicosinformacion"><button onClick={() => setacademicoseleccionado(item)} className="btnactualizaraca">Actualizar académico</button></td>
+                                    <td className="itemsacademicosinformacion"><button onClick={() => eliminarAcademico(item.id)} className="btndeleteaca">Eliminar académico</button></td>
                                 </tr>
                             ))
                         )}

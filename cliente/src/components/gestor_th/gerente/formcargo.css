@@ -1,0 +1,108 @@
+.contenedorcargo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: #f4f6f9;
+}
+
+.formularioscargo {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 6px solid #038C7F;
+}
+
+.formularioscargo h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #038C7F;
+}
+
+.contopcargo {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.inputscargo {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #cccccc;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.inputscargo:focus {
+    outline: none;
+    border-color: #038C7F;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.btnguardarcargo {
+    background-color: #038C7F;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnguardarcargo:hover {
+    background-color: #0056b3;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.modal {
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.progress-line {
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, #038C7F, #66b2ff);
+    border-radius: 3px;
+    animation: cargar 3s linear forwards;
+}
+
+@keyframes cargar {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+

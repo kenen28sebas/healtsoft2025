@@ -1,0 +1,103 @@
+
+.forregistroaca {
+    width: 600px;
+    margin: 50px auto;
+    background: #fefefe;
+    padding: 30px;
+    /* border: salmon 2px solid; */
+    border-radius: 20px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.8s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.formregistroaca{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.tltformacademico {
+    text-align: center;
+    font-size: 28px;
+    color: #3f3d56;
+    margin-bottom: 25px;
+}
+
+
+.inpustaca {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+
+.textsacademicoform {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+
+.inpustaca input {
+    padding: 10px 15px;
+    border: 2px solid #dcdcdc;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+    width: 250px;
+    height: 50px;
+}
+.inpustaca input:focus {
+    border-color: #6c63ff;
+    background-color: #f0f0ff;
+}
+
+
+.btnguardaracademico {
+    background-color: #6c63ff;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.btnguardaracademico:hover {
+    background-color: #574fd6;
+    transform: scale(1.03);
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.inputscontdos{
+    width: 550px;
+    height: 90px;
+    /* border: solid green 2px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.inpustaca{
+    width: 550px;
+    /* border: solid green 2px; */
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

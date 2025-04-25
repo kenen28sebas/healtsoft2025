@@ -46,8 +46,10 @@ const AppGerente = (token) => {
     }
     return(
         <>
-        <NavBarGerente funcionabrir={Cambiarestado} funcioncerrar={cambiarestado2}/>
-        <GestionarIps abrirOpciones={opcion} cerrarOpciones={estado} token={token}/>
+        <div className="gestionips">
+            <NavBarGerente funcionabrir={Cambiarestado} funcioncerrar={cambiarestado2}/>
+            <GestionarIps abrirOpciones={opcion} cerrarOpciones={estado} token={token}/>
+        </div>
         </>
     )
 

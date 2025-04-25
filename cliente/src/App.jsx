@@ -13,6 +13,7 @@ import AppHistoriaClinica from './components/gestor_historia/App_historia_clinic
 import AppGestorTh  from './components/gestor_th/AppGestorTh'
 import CrearHv from './components/gestor_th/CrearHv'
 import AppGerente from './components/gestor_th/gerente/AppGerente'
+import './index.css'
 
 const App = () => {
   const [isActive, setIsActive] = useState(false);
@@ -49,11 +50,10 @@ const App = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100vh',
                 fontFamily: "'Poppins', sans-serif",
               }}
             >
-              <FormularioPaciente isOpen={true} />
+              <FormularioPaciente isOpen={true} isR={true}/>
             </div>
           }
         />

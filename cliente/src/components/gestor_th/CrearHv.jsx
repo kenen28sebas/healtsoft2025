@@ -109,14 +109,15 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
     
     return(
         <>
-        <div className='cont'>
+        <div className='contformcrearhv'>
+            <h1 className='tltcrearhv'>Crear hoja de vida</h1>
             <form onSubmit={handleSubmit} className='fromularios'>
-                <div className='inputscont'>
+                <div className='inputsconttt'>
                     <div>
-                        {/* <label htmlFor="username">Nombre de usuario</label> */}
+                        <label htmlFor="username">Nombre de usuario</label>
                         <input
                         placeholder='Nombre de usuario'
-                        className='inputs'
+                        className='inputss'
                         type="text" 
                         id="username"
                         value={username || ""}
@@ -124,26 +125,26 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         />
                     </div>
                     <div>
-                        {/* <label htmlFor="cargo">Cargo</label> */}
+                        <label htmlFor="cargo">Cargo</label>
                         <select
-                        className='inputs' 
+                        className='inputss' 
                         name="cargo" 
                         id="cargo"
                         value={cargo}
                         onChange={(l) => setcargo(l.target.value)}
                         >
-                            {/* <option value="">Selecciona un cargo</option> */}
+                            <option value="" disabled={true}>Selecciona un cargo</option>
                             {nlista}
                         </select>
                     </div>
                 </div>
 
-                <div className='inputscont'>
+                <div className='inputscontt'>
                     <div>
-                        {/* <label htmlFor="first_name">Nombres</label> */}
+                        <label htmlFor="first_name">Nombres</label>
                         <input
                         placeholder='Nombres completos'
-                        className='inputs'
+                        className='inputss'
                         type="text" 
                         id='first_name'
                         value={first_name || ""}
@@ -151,10 +152,10 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         />
                     </div>
                     <div>
-                        {/* <label htmlFor="last_name">Apellidos</label> */}
+                        <label htmlFor="last_name">Apellidos</label>
                         <input
                         placeholder='Apellidos'
-                        className='inputs'
+                        className='inputss'
                         type="text" 
                         id='last_name'
                         value={last_name || ""}
@@ -163,12 +164,12 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                     </div>
                 </div>
 
-                <div className='inputscont'>
+                <div className='inputscontt'>
                     <div>
-                        {/* <label htmlFor="email">Email</label> */}
+                        <label htmlFor="email">Email</label>
                         <input
                         placeholder='Email'
-                        className='inputs'
+                        className='inputss'
                         type="text"
                         id='email'
                         value={email || ""}
@@ -176,10 +177,10 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         />
                     </div>
                     <div>
-                        {/* <label htmlFor="especialidad">Especialidad</label> */}
+                        <label htmlFor="especialidad">Especialidad</label>
                         <input
                         placeholder='Especialidad'
-                        className='inputs'
+                        className='inputss'
                         id='especialidad'
                         type='text'
                         value={especialidad || ""}
@@ -188,12 +189,12 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                     </div>
                 </div>
 
-                <div className='inputscont'>
+                <div className='inputscontt'>
                     <div>
-                        {/* <label htmlFor="contrato">Tipo de contrato</label> */}
+                        <label htmlFor="contrato">Tipo de contrato</label>
                         <input
                         placeholder='Tipo de contrato'
-                        className='inputs'
+                        className='inputss'
                         id='contrato'
                         type='text'
                         value={contrato || ""}
@@ -201,10 +202,10 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         />
                     </div>
                     <div>
-                        {/* <label htmlFor="sueldo">Sueldo</label> */}
+                        <label htmlFor="sueldo">Sueldo</label>
                         <input
                         placeholder='Sueldo'
-                        className='inputs'
+                        className='inputss'
                         type='text'
                         id='sueldo'
                         value={sueldo || ""}
@@ -213,12 +214,12 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                     </div>
                 </div>
 
-                <div className='inputscont'>
+                <div className='inputscontt'>
                     <div>
-                        {/* <label htmlFor="nro_doc">Numero de documento</label> */}
+                        <label htmlFor="nro_doc">Numero de documento</label>
                         <input
                         placeholder='Numero de documento'
-                        className='inputs'
+                        className='inputss'
                         type="text" 
                         id='nro_doc'
                         value={nro_doc || ""}
@@ -226,9 +227,9 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         />
                     </div>
                     <div>
-                        {/* <label htmlFor="tdoc">Tipo de documento</label> */}
+                        <label htmlFor="tdoc">Tipo de documento</label>
                         <select
-                        className='inputs'
+                        className='inputss'
                         id="tdoc"
                         value={tdoc || ""}
                         onChange={(l) => settdoc(l.target.value)}
@@ -246,12 +247,12 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                     </div>
                 </div>
 
-                <div className='inputscont'>
+                <div className='inputscontt'>
                     <div>
-                        {/* <label htmlFor="lugarexp">Lugar de expedicion</label> */}
+                        <label htmlFor="lugarexp">Lugar de expedicion</label>
                         <input
                         placeholder='Lugar de expedición'
-                        className='inputs'
+                        className='inputss'
                         type="text"
                         id='lugarexp'
                         value={lugarexp || ""}
@@ -259,10 +260,10 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         />
                     </div>
                     <div>
-                        {/* <label htmlFor="">Fecha de expedición</label> */}
+                        <label htmlFor="">Fecha de expedición</label>
                         <input
                         placeholder='Lugar de expedicion'
-                        className='inputs'
+                        className='inputss'
                         type="date"
                         id='fechaexpt'
                         value={fechaexpt || ""}
@@ -271,12 +272,11 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                     </div>
                 </div>
                 
-                <div className='inputscont'>
+                <div className='inputscontt'>
                     <div>
-                        {/* <label htmlFor="sexo">Sexo</label> */}
-
+                        <label htmlFor="sexo">Sexo</label>
                         <select
-                        className='inputs'
+                        className='inputss'
                         id='sexo'
                         value={sexo || ""}
                         placeholder = 'Sexo'
@@ -296,10 +296,10 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         /> */}
                     </div>
                     <div>
-                        {/* <label htmlFor="fechana">Fecha de nacimiento</label> */}
+                        <label htmlFor="fechana">Fecha de nacimiento</label>
                         <input
                         placeholder='Fecha de nacimiento'
-                        className='inputs'
+                        className='inputss'
                         type="date"
                         id='fechana'
                         value={fechana || ""}
@@ -308,11 +308,11 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                     </div>
                 </div>
 
-                <div className='inputscont'>
+                <div className='inputscontt'>
                     <div>
-                        {/* <label htmlFor="">Estado civil</label> */}
+                        <label htmlFor="">Estado civil</label>
                         <select
-                        className='inputs'
+                        className='inputss'
                         id="estadocv"
                         value={estadocv || ""}
                         onChange={(l) => setestadocv(l.target.value)}
@@ -327,10 +327,10 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         </select>
                     </div>
                     <div>
-                        {/* <label htmlFor="">Telefono</label> */}
+                        <label htmlFor="">Telefono</label>
                         <input
                         placeholder='Telefono'
-                        className='inputs'
+                        className='inputss'
                         type="text"
                         id='telefono'
                         value={telefono || ""}
@@ -339,12 +339,12 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                     </div>
                 </div>
 
-                <div className='inputscont'>
+                <div className='inputscontt'>
                     <div>
-                        {/* <label htmlFor="">Nacionalidad</label> */}
+                        <label htmlFor="">Nacionalidad</label>
                         <input
                         placeholder='Nacionalidad'
-                        className='inputs'
+                        className='inputss'
                         type="text" 
                         id='nacionalidad'
                         value={nacionalidad || ""}
@@ -352,10 +352,10 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         />
                     </div>
                     <div>
-                        {/* <label htmlFor="">Municipio</label> */}
+                        <label htmlFor="">Municipio</label>
                         <input
                         placeholder='Municipio'
-                        className='inputs'
+                        className='inputss'
                         type="text"
                         id='municipio'
                         value={municipio || ""}
@@ -365,10 +365,10 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                 </div>
                 <div className='contpassword'>
                     <div>
-                        {/* <label htmlFor="">Password</label> */}
+                        <label htmlFor="">Password</label>
                         <input
                         placeholder='Contraseña'
-                        className='inputs'
+                        className='inputss'
                         type="text"
                         id='password'
                         value={password || ""}
@@ -376,7 +376,7 @@ export default function CrearHv ({token , abierto , documento_auxiliar}){
                         />
                     </div>
                 </div>
-                <button type='submit' className='btnguardar'>Guardar</button>
+                <button type='submit' className='btnguardarhvp'>Guardar</button>
             </form>
         </div>
         </>

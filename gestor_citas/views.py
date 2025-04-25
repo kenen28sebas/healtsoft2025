@@ -125,11 +125,25 @@ class CitaPacienteViewSet(ModelViewSet):
         },
         security=[{"Bearer": []}]
     )
+    # def list(self, request, *args, **kwargs):
+    #     queryset = self.filter_queryset(self.get_queryset())
+    #     queryset = queryset.filter(paciente_id = request.user.nro_doc)
+    #     serializer = self.get_serializer(queryset, many=True)
+    #     return Response(serializer.data)
+    
     def list(self, request, *args, **kwargs):
+        nro_doc = self.request.query_params.get('nro_doc', None)
         queryset = self.filter_queryset(self.get_queryset())
-        queryset = queryset.filter(paciente_id = request.user.nro_doc)
+        paciente = get_object_or_404(Paciente, usuario_id = nro_doc)
+        queryset = queryset.filter(paciente_id = paciente.id)
+        if nro_doc:
+            # Usa un serializador diferente solo para este caso
+            serializer = CitaSerializerver(queryset, many=True)
+            return Response(serializer.data) 
+        # Para otros casos, usa el serializador predeterminado
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
     
 
 @swagger_auto_schema(

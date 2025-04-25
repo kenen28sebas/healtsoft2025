@@ -106,14 +106,14 @@ const App_gestor_citas = ({token}) =>{
           <Contenedor_opciones lista={listabotones} closeOther={cerrarVentanas}></Contenedor_opciones>
         </Nabvar>
         <div className="contenido">
-          <BuscarPaciente isOpen={isOpenCalendario}  token = {token} tipo={"agendar"} isLock={false}>
+          <BuscarPaciente isOpen={isOpenCalendario}  token = {token} tipo={"agendar"} isLock={false} textoo={"Crear cita"}>
             <Calendario_citas isOpen={isOpenCalendario} token={token}></Calendario_citas>
         </BuscarPaciente>
-        <BuscarPaciente isOpen={isOpenConsulatr}  token = {token} tipo={"consultar citas"} isLock={false}> 
+        <BuscarPaciente isOpen={isOpenConsulatr}  token = {token} tipo={"consultar citas"} isLock={false} textoo={"Buscar paciente"}> 
             <ListaCitas isOpen={isOpenConsulatr} token={token}></ListaCitas>
         </BuscarPaciente>
         <FormularioPaciente isOpen={isOpencrearPaciente} ></FormularioPaciente>
-        <BuscarPaciente isOpen={isOpeninfoPaciente}  token = {token} tipo={"ver informacion"} isLock={true}>
+        <BuscarPaciente isOpen={isOpeninfoPaciente}  token = {token} tipo={"ver informacion"} isLock={true} textoo={"Buscar Paciente"}>
         </BuscarPaciente>
         </div>
         
@@ -127,12 +127,17 @@ const App_gestor_citas = ({token}) =>{
     }
     return(
         <>
+        <div className="cuerpo_app">
         <Nabvar>
           <ContenedorNombre nombre={`${datos.user.usuario.first_name} ${datos.user.usuario.last_name}`} rol={"Paciente"}></ContenedorNombre>
           <Contenedor_opciones lista={listabotones} closeOther={cerrarVentanas}></Contenedor_opciones>
         </Nabvar>
+        <div className="contenido">
         <Calendario_citas isOpen={isOpenCalendario} token={token}></Calendario_citas>
-        <ListaCitas isOpen={isOpenConsulatr} token={token}></ListaCitas>
+        <ListaCitas isOpen={isOpenConsulatr} token={token} nro_doc={datos.user.usuario.nro_doc}></ListaCitas>
+        </div>
+        
+        </div>
         </>
         
     )

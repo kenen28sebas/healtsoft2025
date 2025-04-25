@@ -2,6 +2,7 @@ import React, { useState ,useEffect} from "react";
 import "./CrearHc.css"
 
 const CrearHv= ({nro_doc,userId,token}) => {
+    const [nroDoc, setNroDoc] = useState(null)
     const [listaCie10 , setListaCie10] = useState(null)
     const [listaCups, setListaCups] = useState(null);
     const [isOpenAnamnesis , setIsOpenAnamnesis] = useState(false)
@@ -81,8 +82,10 @@ const CrearHv= ({nro_doc,userId,token}) => {
         plan_de_seguimiento: "",
     });
 
+
+
     let formData = {
-        paciente: nro_doc,
+        paciente: nroDoc,
         anamnesis: anamnesis,
         diagnostico: diagnostico,
         antecedentes_medicos: antecedentesMedicos,
@@ -267,6 +270,7 @@ const CrearHv= ({nro_doc,userId,token}) => {
     };
     const urlListaCups = "http://127.0.0.1:8000/getCups"
     const urlCie10 = "http://127.0.0.1:8000/cie10/"
+    const urlPaciente = `http://127.0.0.1:8000/getPaciente/${nro_doc}/`
     const cargarDatos = async () =>{
         const response = await fetch(urlListaCups,{
             method: 'GET',
@@ -281,6 +285,12 @@ const CrearHv= ({nro_doc,userId,token}) => {
         })
         const datos2 = await response2.json()
         setListaCie10(datos2)
+        const response3 = await fetch(urlPaciente,{
+            method: 'GET',
+            headers: header,
+        })
+        const datos3 = await response3.json()
+        setNroDoc(datos3.datos.id)
     }
     useEffect(() => {
             cargarDatos();
@@ -314,7 +324,7 @@ const CrearHv= ({nro_doc,userId,token}) => {
     const opcionesCie10= listaCie10.map(cups => <option value={cups.codigo_cie10}>{cups.nombre_cie10}</option>)
     const opcionesCups = listaCups.map((cups) => (
         <option key={cups.codigo} value={cups.codigo}>
-            {cups.Nombre}
+            {cups.nombre}
         </option>
     ));
     const handleSubmit = (e) => { e.preventDefault(); console.log("Datos de Anamnesis:", anamnesis); alert("Formulario enviado con éxito!"); };

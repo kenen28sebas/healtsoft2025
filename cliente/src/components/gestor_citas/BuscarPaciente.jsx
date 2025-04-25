@@ -5,7 +5,7 @@ import React from 'react';
 import Lupa from '/lupa.png'
 import reactLogo from '../../assets/react.svg';
 
-const BuscarPaciente = ({children,isOpen,token,tipo,isLock,userid}) => {
+const BuscarPaciente = ({children,isOpen,token,tipo,isLock,userid,textoo}) => {
     console.log(userid)
     const [userId , setUserId] = useState(userid)
     const [nro_doc, setNro_doc] = useState(null)
@@ -59,6 +59,7 @@ const BuscarPaciente = ({children,isOpen,token,tipo,isLock,userid}) => {
     return(
         <>
         <div className="buscar_paciente">
+            {textoo && <h1 className="textoo">{textoo}</h1>}
         {!childrenIsOpen &&
         <div className="buscar_paciente__contenedor_buscar">
         

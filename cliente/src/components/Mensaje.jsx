@@ -16,6 +16,8 @@ const Mensaje = ({ closeModal , children  }) => (
     >
       <div
         style={{
+          position:'fixed',
+          left:'180px',
           background: '#fff',
           padding: '20px',
           borderRadius: '10px',

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { data, useNavigate } from 'react-router-dom';
 import Mensaje from './Mensaje';
+import './style.css'
 
 const Login = (almacenarTokenp) => {
   const [userId, setUserId] = useState('');
@@ -78,6 +79,7 @@ const Login = (almacenarTokenp) => {
           id=""
           value={tipo}
           onChange={(e) => {setTipo(e.target.value);console.log(tipo)}}
+          className='textos'
           required>
             <option value="" disabled>Tipo de usuario</option>
             <option value="medico">Medico</option>

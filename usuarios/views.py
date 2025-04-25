@@ -8,6 +8,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from rest_framework import status
 
 
 @swagger_auto_schema(
@@ -85,7 +86,9 @@ def registrar (request):
             serializer= PacienteSerializador(data = request.data)
             print(serializer.is_valid())
             if not serializer.is_valid():
+                print("hola")
                 print(serializer.errors)
+                return Response({"errores" : serializer.errors} ,status=status.HTTP_404_NOT_FOUND)
             if serializer.is_valid():
                 
                 serializer.save()
@@ -93,6 +96,10 @@ def registrar (request):
         case "auxiliar":
             serializer = AuxiliarAdminSerializador(data = request.data)   
             print(serializer.is_valid())
+            if not serializer.is_valid():
+                print("hola")
+                print(serializer.errors)
+                return Response({"errores" : serializer.errors} ,status=status.HTTP_404_NOT_FOUND)
             if serializer.is_valid():
                 
                 serializer.save()
@@ -108,7 +115,7 @@ def registrar (request):
                 print(serializer.errors)
 
 
-    return Response({"error": "error" ,"user" : request.data})
+    return Response({"error": "error" ,"user" : request.data},status=status.HTTP_404_NOT_FOUND)
 
 
 @swagger_auto_schema(
@@ -209,7 +216,7 @@ def login (request):
             except:
                 print("señor gerente no encontrado jijiji")
 
-    return Response ( {"error" : "erro en la validacion de cuenta " } )    
+    return Response ( {"error" : "erro en la validacion de cuenta " },status=status.HTTP_404_NOT_FOUND )    
 @swagger_auto_schema(
     method='post',
     operation_description="Obtiene el perfil del usuario autenticado (requiere token JWT).",
@@ -273,7 +280,7 @@ def perfil(request):
         datos_paciente = AuxiliarAdminSerializador(instance  = auxiliar)
         return Response ({"user" : datos_paciente.data , "tipo_usuario" : "auxiliar" })
     except:
-        print("medico sexual no encotrado")     
+        print("medico no encotrado")     
 
     try:
         gerente=get_object_or_404(Gerente,usuario_id = request.request.user.nro_doc)

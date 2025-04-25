@@ -24,7 +24,9 @@ const GestionarHv = ({isOpen , isClose , token , nro_doc_auxiliar}) =>{
         setabrirComp(false)
         setabriracademicos(false)
         setabrirlista(false)
+        setabrirlistarhv(false)
         console.log(estado)
+        setabrirexperiencial(false)
     }
     function cerrar (){
         setestado(false)
@@ -57,29 +59,40 @@ const GestionarHv = ({isOpen , isClose , token , nro_doc_auxiliar}) =>{
     const documento_auxiliar = nro_doc_auxiliar
     return(
         <>
-        <div className="barra2">
-            <button onClick={abrirformulario}>Crear hoja de vida</button>
-            {/* <button>Actualizar Hoja de vida</button> */}
-            {/* <button onClick={cerrar}>Eliminar Hoja de vida</button> */}
-            <button onClick={listar}>Listar Hojas de vida</button>
-            <button onClick={abriracademicosb}>Registrar academicos</button>
-            <button onClick={abrirexperienciab}>Registrar experiencias</button>
+        <div className="contenedorgestionips">
+            <div className="barra2">
+                <div className="opcionesgerente" onClick={abrirformulario}>
+                    <box-icon type='solid' name='book-heart' className="logosnavbar"></box-icon>
+                    <p className="opcionesnb">Crear hoja de vida</p>
+                </div>
+                <div className="opcionesgerente" onClick={listar}>
+                    <box-icon type='solid' name='file-blank' className="logosnavbar"></box-icon>
+                    <p className="opcionesnb">Listar Hojas de vida</p>
+                </div>
+                <div className="opcionesgerente" onClick={abriracademicosb}>
+                    <box-icon name='add-to-queue' type='solid' className="logosnavbar"></box-icon>
+                    <p className="opcionesnb">Registrar academicos</p>
+                </div>
+                <div className="opcionesgerente" onClick={abrirexperienciab}>
+                    <box-icon name='list-ol' className="logosnavbar" ></box-icon>
+                    <p className="opcionesnb">Registrar experiencia</p>
+                </div>
+            </div>
+            <CrearHv 
+            token={token}
+            abierto={estado}
+            documento_auxiliar={documento_auxiliar}
+            ></CrearHv>
+            <div className="divbuscarcomps">
+                <Buscar abrir={abrirexperiencial} token={token}>
+                    <Experiencia></Experiencia>
+                </Buscar>
+                <Buscar abrir={abriracademicos} token={token}>
+                    <Academico></Academico>
+                </Buscar>
+            </div>
+            <ListarHv token={token} openlistarhv={abrirlistarhv}></ListarHv>
         </div>
-        <CrearHv 
-        token={token}
-        abierto={estado}
-        documento_auxiliar={documento_auxiliar}
-        ></CrearHv>
-        <Buscar abrir={abrirexperiencial} token={token}>
-            <Experiencia></Experiencia>
-        </Buscar>
-        <Buscar abrir={abriracademicos} token={token}>
-            <Academico></Academico>
-        </Buscar>
-        {/* <Buscar abrir={abrirlista} token={token}>
-            <ListarHv></ListarHv>
-        </Buscar> */}
-        <ListarHv token={token} openlistarhv={abrirlistarhv}></ListarHv>
         </>
     )
 }

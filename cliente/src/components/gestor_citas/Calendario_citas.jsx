@@ -75,10 +75,11 @@ const Calendario_citas = ({isOpen , token , nro_doc}) =>{
 
     return(
         <>
-        
+
             
             {!open && (
                 <>
+                <h1 className="textoo">Crear cita</h1>
                 <div className="calendario">
                 <div className="calendario__meses_info">
                   <button onClick={handleRestaMes}> {texto_meses[index - 1]} </button>
@@ -95,11 +96,26 @@ const Calendario_citas = ({isOpen , token , nro_doc}) =>{
                   <h1>Sabado</h1>
                 </div>
                 <div className="calendario__contenedor">
-                {dias[index].map(dias_card => {
-                    if (dias_card == null) return <Card_cita dia={"*"} open={() => handleOpen()} />;
-                    return <Card_cita dia={dias_card.getDate()} open={() => handleOpen(dias_card)} />;
-                })}
+                  {dias[index].map(dias_card => {
+                    if (dias_card == null) {
+                      // Días nulos (relleno para inicio de mes)
+                      return <Card_cita dia={"*"} open={() => {}} className="calendario__dia--nulo" />;
+                    } else {
+                      const fechaHoy = new Date(); // Fecha actual
+                      fechaHoy.setHours(0, 0, 0, 0); // Resetear hora para comparar solo fechas
+
+                      const esPasado = dias_card < fechaHoy; // Comparar fechas
+                      return (
+                        <Card_cita
+                          dia={dias_card.getDate()}
+                          open={esPasado ? null : () => handleOpen(dias_card)} // Si es pasado, no ejecuta `onClick`
+                          className={esPasado ? "calendario__dia--pasado" : "calendario__dia"}
+                        />
+                      );
+                    }
+                  })}
                 </div>
+
                 </div>
                 </>
             )}    

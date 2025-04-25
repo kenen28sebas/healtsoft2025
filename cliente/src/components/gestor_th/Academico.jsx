@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import './Academico.css'
 function Academico({token , id , numroid}){
 
     const [tituloobtenido , settituloobtenido] = useState("")
@@ -45,55 +45,66 @@ function Academico({token , id , numroid}){
 
     return(
         <>
-        <div>
-            <h1>Registrar academicos</h1>
-            <form action="" onSubmit={handleSubmit}>
-                <div>
-                    {/* <label htmlFor="">Titulo ontenido</label> */}
-                    <input 
-                    type="text"
-                    value={tituloobtenido || ""}
-                    placeholder="Titulo obtenido"
-                    onChange={(e) => settituloobtenido(e.target.value)}
-                    />
+        <div className="forregistroaca">
+            <h1 className="tltformacademico">Registrar academicos</h1>
+            <form action="" onSubmit={handleSubmit} className="formregistroaca">
+                <div className="inputscontdos">
+                    <div className="inpustaca">
+                        <label htmlFor="" className="textsacademicoform">Titulo ontenido</label>
+                        <input 
+                        type="text"
+                        value={tituloobtenido || ""}
+                        placeholder="Titulo obtenido"
+                        onChange={(e) => settituloobtenido(e.target.value)}
+                        className="inputsacademico"
+                        />
+                    </div>
+                    <div className="inpustaca">
+                        <label htmlFor="" className="textsacademicoform">Institucion Educativa</label>
+                        <input 
+                        type="text"
+                        value={institudionedu || ""}
+                        placeholder="Institucion educativa"
+                        onChange={(e) => setinstitudionedu(e.target.value)}
+                        className="inputsacademico"
+                        />
+                    </div>
                 </div>
-                <div>
-                    {/* <label htmlFor="">Institucion Educativa</label> */}
-                    <input 
-                    type="text"
-                    value={institudionedu || ""}
-                    placeholder="Institucion educativa"
-                    onChange={(e) => setinstitudionedu(e.target.value)}
-                    />
+                <div className="inputscontdos">
+                    <div className="inpustaca">
+                        <label htmlFor="" className="textsacademicoform">Fecha de inicio</label>
+                        <input 
+                        type="date" 
+                        value={fechainiciot || ""}
+                        placeholder="Fecha de inicio"
+                        onChange={(e) => setfechainiciot(e.target.value)}
+                        className="inputsacademico"
+                        />
+                    </div>
+                    <div className="inpustaca">
+                        <label htmlFor="" className="textsacademicoform">Fecha de culminación</label>
+                        <input 
+                        type="date"
+                        value={fechaculminado || ""}
+                        placeholder="Fecha de culminación"
+                        onChange={(e) => setfechaculminado(e.target.value)}
+                        className="inputsacademico"
+                        />
+                    </div>
                 </div>
-                <div>
-                    {/* <label htmlFor="">Fecha de inicio</label> */}
-                    <input 
-                    type="text" 
-                    value={fechainiciot || ""}
-                    placeholder="Fecha de inicio"
-                    onChange={(e) => setfechainiciot(e.target.value)}
-                    />
+                <div className="inputnivel">
+                    <div className="inpustaca">
+                        <label htmlFor="" className="textsacademicoform">Nivel educativo</label>
+                        <input 
+                        type="text"
+                        value={niveleducativo || ""}
+                        placeholder="Nivel educativo"
+                        onChange={(e) => setniveleducativo(e.target.value)}
+                        className="inputsacademico"
+                        />
+                    </div>
                 </div>
-                <div>
-                    {/* <label htmlFor="">Fecha de culminación</label> */}
-                    <input 
-                    type="text"
-                    value={fechaculminado || ""}
-                    placeholder="Fecha de culminación"
-                    onChange={(e) => setfechaculminado(e.target.value)}
-                    />
-                </div>
-                <div>
-                    {/* <label htmlFor="">Nivel educativo</label> */}
-                    <input 
-                    type="text"
-                    value={niveleducativo || ""}
-                    placeholder="Nivel educativo"
-                    onChange={(e) => setniveleducativo(e.target.value)}
-                    />
-                </div>
-                <button>Guardar</button>
+                <button className="btnguardaracademico">Guardar</button>
             </form>
         </div>
         </>

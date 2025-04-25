@@ -77,7 +77,18 @@
     color: white;
 }
 
+
 .styled-table__button--update:hover {
+    background-color: #45A049; /* Hover verde oscuro */
+}
+
+.styled-table__button--ver {
+    background-color: #5f43ff; /* Verde para actualizar */
+    color: white;
+}
+
+
+.styled-table__button--ver:hover {
     background-color: #45A049; /* Hover verde oscuro */
 }
 

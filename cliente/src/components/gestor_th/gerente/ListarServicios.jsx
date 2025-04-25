@@ -50,32 +50,34 @@ function ListarServicios({token , abrirlistaservicios}){
     }
     return(
         <>
-        <div>
-            <h2>Lista de servicios</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Codigo</th>
-                        <th>Detalles</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {lista.map(item =>(
-                        <tr>
-                            <td>{item.nombre}</td>
-                            <td>{item.descripcion}</td>
-                            <td>{item.codigo}</td>
-                            <td style={{ color: item.activo ? 'green' : 'red', fontWeight: 'bold' }}>
-                                {item.activo ? 'Activo' : 'Inactivo'}
-                            </td>
-                            <td><button onClick={() => abrirdetalles(item)}>Ver detalles</button></td>
+        <div className="contenedorlistadetalles contenedortable">
+            <div className="tablagenial">
+                <h2 className="tltlista">Lista de servicios</h2>
+                <table className="tableips">
+                    <thead className="cabezatablaips">
+                        <tr className="encabezadosips">
+                            <th className="tltipsn">Nombre</th>
+                            <th className="tltipsn">Descripción</th>
+                            <th className="tltipsn">Codigo</th>
+                            <th className="tltipsn">Detalles</th>
+                            <th className="tltipsn">Estado</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody className="cuerpotableips">
+                        {lista.map(item =>(
+                            <tr className="cuerpoopips">
+                                <td className="optdtabla">{item.nombre}</td>
+                                <td className="optdtabla">{item.descripcion}</td>
+                                <td className="optdtabla">{item.codigo}</td>
+                                <td style={{ color: item.activo ? 'green' : 'red', fontWeight: 'bold' }} className="optdtabla">
+                                    {item.activo ? 'Activo' : 'Inactivo'}
+                                </td>
+                                <td className="optdtabla"><button onClick={() => abrirdetalles(item)} className="verdetallesips">Ver detalles</button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
         {servicio && (
         <Detallesservicio 

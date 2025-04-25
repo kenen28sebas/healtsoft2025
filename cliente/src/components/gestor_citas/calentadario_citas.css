@@ -50,6 +50,10 @@
     
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }
+.textoo{
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+}
 
 .calendario__contenedor {
     background-color: var(--blanco); /* Fondo blanco claro */

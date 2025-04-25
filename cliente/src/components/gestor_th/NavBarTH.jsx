@@ -1,42 +1,34 @@
 import React from "react"
 import './barra.css'
+// import './sidebar.css'
 
 
 const NavBarTH = ({funcion , funcion2 , nombreuser }) => {
     return(
     <>
-    <div className="sidebargestorth">
-        <div className="info_content">
-            <div className="logoth">
-                <box-icon type='solid' name='donate-heart'></box-icon>
-                <h3>KenayHealthsoft</h3>
+    <div className="barralateral">
+        <div className="logo_contenido">
+            <box-icon type='solid' name='donate-heart' className="logokenay"></box-icon>
+            <h3 className="titulokeny">KenayHealthsoft</h3>
+        </div>
+        <div className="barragerente">
+            <div className="opcionesgerente casita">
+                <box-icon name='home' type='solid' className="logosnavbar" ></box-icon>
+                <p className="opcionesnb">Inicio</p>
+            </div>
+            <div className="opcionesgerente gestion" onClick={funcion}>
+                <box-icon type='solid' name='clinic' className="logosnavbar"></box-icon>
+                <p className="opcionesnb">Gestionar hoja de vida</p>
+            </div>
+            <div className="opcionesgerente">
+                <box-icon type='solid' name='user-circle' className="logosnavbar"></box-icon>
+                <p className="opcionesnb">Ver perfil</p>
+            </div>
+            <div className="opcionesgerente" onClick={funcion2}>
+                <box-icon name='door-open' type='solid' className="logosnavbar"></box-icon>
+                <p className="opcionesnb">Cerrar</p>
             </div>
         </div>
-        <div className="navbarth">
-            <div className="opcionth">
-                <box-icon name='home' type='solid' ></box-icon>
-                <p>Inicio</p>
-            </div>
-            <div className="opcionth">
-                <box-icon type='solid' name='file'></box-icon>
-                <p>Gestionar hoja de vida</p>
-            </div>
-            <div className="opcionth">
-                <box-icon type='solid' name='user-circle'></box-icon>
-                <p>Ver perfil</p>
-            </div>
-            <div className="opcionth">
-                
-            </div>
-        </div>
-    </div>
-    <div className="barra">
-        <button>Inicio</button>
-        <button onClick={funcion}>Gestionar Hojas de vida</button>
-        <button>Ver perfil</button>
-        <button>Gestionar personal</button>
-        <button onClick={funcion2}>Cerrar</button>
-        <p>{nombreuser}</p>
     </div>
     </>
     )

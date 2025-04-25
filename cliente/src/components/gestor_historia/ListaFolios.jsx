@@ -57,13 +57,13 @@ const ListaHistoriaClinica = ({ isOpen, token, nro_doc }) => {
 
     // Mapeo de la historia clínica en filas para la tabla
     const filasHistoriaClinica = historiaClinica.map((consulta) => (
-        <tr key={consulta.id}>
-            <td>{consulta.anamnesis.inicio_sintomas}</td>
-            <td>{consulta.diagnostico.tipo_diagnostico}</td>
-            <td>{consulta.anamnesis.motivo_consulta}</td>
-            <td>{consulta.diagnostico.cie10_detalle.nombre_cie10}</td>
+        <tr className="styled-table__cell" key={consulta.id}>
+            <td className="styled-table__cell">{consulta.anamnesis.inicio_sintomas}</td>
+            <td className="styled-table__cell">{consulta.diagnostico.tipo_diagnostico}</td>
+            <td className="styled-table__cell">{consulta.anamnesis.motivo_consulta}</td>
+            <td className="styled-table__cell">{consulta.diagnostico.cie10_detalle.nombre_cie10}</td>
             <td>
-                <button onClick={() => {handleOpenModal(consulta)} }>
+                <button className="styled-table__button styled-table__button--ver" onClick={() => {handleOpenModal(consulta)} }>
                     Ver Folio
                 </button>
             </td>
@@ -74,17 +74,17 @@ const ListaHistoriaClinica = ({ isOpen, token, nro_doc }) => {
     return (
         <>
             <div className="styled-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Fecha de Consulta</th>
-                            <th>Tipo</th>
-                            <th>Motivo de Consulta</th>
-                            <th>CIE10</th>
-                            <th>Acciones</th>
+                <table className="styled-table__table">
+                    <thead className="styled-table__header">
+                        <tr className="styled-table__row">
+                            <th className="styled-table__cell">Fecha de Consulta</th>
+                            <th className="styled-table__cell">Tipo</th>
+                            <th className="styled-table__cell">Motivo de Consulta</th>
+                            <th className="styled-table__cell">CIE10</th>
+                            <th className="styled-table__cell">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>{filasHistoriaClinica}</tbody>
+                    <tbody className="styled-table__body">{filasHistoriaClinica}</tbody>
                 </table>
             </div>
             <FolioModal

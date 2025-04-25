@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './experiencia.css'
 
 function Experiencia ({token,id,numroid}){
 
@@ -45,40 +46,66 @@ function Experiencia ({token,id,numroid}){
 
     return(
         <>
-        <h1>Resgistrar Experiencia laboral</h1>
-        <div>
-            <form action="" onSubmit={handleSubmitt}>
-                <input
-                value={nombreempresa || ""}
-                type="text" 
-                placeholder="Nombre de la empresa"
-                onChange={(e) => setnombreempresa(e.target.value)}
-                />
-                <input
-                value={cargoo || ""}
-                type="text"
-                placeholder="cargo"
-                onChange={(e) => setcargoo(e.target.value)}
-                />
-                <input
-                value={fechainicio || ""}
-                type="dato"
-                placeholder="Fecha de inicio"
-                onChange={(e) => setfechainicio(e.target.value)}
-                />
-                <input 
-                value={fechafin || ""}
-                type="text" 
-                placeholder="Fecha de finalizacion"
-                onChange={(e) => setfechafin(e.target.value)}
-                />
-                <input
-                value={tipocontrato || ""}
-                type="text" 
-                placeholder="Tipo de contrato"
-                onChange={(e) => settipocontrato(e.target.value)}
-                />
-                <button>Guardar</button>
+        <div className="contenedorformexpl">
+            <h1 className="tltregistrarexpl">Resgistrar Experiencia laboral</h1>
+            <form action="" onSubmit={handleSubmitt} className="formexpl">
+                <div className="divsinputs">
+                    <div className="labelinputcont">
+                        <label htmlFor="">Nombre de la empresa</label>
+                        <input
+                        value={nombreempresa || ""}
+                        type="text" 
+                        placeholder="Nombre de la empresa"
+                        onChange={(e) => setnombreempresa(e.target.value)}
+                        className="inputsexpl"
+                        />
+                    </div>
+                    <div className="labelinputcont">
+                        <label htmlFor="">Cargo</label>
+                        <input
+                        value={cargoo || ""}
+                        type="text"
+                        placeholder="cargo"
+                        onChange={(e) => setcargoo(e.target.value)}
+                        className="inputsexpl"
+                        />
+                    </div>
+                </div>
+                <div className="divsinputs">
+                    <div  className="labelinputcont">
+                        <label htmlFor="">Fecha de inicio</label>
+                        <input
+                        value={fechainicio || ""}
+                        type="datE"
+                        placeholder="Fecha de inicio"
+                        onChange={(e) => setfechainicio(e.target.value)}
+                        className="inputsexpl"
+                        />
+                    </div>
+                    <div  className="labelinputcont">
+                        <label htmlFor="">Fecha de finalizacion</label>
+                        <input 
+                        value={fechafin || ""}
+                        type="text" 
+                        placeholder="Fecha de finalizacion"
+                        onChange={(e) => setfechafin(e.target.value)}
+                        className="inputsexpl"
+                        />
+                    </div>
+                </div>
+                <div className="divsinputs">
+                    <div  className="labelinputcont">
+                        <label htmlFor="">Tipo de contrato</label>
+                        <input
+                        value={tipocontrato || ""}
+                        type="text" 
+                        placeholder="Tipo de contrato"
+                        onChange={(e) => settipocontrato(e.target.value)}
+                        className="inputsexpl"
+                        />
+                    </div>
+                </div>
+                <button className="btnguardarexperiencialaborla">Guardar</button>
             </form>
         </div>
         </>

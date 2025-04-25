@@ -1,0 +1,63 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f8ff;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    animation: fadeInTable 1s ease-in-out;
+}
+
+
+@keyframes fadeInTable {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.tablainfohv {
+    transition: background-color 0.3s ease;
+}
+
+.tablainfohv:hover {
+    background-color: #eaf3ff;
+}
+
+.itemingohv {
+    padding: 15px 20px;
+    border-bottom: 1px solid #dee2e6;
+    text-align: center;
+    font-size: 16px;
+}
+
+
+.btnverperfil button,
+.btnveracademico button,
+.btnverexperiencia button {
+    background: linear-gradient(135deg, #6c63ff, #ab47bc);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+
+.btnverperfil button:hover,
+.btnveracademico button:hover,
+.btnverexperiencia button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #5c54e5, #9a3fb0);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}

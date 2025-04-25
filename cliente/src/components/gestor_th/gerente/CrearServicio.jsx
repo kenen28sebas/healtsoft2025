@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './formservicio.css'
 
 function CrearServicio ({token , abrirformularioservicio}){
     if (!abrirformularioservicio){
@@ -10,6 +11,7 @@ function CrearServicio ({token , abrirformularioservicio}){
     const [ips , setIps] = useState('')
     const [codigo , setCodigo] = useState('')
     const [lista , setLista] = useState([])
+    const [showModal, setShowModal] = useState(false);
 
     const rutaconsulta = 'http://127.0.0.1:8000/consultar/ips/'
     const header = {
@@ -38,7 +40,7 @@ function CrearServicio ({token , abrirformularioservicio}){
         activo : activo,
         ips_id : ips,
         codigo : codigo,
-    })
+    });
     const handleSubmit = async (e) =>{
         e.preventDefault();
         const respuesta = await fetch(ruta,{
@@ -46,6 +48,10 @@ function CrearServicio ({token , abrirformularioservicio}){
             headers : header,
             body : body,
         });
+        setShowModal(true);
+        setTimeout(() => {
+            setShowModal(false);
+        }, 3000);
         if (!respuesta.ok){
             throw new Error(`error ${respuesta.status}`);
         }
@@ -57,51 +63,66 @@ function CrearServicio ({token , abrirformularioservicio}){
 
     return(
         <>
-        <div className="cont">
-            <form onSubmit={handleSubmit} className="formularios">
-                <div>
+        {showModal && (
+        <div className="modal-overlay">
+            <div className="modal">
+                <h2>Guardando contenido...</h2>
+                <div className="progress-line"></div>
+            </div>
+        </div>
+)}
+        <div className="contservicio">
+            <form onSubmit={handleSubmit} className="formulariosservicio">
+                <h1 className="tltservicio">Registrar servicio</h1>
+                <div className="inputsservicio">
+                    <label htmlFor="">Nombre</label>
                     <input 
                     type="text" 
                     id="nombre"
                     placeholder="Nombre del servicio"
-                    className="inputs"
+                    className="inputsservicio"
                     value={nombre || ""}
                     onChange={(e) => setNombre(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="inputsservicio">
+                    <label htmlFor="" className="labelservicio">Descripcion</label>
                     <input 
                     type="text"
                     id="descripcion"
                     placeholder="Descripcion"
-                    className="inputs"
+                    className="inputsservicio"
                     value={descripcion || ""}
                     onChange={(e)=> setDescripcion(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="inputsservicio">
+                    <label htmlFor="" className="labelservicio">Estado</label>
                     <input 
                     type="checkbox"
                     id="activo"
-                    className="inputs"
+                    className="inputsservicio"
                     checked ={activo}
                     onChange={(e) => setActivo(e.target.checked)}
                     />
                 </div>
-                <div>
+                <div className="inputsservicio">
+                    <label htmlFor="" className="labelservicio">Ips</label>
                     <select
-                    className="inputs"
+                    className="inputsservicio"
                     name="ips"
                     id="ips"
                     value={ips}
                     onChange={(e) => setIps(e.target.value)}
                     >
+                        <option value="" disabled={true}>Selecciona una ips</option>
                         {nlista}
                     </select>
                 </div>
-                <div>
+                <div className="inputsservicio">
+                    <label htmlFor="" className="labelservicio">Codigo</label>
                     <input 
-                    className="inputs"
+                    className="inputsservicio"
                     name="codigo"
                     id="codigo"
                     value={codigo || ""}
@@ -110,7 +131,7 @@ function CrearServicio ({token , abrirformularioservicio}){
                     onChange={(e) => setCodigo(e.target.value)}
                     />
                 </div>
-                <button className="btnguardar">Guardar</button>
+                <button className="btnguardarservicio">Guardar</button>
             </form>
         </div>
         </>

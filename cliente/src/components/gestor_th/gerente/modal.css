@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+.btndetallesips{
+    width: 150px;
+    height: 30px;
+    border: green solid 3px;
+}
+.contenedordetallesips{
+    width: 100%;
+    height: 100%;
+    /* border: rgb(0, 0, 0) 5px solid; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Fondo oscuro detrás del modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* para estar encima de todo */
+}
+
+  /* Contenido del modal */
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    min-width: 400px;
+    position: relative;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  /* Para inputs bonitos */
+.modal-content input,
+.modal-content select {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+.tituloactualizarips{
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+.textosupdateips{
+    width: 300px;
+    height: 40px;
+    border: solid black 1px;
+    border-radius: 15px;
+}
+.formupdateips{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.btnguardarcambios{
+    width: 200px;
+    height: 40px;
+    background-color: green;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: white;
+}
+.btncancelarupdate{
+    width: 200px;
+    height: 40px;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight:400 ;
+    color: white;
+    background-color: red;
+}

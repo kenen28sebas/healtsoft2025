@@ -40,11 +40,14 @@ const Registro = () => {
           <option value="4">Tarjeta de identidad</option>
         </select>
         <input 
+        className='textos'
           type="text" 
           placeholder="Número de identificación"
           value={nrodoc}
-          onChange={(e) => setNrodoc(e.target.value)} />
-        <button onClick={consultarExistencia}>Registrarse</button>
+          onChange={(e) => 
+            setNrodoc(e.target.value)}
+          maxLength="12" />
+        <button onClick={consultarExistencia} className='btn'>Registrarse</button>
         <span>O usa tu cuenta</span>
       </form>
     </div>

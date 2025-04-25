@@ -148,33 +148,33 @@ function ConsultarExperienciaL({openExperiencias , token , nro_doc}){
                 <button onClick={() => setExperienciaSeleccionada(null)}>Cancelar</button>
             </form>
         )}
-        <div>
-            <h3>Experiencias laborales</h3>
-            <table>
-                <thead>
+        <div className="continfoacademica">
+            <h3 className="tltinformacionacademica">Experiencias laborales</h3>
+            <table className="tablainfoaca">
+                <thead className="encabezadosinfo">
                     <tr>
-                        <th>Nombre de la empresa</th>
-                        <th>Cargo</th>
-                        <th>Fecha de inicio</th>
-                        <th>Fecha de finalización</th>
-                        <th>Tipo de contrato</th>
+                        <th className="itemsacademicos">Nombre de la empresa</th>
+                        <th className="itemsacademicos">Cargo</th>
+                        <th className="itemsacademicos">Fecha de inicio</th>
+                        <th className="itemsacademicos">Fecha de finalización</th>
+                        <th className="itemsacademicos">Tipo de contrato</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="tablacuerpoacademico">
                     {listaExperiencia.length === 0 ?(
                         <tr>
                             <td colSpan="5">Esta persona no tiene registros academicos</td>
                         </tr>
                     ) : (
                         listaExperiencia.map((item) => (
-                            <tr key={item.id}>
-                                <td>{item.nombre_empresa}</td>
-                                <td>{item.cargo}</td>
-                                <td>{item.fecha_inicio}</td>
-                                <td>{item.fecha_finalizacion}</td>
-                                <td>{item.tipo_contrato}</td>
-                                <td><button onClick={() => setExperienciaSeleccionada(item)}>Actualizar Experiencia</button></td>
-                                <td><button onClick={() => EliminarexpLa(item.id)}>Eliminar Experiencia</button></td>
+                            <tr key={item.id} className="itemsacademicos4">
+                                <td className="itemsacademicosinformacion">{item.nombre_empresa}</td>
+                                <td className="itemsacademicosinformacion">{item.cargo}</td>
+                                <td className="itemsacademicosinformacion">{item.fecha_inicio}</td>
+                                <td className="itemsacademicosinformacion">{item.fecha_finalizacion}</td>
+                                <td className="itemsacademicosinformacion">{item.tipo_contrato}</td>
+                                <td className="itemsacademicosinformacion"><button onClick={() => setExperienciaSeleccionada(item)}>Actualizar Experiencia</button></td>
+                                <td className="itemsacademicosinformacion"><button onClick={() => EliminarexpLa(item.id)}>Eliminar Experiencia</button></td>
                             </tr>
 
                         ))

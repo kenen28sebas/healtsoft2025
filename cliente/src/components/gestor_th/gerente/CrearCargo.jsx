@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './formcargo.css'
 
 function CrearCargo ({token , abrirFormularioCrgo}){
     if (!abrirFormularioCrgo){
@@ -10,6 +11,7 @@ function CrearCargo ({token , abrirFormularioCrgo}){
     const [ips , setIps] = useState('')
     // const [codigo , setCodigo] = useState('')
     const [lista , setLista] = useState([])
+    const [showModal, setShowModal] = useState(false);
 
     const rutaconsulta = 'http://127.0.0.1:8000/consultar/ips/'
     const header = {
@@ -47,6 +49,10 @@ function CrearCargo ({token , abrirFormularioCrgo}){
             headers : header,
             body : body,
         });
+        setShowModal(true);
+        setTimeout(() => {
+            setShowModal(false);
+        }, 3000);
         if (!respuesta.ok){
             throw new Error(`error ${respuesta.status}`);
         }
@@ -57,11 +63,21 @@ function CrearCargo ({token , abrirFormularioCrgo}){
     const nlista = lista.map(item => <option value={item.id}>{item.nombre}</option>)
     return(
         <>
-        <div className="cont">
-            <form onSubmit={handleSubmit} className="formularios">
-                <div>
+
+        {showModal && (
+        <div className="modal-overlay">
+            <div className="modal">
+                <h2>Guardando contenido...</h2>
+                <div className="progress-line"></div>
+            </div>
+        </div>
+)}
+        <div className="contenedorcargo">
+            <form onSubmit={handleSubmit} className="formularioscargo">
+                <h1>Registrar Cargo</h1>
+                <div className="contopcargo">
                     <input
-                    className="inputs"
+                    className="inputscargo"
                     placeholder="Nombre del cargo"
                     id="nombre"
                     value={nombre}
@@ -69,9 +85,9 @@ function CrearCargo ({token , abrirFormularioCrgo}){
                     onChange={(e) => setNombre(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="contopcargo">
                     <input
-                    className="inputs"
+                    className="inputscargo"
                     placeholder="descripcion"
                     id="descripcion"
                     value={descripcion || ""}
@@ -79,9 +95,9 @@ function CrearCargo ({token , abrirFormularioCrgo}){
                     onChange={(e) => setDescripcion(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="contopcargo">
                     <input
-                    className="inputs"
+                    className="inputscargo"
                     placeholder="Estado"
                     id="estado"
                     checked={estado}
@@ -89,9 +105,9 @@ function CrearCargo ({token , abrirFormularioCrgo}){
                     onChange={(e) => setEstado(e.target.checked)} 
                     />
                 </div>
-                <div>
+                <div className="contopcargo">
                     <select 
-                    className="inputs"
+                    className="inputscargo"
                     name="ips"
                     id="ips"
                     value={ips || ""}
@@ -100,7 +116,7 @@ function CrearCargo ({token , abrirFormularioCrgo}){
                         {nlista}
                     </select>
                 </div>
-                <button className="btnguardar">Guardar</button>
+                <button className="btnguardarcargo">Guardar</button>
             </form>
         </div>
         </>

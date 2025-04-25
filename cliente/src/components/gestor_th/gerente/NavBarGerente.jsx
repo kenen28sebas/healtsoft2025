@@ -4,30 +4,30 @@ import './sidebar.css'
 const NavBarGerente = ({funcionabrir , funcioncerrar }) =>{
     return(
         <>
-        <div className="sidebar">
-            <div className="logo_content">
-                <div className="logo">
-                    <box-icon type='solid' name='donate-heart' color="#0b2997"></box-icon>
-                    <div className="logo_nombre"><p className="kenayhealth">KenayHealthsoft</p></div>
-                </div>
+        <div className="barralateral">
+            <div className="logo_contenido">
+                <box-icon type='solid' name='donate-heart' color="#0b2997" className="logokenay"></box-icon>
+                <h3 className="titulokeny">KenayHeathsoft</h3>
             </div>
+            <div className="barragerente">
+                <div className="opcionesgerente casita">
+                    <box-icon type='solid' name='home' className="logosnavbar"></box-icon>
+                    <p className="opcionesnb">Inicio</p>
+                </div>
 
-            <div className="navbar">
-                <div className="opciones">
-                    <box-icon type='solid' name='home'></box-icon>
-                    <span className="textoop">Inicio</span>
+                <div className="opcionesgerente" onClick={funcionabrir}>
+                    <box-icon type='solid' name='clinic' className="logosnavbar"></box-icon>
+                    <p className="opcionesnb">Gestionar Ips</p>
                 </div>
-                <div  onClick={funcionabrir} className="opciones">
-                    <box-icon type='solid' name='clinic' width="20px" height="20px"></box-icon>
-                    <span className="textoop">Gestionar Ips</span>
+
+                <div className="opcionesgerente">
+                    <box-icon name='user-circle' type='solid' className="logosnavbar"></box-icon>
+                    <p className="opcionesnb">Ver perfil</p>
                 </div>
-                <div className="opciones">
-                    <box-icon name='user-circle' type='solid'></box-icon>
-                    <span className="textoop">Ver perfil</span>
-                </div>
-                <div onClick={funcioncerrar} className="opciones">
-                    <box-icon name='door-open' type='solid' width="20px" height="20px"></box-icon>
-                    <span className="textoop">Cerrar</span>
+
+                <div className="opcionesgerente" onClick={funcioncerrar}>
+                    <box-icon name='door-open' type='solid' className="logosnavbar"></box-icon>
+                    <p className="opcionesnb">Cerrar</p>
                 </div>
             </div>
         </div>

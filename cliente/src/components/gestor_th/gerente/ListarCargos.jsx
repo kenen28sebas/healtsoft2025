@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DetallesCargo } from "./Detalles";
+import './detalleslistas.css'
 
 function ListarCargos({token , abrirlistacargos}){
     if (!abrirlistacargos){
@@ -53,48 +54,48 @@ function ListarCargos({token , abrirlistacargos}){
 
     return(
         <>
-        <div>
-            <h2>Cargos</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>estado</th>
-                        <th>Fecha de creación</th>
-                        <th>Detalles</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {lista.map(item =>(
-                        <tr>
-                            <td>{item.nombre}</td>
-                            <td>{item.descripcion}</td>
-                            <td style={{ color: item.estado ? 'green' : 'red', fontWeight: 'bold' }}>
-                                {item.estado ? 'Activo' : 'Inactivo'}
-                            </td>
-                            <td>{item.fecha_creacion}</td>
-                            <td><button onClick={() => abrirdetallesCargo(item)}>Ver detalles</button></td>
+        <div className="contenedorlistadetalles contenedortable">
+            <div className="tablagenial">
+                <h2 className="tltlista">Cargos</h2>
+                <table className="tableips">
+                    <thead className="cabezatablaips">
+                        <tr className="encabezadosips">
+                            <th className="tltipsn">Nombre</th>
+                            <th className="tltipsn">Descripción</th>
+                            <th className="tltipsn">estado</th>
+                            <th className="tltipsn">Fecha de creación</th>
+                            <th className="tltipsn">Detalles</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody className="cuerpotableips">
+                        {lista.map(item =>(
+                            <tr className="cuerpoopips">
+                                <td className="optdtabla">{item.nombre}</td>
+                                <td className="optdtabla">{item.descripcion}</td>
+                                <td style={{ color: item.estado ? 'green' : 'red', fontWeight: 'bold' }} className="optdtabla">
+                                    {item.estado ? 'Activo' : 'Inactivo'}
+                                </td>
+                                <td className="optdtabla">{item.fecha_creacion}</td>
+                                <td className="optdtabla"><button onClick={() => abrirdetallesCargo(item)} className="verdetallesips">Ver detalles</button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            {cargo && (
+                <DetallesCargo
+                abrirdetallescargo={abrirdetallescargo}
+                cerrardetallescargo={cerrardetallesCargo}
+                nombre={cargo.nombre}
+                descripcion={cargo.descripcion}
+                estado={cargo.estado}
+                fecha_creacion={cargo.fecha_creacion}
+                id ={cargo.id}
+                token={token}
+                cargarListaNueva={CargarLista}
+                />
+            )}
         </div>
-        {cargo && (
-            <DetallesCargo
-            abrirdetallescargo={abrirdetallescargo}
-            cerrardetallescargo={cerrardetallesCargo}
-            nombre={cargo.nombre}
-            descripcion={cargo.descripcion}
-            estado={cargo.estado}
-            fecha_creacion={cargo.fecha_creacion}
-            id ={cargo.id}
-            token={token}
-            cargarListaNueva={CargarLista}
-            />
-        )}
-
-
         </>
     )
 
