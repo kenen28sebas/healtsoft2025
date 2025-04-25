@@ -1,8 +1,12 @@
 import React, { useState ,useEffect} from "react";
 import "./CrearHc.css"
+import Alerta from "../gestor_citas/alerta";
 
-const CrearHv= ({nro_doc,userId,token}) => {
+const CrearHv= ({nro_doc,userId,token,isOpen}) => {
+    const [isOpenr,setIsOpen] = useState(isOpen)
+    if(!isOpenr){return null}
     const [nroDoc, setNroDoc] = useState(null)
+    const [openAlerta, setOpenAlerta] = useState(false);
     const [listaCie10 , setListaCie10] = useState(null)
     const [listaCups, setListaCups] = useState(null);
     const [isOpenAnamnesis , setIsOpenAnamnesis] = useState(false)
@@ -120,9 +124,12 @@ const CrearHv= ({nro_doc,userId,token}) => {
             
             if (response.ok) {
                 console.log("se guardo siuuuu")
-            //   setOpenAlerta(true);
-            //   setTimeout(() => setOpenAlerta(false), 3000); 
+              setOpenAlerta(true);
+              setTimeout(() => setOpenAlerta(false), 3000);
+              setIsOpen(false) 
+              
             } else {
+                alert("debes llenar todos los campos")
               console.error("Error en el registro.");
             }
           } catch (error) {
@@ -964,6 +971,7 @@ const CrearHv= ({nro_doc,userId,token}) => {
             )}
             </div>   
             <button onClick={crearFolio}>crearFolio</button>
+            <Alerta isOpen={openAlerta}>¡Registro exitoso!</Alerta>
         </>
     );
 };

@@ -111,7 +111,7 @@ const AppHistoriaClinica = ({  token }) => {
               }
             }>
             <BuscarPaciente isOpen={isOpenCrearhc}  token={token} tipo={"crear nuevo folio"} isLock={false} userid={datos.user.id} textoo={"Crear nuevo folio"}>
-                <CrearHv></CrearHv>
+                <CrearHv isOpen={true}></CrearHv>
             </BuscarPaciente>
             <ListaCitasMedico isOpen={isOpenConsultar} token={token} nro_doc_medico={datos.user.id}></ListaCitasMedico>
             <BuscarPaciente isOpen={isOpenPaciente}  token={token} tipo={"crear nuevo folio"} isLock={false} textoo={"Buscar Paciente"}>
